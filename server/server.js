@@ -20,7 +20,9 @@ function setupServer(mongoDb) {
     app.use(myLogger);
 
     // Static files.
-    app.use(express.static(path.join(__dirname, 'public')));
+
+//    app.use(express.static(path.join(__dirname, 'public')));
+    app.use(express.static(path.join(__dirname, '../frontend/build/app')));
 
     // Make the mongo db available in the routers.
     app.use(function(req,res,next){
