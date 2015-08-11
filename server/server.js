@@ -37,7 +37,7 @@ function setupServer(mongoDb) {
 
     // Forward 404 to error handler to error handler.
     app.use(function (req, res, next) {
-        var err = new Error('Not Found');
+        var err = new Error('Not Found: ' + req.originalUrl);
         err.status = 404;
         next(err);
     });
@@ -67,7 +67,7 @@ function setupServer(mongoDb) {
         var host = server.address().address;
         var port = server.address().port;
 
-        console.log('Example app listening at http://%s:%s', host, port);
+        console.log('Server listening at http://%s:%s', host, port);
     });
 
     // Close mongodb connection when server closes.
@@ -78,11 +78,12 @@ function setupServer(mongoDb) {
 
 
 var mongodbUrl = 'mongodb://localhost:27017/test';
-MongoClient.connect(mongodbUrl, function(err, mongoDb) {
+var c = MongoClient.connect(mongodbUrl, function(err, mongoDb) {
     assert.equal(null, err);
-    console.log("Connected correctly to server.");
     setupServer(mongoDb);
+    console.log("Connected to server " + mongodbUrl);
 //    db.close();
 });
 
+var t = c;
 
