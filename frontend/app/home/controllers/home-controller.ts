@@ -1,5 +1,5 @@
 ///<reference path='../../../typings/tsd.d.ts' />
-module HomeCtrl {
+module Home.Controllers{
   'use strict';
 
   class HomeCtrl {
@@ -10,14 +10,12 @@ module HomeCtrl {
     // It provides $injector with information about dependencies to be injected into constructor
     // it is better to have it close to the constructor, because the parameters must match in count and type.
     // See http://docs.angularjs.org/guide/di
-    public static $inject = [
-    ];
+    public static $inject = ['$log', '$location', '$http'];
 
     // dependencies are injected via AngularJS $injector
-    constructor() {
-      var vm = this;
-      vm.ctrlName = 'HomeCtrl';
-      console.log('home controller called');
+    constructor(private $log : ng.ILogService, private $location : ng.ILocationService, private $http : ng.IHttpService) {
+      this.ctrlName = 'HomeCtrl';
+      this.$log.debug('home controller called');
 
     }
   }
