@@ -1,17 +1,28 @@
 ///<reference path='../../typings/tsd.d.ts' />
 module home {
-  'use strict';
+    'use strict';
 
-  angular
-    .module('home')
-    .config(config)
+    angular
+        .module('home')
+        .config(config)
 
-  function config($routeProvider: ng.route.IRouteProvider) {
-    $routeProvider
-      .when('/home', {
-        templateUrl: 'home/views/home.tpl.html',
-        controller: 'HomeCtrl',
-        controllerAs: 'home'
-      });
-  }
+    function config($routeProvider:ng.route.IRouteProvider) {
+        $routeProvider
+            .when('/home', {
+                templateUrl: 'home/views/home.tpl.html',
+                controller: 'HomeCtrl',
+                controllerAs: 'home'
+            })
+            .when('/Login', {
+                templateUrl: 'home/views/login.tpl.html',
+                controller: 'LoginCtrl',
+                controllerAs: 'login',
+                resolve: {
+                    'Something': ['Repository', function (repository:Home.Interfaces.IRepository) {
+                        return repository;
+                    }]
+                }
+
+            });
+    }
 }
