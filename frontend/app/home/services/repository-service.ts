@@ -2,10 +2,11 @@
 module Home.Services {
   'use strict';
 
-  class User implements Home.Interfaces.IUser {
+  export class User implements Home.Interfaces.IUser {
     email: string;
-    password: string;
+    passwordHash: string;
   }
+
 
   class Repository implements Home.Interfaces.IRepository{
     public static $inject = ['$log', '$http', '$q'];

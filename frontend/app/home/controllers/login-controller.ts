@@ -6,6 +6,8 @@ module Home.Controllers {
 
         ctrlName:string;
 
+        user: Home.Services.User;
+
 
         // $inject annotation.
         // It provides $injector with information about dependencies to be injected into constructor
@@ -18,6 +20,23 @@ module Home.Controllers {
             this.ctrlName = 'LoginCtrl';
             this.$log.debug('Login controller called');
             this.$log.debug('Repository name: ' + repository.name);
+            this.user = new Home.Services.User();
+            this.user.email = "test@test";
+            this.user.passwordHash = "abc";
+
+        }
+
+        getUserProfiles():void {
+            this.$log.debug('getUserProfiles');
+            this.$http({
+                method: "get",
+                url: "/getUserProfiles",
+                headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+                data: this.user
+            }).success(function(result){
+                console.log(result);
+            });
+
         }
     }
 

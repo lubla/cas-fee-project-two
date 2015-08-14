@@ -5,6 +5,8 @@ var express = require('express');
 var logger = require('express-logger');
 var assert = require('assert');
 var path = require('path');
+var bodyParser = require('body-parser');
+
 var MongoClient = require('mongodb').MongoClient;
 
 function setupServer(mongoDb) {
@@ -30,10 +32,13 @@ function setupServer(mongoDb) {
         next();
     });
 
+    //app.use(bodyParser.urlencoded({ extended: false }));
+    //app.use(bodyParser.json());
 
     // Routes.
     var indexRoute = require('./routes/index');
     app.use('/', indexRoute);
+    app.use('/getUserProfiles', require('./routes/getUserProfiles'));
 
     // Forward 404 to error handler to error handler.
     app.use(function (req, res, next) {
