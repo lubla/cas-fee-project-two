@@ -4,7 +4,7 @@ module Home.Services {
 
   export class User implements Home.Interfaces.IUser {
     email: string;
-    passwordHash: string;
+    password: string;
   }
 
 

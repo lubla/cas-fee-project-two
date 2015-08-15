@@ -6,7 +6,7 @@ module Home.Interfaces {
 
     export interface  IUser {
         email: string;
-        passwordHash: string;
+        password: string;
     }
 
     export interface  IUserProfile {

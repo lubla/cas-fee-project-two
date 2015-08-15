@@ -1,3 +1,18 @@
 <h2>login</h2>
 <p>{{login.ctrlName}}</p>
-<a ng-click='login.getUserProfiles()' >Login</a>
+<div>
+  <p>Email Adresse: </p>
+  <input type="text" ng-model="login.user.email" value="{{login.user.email}}"/>
+  <p>Passwort: </p>
+
+  <input type="password" ng-model="login.user.password" value="{{login.user.password}}"/>
+
+  <input type="password" ng-model="login.user.password" value="{{login.user.password}}"/>
+
+  <div class="errorMessage">
+    {{login.errorMessage}}
+  </div>
+
+</div>
+
+<a ng-click='login.getUserProfiles()'>Login</a>
