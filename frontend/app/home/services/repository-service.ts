@@ -5,6 +5,11 @@ module Home.Services {
   export class User implements Home.Interfaces.IUser {
     email: string;
     password: string;
+
+    constructor(email: string, password: string) {
+      this.email = email;
+      this.password = password;
+    }
   }
 
 

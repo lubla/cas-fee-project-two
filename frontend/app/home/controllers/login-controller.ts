@@ -24,13 +24,10 @@ module Home.Controllers {
             this.ctrlName = 'LoginCtrl';
             this.$log.debug('Login controller called');
             this.$log.debug('Repository name: ' + repository.name);
-            this.user = new Home.Services.User();
-            this.user.email = "test@test";
-            this.user.password = "abc";
-
+            this.user = new Home.Services.User('', '');
         }
 
-        getUserProfiles():void {
+        getUserProfiles(): void {
             this.$log.debug('getUserProfiles');
             this.$http
                 .get('/getUserProfiles?email=' + this.user.email + '&passwordHash=' + Home.Utilities.Hash.MD5(this.user.password))
@@ -39,7 +36,7 @@ module Home.Controllers {
                     var userProfiles = response.data;
                     if(userProfiles instanceof Array) {
                         if(userProfiles.length === 0) {
-                            this.errorMessage = "Passwort oder Email Adresse ungültig!";
+                            this.errorMessage = "Passwort oder Email Adresse ungÃ¼ltig!";
                         }
                     }
                     else {

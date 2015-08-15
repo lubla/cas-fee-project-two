@@ -23,6 +23,11 @@ module home {
                     }]
                 }
 
+            })
+            .when('/RegisterUser', {
+              templateUrl: 'home/views/register-user.tpl.html',
+              controller: 'RegisterUserCtrl',
+              controllerAs: 'registerUser'
             });
     }
 }

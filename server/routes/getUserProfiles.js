@@ -7,15 +7,14 @@ var bodyParser = require('body-parser');
 
 /* GET profiles. */
 
-var urlencodedParser = bodyParser.urlencoded({ extended: false })
-
+var urlencodedParser = bodyParser.urlencoded({ extended: false });
 
 router.get('/', urlencodedParser, function (req, res, next) {
 
     var mongoDb = req.mongoDb;
 
     var cursor = mongoDb.collection('userProfiles')
-        .find({$and: [{"email": "Juni"}]});
+        .find({$and: [{'email': req.query.email}, {'passwordHash': req.query.passwordHash}]});
 
     var result = cursor.toArray();
 
@@ -24,17 +23,6 @@ router.get('/', urlencodedParser, function (req, res, next) {
             res.send(JSON.stringify(result))
         })
         .catch(next);
-
-
-    //cursor.each(function(err, doc) {
-    //    if(err) {
-    //        throw(err);
-    //    }
-    //    if (doc != null) {
-    //        result.push(doc);
-    //    }
-    //});
-
 
 });
 

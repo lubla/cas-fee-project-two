@@ -39,6 +39,7 @@ function setupServer(mongoDb) {
     var indexRoute = require('./routes/index');
     app.use('/', indexRoute);
     app.use('/getUserProfiles', require('./routes/getUserProfiles'));
+    app.use('/registerUser', require('./routes/registerUser'));
 
     // Forward 404 to error handler to error handler.
     app.use(function (req, res, next) {

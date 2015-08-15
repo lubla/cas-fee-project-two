@@ -16,7 +16,7 @@ module Home.Utilities {
 
     export class Hash {
 
-        static MD5(string) {
+        static MD5(string): string {
 
             function RotateLeft(lValue, iShiftBits) {
                 return (lValue << iShiftBits) | (lValue >>> (32 - iShiftBits));
