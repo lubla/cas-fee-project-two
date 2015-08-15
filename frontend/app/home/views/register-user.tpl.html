@@ -1,0 +1,22 @@
+<h2>Register User</h2>
+<p>{{registerUser.ctrlName}}</p>
+<div>
+  <p>Email Adresse: </p>
+  <input type="text" ng-model="registerUser.user.email" value="{{registerUser.user.email}}"/>
+
+  <p>Passwort: </p>
+  <input type="password" ng-model="registerUser.user.password" value="{{registerUser.user.password}}"/>
+
+  <p>Passwort best&aumltigen: </p>
+  <input type="password" ng-model="registerUser.passwordConfirmation" value="{{registerUser.passwordConfirmation}}"/>
+
+  <div class="errorMessage">
+    {{registerUser.errorMessage}}
+  </div>
+
+</div>
+
+<p>
+  <a ng-click='registerUser.registerUser()'>Registrieren</a>
+</p>
+
