@@ -1,0 +1,22 @@
+If not already installed
+========================
+Install mongoDB from the mongoDB web page
+mongoDB must run
+
+In server folder
+================
+npm install
+
+Run the server:
+===============
+1. Load the server project in webstorm
+2. run server.js
+
+Console output if server is running:
+
+Connected to server mongodb://localhost:27017/test
+Server listening at http://:::3000
+
+
+
+

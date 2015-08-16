@@ -1,0 +1,41 @@
+If not already installed
+========================
+npm install -g bower gulp yo generator-ng-poly
+npm install -g tsd
+
+In frontend folder
+==================
+npm install
+
+In project root folder (parent of frontend folder!)
+===================================================
+yo ng-poly
+
+Generator Options:
+App Name: frontend
+Version: 1.4 (RC)
+Structure: app/module1/controllers/…js
+Markup: HTML
+Scripting Language: TypeScript
+Controller As: Yes
+Test Language: TypeScript
+Testing Framework: Jasmine
+E2e: Jasmine
+Style: CSS
+Polymer: No
+Framework: AngularStrap
+ngRoute: Yes
+Bower: Angular Sanatize
+
+NOTE:
+The generator will overwrite files that are already in the project. REVERT ALL CHANGES WHEN THE GENERATOR HAS FINISHED.
+
+Run the frontend:
+1. Start the server
+2. Load the frontend project in webstorm
+3. Run gulp build
+4. Load http://localhost:3000/#/home (Configure a webstorm debug configuration with this url for index.html). 
+
+
+
+
