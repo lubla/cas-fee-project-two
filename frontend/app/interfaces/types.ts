@@ -9,6 +9,12 @@ module Home.Interfaces {
         password: string;
     }
 
+    export interface  IUserRegister {
+        email: string;
+        passwordHash: string;
+    }
+
+
     export interface  IUserProfile {
         id : string;
         email: string;

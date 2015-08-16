@@ -39,23 +39,20 @@ module Home.Controllers {
                 this.errorMessage = 'Email Adresse ungültig!';
             }
             else {
-                this.errorMessage = 'OK!';
-                var userToPost = {email: this.user.email, passwordHash: Home.Utilities.Hash.MD5(this.user.password)};
-                this.$http
-                    .post('/registerUser', userToPost)
-                    .then(response => {
-                        this.$log.debug(response.data);
-                        if(response.status === 200) {
-                            // OK.
-                        }
-                        else {
-                            this.errorMessage = response.statusText;
-                        }
-
+                this.repository
+                    .registerUser(this.user)
+                    .then(userProfile => {
+                        console.log(this.user);
+                        this.repository
+                            .login(this.user)
+                            .then((result) => {
+                                this.$location.path('#/Home');
+                            })
                     })
                     .catch(err => {
                         this.errorMessage = err.message;
                     });
+
             }
         }
     }

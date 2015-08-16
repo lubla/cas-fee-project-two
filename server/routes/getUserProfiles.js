@@ -11,19 +11,11 @@ var urlencodedParser = bodyParser.urlencoded({ extended: false });
 
 router.get('/', urlencodedParser, function (req, res, next) {
 
-    var mongoDb = req.mongoDb;
-
-    var cursor = mongoDb.collection('userProfiles')
-        .find({$and: [{'email': req.query.email}, {'passwordHash': req.query.passwordHash}]});
-
-    var result = cursor.toArray();
-
-    result
+    req.repository.getUserProfiles(req.query)
         .then(function (result) {
-            res.send(JSON.stringify(result))
+            res.send(result);
         })
-        .catch(next);
-
+       .catch(next);
 });
 
 module.exports = router;

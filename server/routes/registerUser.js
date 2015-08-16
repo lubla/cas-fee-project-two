@@ -10,42 +10,12 @@ var bodyParser = require('body-parser');
 
 /* POST user. */
 
-
 router.post('/', bodyParser.json(), function (req, res, next) {
-
-    var mongoDb = req.mongoDb;
-
-    // Check if user already exists.
-
-    var result = mongoDb.collection('userProfiles')
-        .find({$and: [{'email': req.body.email}]})
-        .toArray();
-
-    result
+    req.repository.registerUser(req.body)
         .then(function (result) {
-            if(result.length > 0) {
-                res.statusText = "Ein Benutzer für diese Email ist schon registriert";
-                res.status(409); // Conflict.
-                res.send('failed');
-            }
-            else {
-                var writeResult = mongoDb.collection('userProfiles')
-                    .insert(req.body);
-
-                writeResult
-                    .then(function (result) {
-                        if(result.result.n == 1) {
-                            res.send(result.ops[0]);
-                        }
-                        else {
-                            throw new Error("Cannot register user");
-                        }
-                    })
-                    .catch(next);
-            }
+            res.send(result);
         })
         .catch(next);
-
 });
 
 module.exports = router;

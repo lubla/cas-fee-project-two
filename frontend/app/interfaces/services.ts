@@ -6,7 +6,11 @@ module Home.Interfaces {
 
     export interface  IRepository {
         name: string;
-        getUserProfiles():Array<Home.Interfaces.IUserProfile>;
+        loggedInUser: Home.Interfaces.IUserProfile;
+        login(user: Home.Interfaces.IUser):ng.IPromise<Home.Interfaces.IUserProfile>;
+        getUserProfiles(user: Home.Interfaces.IUser):ng.IPromise<Array<Home.Interfaces.IUserProfile>>;
+
+        registerUser(user: Home.Interfaces.IUser):ng.IPromise<Home.Interfaces.IUserProfile>;
     }
 
 

@@ -1,15 +1,16 @@
 /**
  * Created by Luzius on 03.08.2015.
  */
+
+'use strict'
+
 var express = require('express');
 var logger = require('express-logger');
 var assert = require('assert');
 var path = require('path');
-var bodyParser = require('body-parser');
 
-var MongoClient = require('mongodb').MongoClient;
 
-function setupServer(mongoDb) {
+function setupServer(repository) {
 
     var app = express();
 
@@ -23,12 +24,11 @@ function setupServer(mongoDb) {
 
     // Static files.
 
-//    app.use(express.static(path.join(__dirname, 'public')));
     app.use(express.static(path.join(__dirname, '../frontend/build/app')));
 
-    // Make the mongo db available in the routers.
+    // Make the repository available in the routers.
     app.use(function(req,res,next){
-        req.mongoDb = mongoDb;
+        req.repository = repository;
         next();
     });
 
@@ -82,14 +82,16 @@ function setupServer(mongoDb) {
     });
 }
 
+var repository = require('./database/repository');
+var r = new repository.Repository(setupServer);
 
-var mongodbUrl = 'mongodb://localhost:27017/test';
-var c = MongoClient.connect(mongodbUrl, function(err, mongoDb) {
-    assert.equal(null, err);
-    setupServer(mongoDb);
-    console.log("Connected to server " + mongodbUrl);
-//    db.close();
-});
-
-var t = c;
+//var mongodbUrl = 'mongodb://localhost:27017/test';
+//var c = MongoClient.connect(mongodbUrl, function(err, mongoDb) {
+//    assert.equal(null, err);
+//    setupServer(mongoDb);
+//    console.log("Connected to server " + mongodbUrl);
+////    db.close();
+//});
+//
+//var t = c;
 
