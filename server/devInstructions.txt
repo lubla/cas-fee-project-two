@@ -1,7 +1,7 @@
 If not already installed
 ========================
 Install mongoDB from the mongoDB web page
-mongoDB must run
+mongoDB must run with the default setting (e.g. port).
 
 In server folder
 ================
