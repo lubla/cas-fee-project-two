@@ -6,9 +6,10 @@
     "markup": "html",
     "ngRoute": true,
     "structure": "module-type",
-    "style": "css",
+    "style": "scss",
     "testFramework": "jasmine",
     "testScript": "ts",
-    "lastUsedModule": "home"
+    "lastUsedModule": "home",
+    "directiveTemplateUrl": false
   }
 }

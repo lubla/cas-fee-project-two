@@ -1,11 +1,11 @@
 # frontend
 
-*Generated with [ng-poly](https://github.com/dustinspecker/generator-ng-poly/tree/v0.10.7) version 0.10.7*
+*Generated with [ng-poly](https://github.com/dustinspecker/generator-ng-poly/tree/v0.10.11) version 0.10.11*
 
 ## Setup
 1. Install [Node.js](http://nodejs.org/)
  - This will also install npm.
-1. Run `npm install -g bower gulp yo generator-ng-poly@0.10.7`
+1. Run `npm install -g bower gulp yo generator-ng-poly@0.10.11`
  - This enables Bower, Gulp, and Yeoman generators to be used from command line.
 1. Run `npm install` to install this project's dependencies
 1. Run `bower install` to install client-side dependencies

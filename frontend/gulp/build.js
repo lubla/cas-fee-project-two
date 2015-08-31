@@ -37,6 +37,7 @@ module.exports = function (gulp, $, config) {
 
         this.emit('end');
       }}))
+      .pipe($.sass())
       .pipe($.autoprefixer())
       .pipe($.if(isProd, $.cssRebaseUrls()))
       .pipe($.if(isProd, $.modifyCssUrls({
@@ -197,7 +198,7 @@ module.exports = function (gulp, $, config) {
 
   // copy Bower fonts and images into build directory
   gulp.task('bowerAssets', ['clean'], function () {
-    var assetFilter = $.filter('**/*.{eot,otf,svg,ttf,woff,gif,jpg,jpeg,png}', {restore: true});
+    var assetFilter = $.filter('**/*.{eot,otf,svg,ttf,woff,woff2,gif,jpg,jpeg,png}', {restore: true});
     return gulp.src($.mainBowerFiles(), {base: bowerDir})
       .pipe(assetFilter)
       .pipe(gulp.dest(config.extDir))
@@ -206,7 +207,7 @@ module.exports = function (gulp, $, config) {
 
   // copy custom fonts into build directory
   gulp.task('fonts', ['clean'], function () {
-    var fontFilter = $.filter('**/*.{eot,otf,svg,ttf,woff}', {restore: true});
+    var fontFilter = $.filter('**/*.{eot,otf,svg,ttf,woff,woff2}', {restore: true});
     return gulp.src([config.appFontFiles])
       .pipe(fontFilter)
       .pipe(gulp.dest(config.buildFonts))
