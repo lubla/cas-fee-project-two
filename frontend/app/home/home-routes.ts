@@ -28,6 +28,16 @@ module home {
               templateUrl: 'home/views/register-user.tpl.html',
               controller: 'RegisterUserCtrl',
               controllerAs: 'registerUser'
+            })
+            .when('/NestedParent', {
+              templateUrl: 'home/views/nested-parent.tpl.html',
+              controller: 'NestedParentCtrl',
+              controllerAs: 'nestedParent'
+            })
+            .when('/NestedChild', {
+              templateUrl: 'home/views/nested-child.tpl.html',
+              controller: 'NestedChildCtrl',
+              controllerAs: 'nestedChild'
             });
     }
 }
