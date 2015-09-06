@@ -8,7 +8,7 @@
 </div>
 <div ng-repeat="dateProposal in editDoodle.doodle.dateProposals">
   <p>
-    Date  <a ng-click='editDoodle.deleteDateProposal(dateProposal.id)'>Löschen</a>
+    Date  {{dateProposal.id}} <a ng-click='editDoodle.deleteDateProposal(dateProposal.id)'>Löschen</a>
   </p>
 </div>
 <div>

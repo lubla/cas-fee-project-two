@@ -42,7 +42,7 @@ module Home.Services {
         constructor() {
             this.id = Home.Utilities.Uuid.new();
             this.start = new Date();
-            this.start.setMinutes(0,0,0);
+            this.start.setMinutes(0, 0, 0);
             this.end = this.start;
             this.end.setHours(this.start.getHours() + 1)
         }
@@ -88,9 +88,52 @@ module Home.Services {
             this.isExpired = false;
         }
 
-        get():string {
-            return 'Doodle';
+        /**
+         * Adds a new date proposal.
+         *
+         * @return The new data proposal.
+         */
+        addNewDateProposal():Home.Interfaces.IDateProposal {
+            var dataProposal = new DateProposal();
+            this.dateProposals.push(dataProposal);
+            return dataProposal;
         }
+
+        /**
+         * Deletes a date proposal.
+         *
+         * @param id The id of the data proposal to delete.
+         */
+        deleteDateProposal(id:string) {
+
+            var index = this.findDateProposalIndex(id);
+            if (index >= 0) {
+                this.dateProposals.splice(index, 1);
+            }
+        }
+
+        /**
+         * Finds the index of a date proposal with a given id.
+         *
+         * @param id The id of the date proposal.
+         * @returns {Number} Then index of the data proposal or -1 if it is not found.
+         */
+        findDateProposalIndex(id:string) {
+            var index:number;
+            var found = false;
+            index = this.dateProposals.length - 1;
+            while (index >= 0 && !found) {
+                if (this.dateProposals[index].id === id) {
+                    found = true;
+                }
+                else {
+                    index--;
+                }
+            }
+
+            return index;
+        }
+
     }
 
 

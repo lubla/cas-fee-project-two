@@ -91,5 +91,21 @@ module Home.Interfaces {
          * Indicates if the Doodle is expired.
          */
         isExpired: boolean;
+
+
+        /**
+         * Adds a new date proposal.
+         *
+         * @return The new data proposal.
+         */
+        addNewDateProposal(): IDateProposal;
+
+        /**
+         * Deletes a date proposal.
+         *
+         * @param id The id of the data proposal to delete.
+         */
+        deleteDateProposal(id: string): void;
+
     }
 }

@@ -34,16 +34,12 @@ module Home.Controllers {
 
         addDateProposal():void {
             this.$log.debug('addDateProposal');
-            this.doodle.dateProposals.push(new Home.Services.DateProposal());
+            this.doodle.addNewDateProposal();
 
         }
         deleteDateProposal(id:string):void {
             this.$log.debug('deleteDateProposal');
-//            var index = this.doodle.dateProposals.findIndex(dateProposal => dateProposal.id === id);
-            var index = 0;
-            if(index >= 0) {
-                this.doodle.dateProposals.splice(index, 1);
-            }
+            this.doodle.deleteDateProposal(id);
         }
     }
 
