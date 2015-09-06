@@ -11,6 +11,11 @@ module Home.Interfaces {
         getUserProfiles(user: Home.Interfaces.IUser):ng.IPromise<Array<Home.Interfaces.IUserProfile>>;
 
         registerUser(user: Home.Interfaces.IUser):ng.IPromise<Home.Interfaces.IUserProfile>;
+
+        /**
+         * Creates a new doodle.
+         */
+        createNewDoodle():ng.IPromise<Home.Interfaces.IDoodle>;
     }
 
 

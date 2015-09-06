@@ -1,0 +1,16 @@
+<h2>editDoodle</h2>
+<p>{{editDoodle.ctrlName}}</p>
+<div>
+  <p>Was: </p>
+  <input type="text" ng-model="editDoodle.doodle.title" value="{{editDoodle.doodle.title}}"/>
+  <p>Wo: </p>
+  <input type="text" ng-model="editDoodle.doodle.place" value="{{editDoodle.doodle.place}}"/>
+</div>
+<div ng-repeat="dateProposal in editDoodle.doodle.dateProposals">
+  <p>
+    Date  <a ng-click='editDoodle.deleteDateProposal(dateProposal.id)'>Löschen</a>
+  </p>
+</div>
+<div>
+  <a ng-click='editDoodle.addDateProposal()'>Neuer Terminvorschlag</a>
+</div>
