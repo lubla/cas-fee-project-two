@@ -34,12 +34,16 @@ module Home.Services {
          */
         end:Date;
 
+
+        test:string;
+
         /**
          * The list of the names of the people that have accepted the proposal.
          */
         acceptedBy:Array<string>;
 
         constructor() {
+
             this.id = Home.Utilities.Uuid.new();
             this.start = new Date();
             this.start.setMinutes(0, 0, 0);

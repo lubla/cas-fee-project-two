@@ -8,7 +8,12 @@
 </div>
 <div ng-repeat="dateProposal in editDoodle.doodle.dateProposals">
   <p>
-    Date  {{dateProposal.id}} <a ng-click='editDoodle.deleteDateProposal(dateProposal.id)'>Löschen</a>
+    Id  {{dateProposal.id}} <a ng-click='editDoodle.deleteDateProposal(dateProposal.id)'>Löschen</a>
+    <p>Wann:</p>
+    <input name="date" class="form-control" type="text" value="{{dateProposal.start}}" ng-model="dateProposal.start" bs-datepicker  data-date-format="dd-MM.yyyy">
+    <input name="timeStart" class="form-control" type="text" size="8" ng-model="dateProposal.end" bs-timepicker data-time-format="HH:mm" data-arrow-behavior="picker" data-minute-step="5" data-length="1">
+
+
   </p>
 </div>
 <div>
