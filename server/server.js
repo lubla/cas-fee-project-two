@@ -40,6 +40,7 @@ function setupServer(repository) {
     app.use('/', indexRoute);
     app.use('/getUserProfiles', require('./routes/getUserProfiles'));
     app.use('/registerUser', require('./routes/registerUser'));
+    app.use('/getDoodle', require('./routes/getDoodle'));
     app.use('/postDoodle', require('./routes/postDoodle'));
 
     // Forward 404 to error handler to error handler.

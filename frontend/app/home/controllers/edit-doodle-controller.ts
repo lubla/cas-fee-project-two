@@ -32,7 +32,16 @@ module Home.Controllers {
                 this.repository.createNewDoodle().then(doodle => this.doodle = doodle);
             }
             else {
-                this.$log.debug("have id");
+                // Id specified => Get the doodle from db.
+                repository
+                    .getDoodle($routeParams.id)
+                    .then(doodle => this.doodle = doodle)
+                    .catch(err => {
+                        this.$log.debug("problem getting doodle");
+                        this.errorMessage = err.statusText;
+                    });
+
+
             }
         }
 

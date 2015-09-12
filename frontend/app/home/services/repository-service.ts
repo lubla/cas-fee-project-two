@@ -265,6 +265,34 @@ module Home.Services {
             return deferred.promise;
         }
 
+        /**
+         * Gets a doodle from the doodle database.
+         *
+         * @param id Id of the doodle
+         * @returns {IPromise<Home.Interfaces.IDoodle>}
+         */
+        getDoodle(id:string):ng.IPromise<Home.Interfaces.IDoodle> {
+            var deferred = this.$q.defer();
+            this.$http
+                .get('/getDoodle?id=' + id)
+                .then(response => {
+                    if (response.status === 200) {
+                        // OK.
+                        deferred.resolve(response.data)
+                    }
+                    else {
+                        console.log("status:" + response.status)
+                        deferred.reject(new Error(response.statusText));
+                    }
+                })
+                .catch(err => deferred.reject(err));
+
+
+            return deferred.promise;
+
+        }
+
+
         get():string {
             return name;
         }

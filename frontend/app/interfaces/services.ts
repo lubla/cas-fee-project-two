@@ -28,6 +28,14 @@ module Home.Interfaces {
          */
         postDoodle(doodle:Home.Interfaces.IDoodle):ng.IPromise<Home.Interfaces.IDoodle>;
 
+        /**
+         * Gets a doodle from the doodle database.
+         *
+         * @param id Id of the doodle
+         * @returns {IPromise<Home.Interfaces.IDoodle>}
+         */
+        getDoodle(id:string):ng.IPromise<Home.Interfaces.IDoodle>;
+
     }
 
 
