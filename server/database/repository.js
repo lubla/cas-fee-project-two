@@ -39,7 +39,7 @@ var serverRepository = (function () {
 
         insertResult
             .then(function (result) {
-                if (result.result.n == 0) {
+                if (result.result.n == 1) {
                     defer.resolve(result.ops[0]);
                 }
                 else {
@@ -50,6 +50,24 @@ var serverRepository = (function () {
         return defer.promise;
     };
 
+    Repository.prototype.addDoodle = function addDoodle(doodle) {
+        var insertResult = this.mongoDb.collection('doodles')
+            .insert(doodle);
+
+        var defer = Q.defer();
+
+        insertResult
+            .then(function (result) {
+                if (result.result.n == 1) {
+                    defer.resolve(result.ops[0]);
+                }
+                else {
+                    console.log('reject');
+                    defer.reject(new Error("Cannot add doodle"));
+                }
+            });
+        return defer.promise;
+    };
 
     return {
         Repository: Repository

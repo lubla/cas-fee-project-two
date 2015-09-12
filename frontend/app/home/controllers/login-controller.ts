@@ -31,7 +31,7 @@ module Home.Controllers {
             this.repository
                 .login(this.user)
                 .then(userProfile => {
-                    this.$location.path('#/Home')
+                    this.$location.path('/Home')
                 })
                 .catch(error => {
                     this.errorMessage = error.message;

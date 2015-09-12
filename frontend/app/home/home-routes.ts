@@ -39,6 +39,11 @@ module home {
                 //    }],
                 //}
 
+            })
+            .when('/DoodleRegistered', {
+              templateUrl: 'home/views/doodle-registered.tpl.html',
+              controller: 'DoodleRegisteredCtrl',
+              controllerAs: 'doodleRegistered'
             });
     }
 }

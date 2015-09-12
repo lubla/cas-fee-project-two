@@ -46,7 +46,7 @@ module Home.Controllers {
                         this.repository
                             .login(this.user)
                             .then((result) => {
-                                this.$location.path('#/Home');
+                                this.$location.path('/Home');
                             })
                     })
                     .catch(err => {

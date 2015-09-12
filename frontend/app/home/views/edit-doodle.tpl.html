@@ -1,6 +1,8 @@
 <h2>editDoodle</h2>
 <p>{{editDoodle.ctrlName}}</p>
 <div>
+  <p>Id {{editDoodle.doodle._id}}</p>
+  <p>Id {{editDoodle.errorMessage}}</p>
   <p>Was: </p>
   <input type="text" ng-model="editDoodle.doodle.title" value="{{editDoodle.doodle.title}}"/>
   <p>Wo: </p>
@@ -8,7 +10,7 @@
 </div>
 <div ng-repeat="dateProposal in editDoodle.doodle.dateProposals">
   <p>
-    Id  {{dateProposal.id}} <a ng-click='editDoodle.deleteDateProposal(dateProposal.id)'>Löschen</a>
+    Id  {{dateProposal._id}} <a ng-click='editDoodle.deleteDateProposal(dateProposal._id)'>Löschen</a>
     <p>Wann:</p>
     <input name="date" class="form-control" type="text" value="{{dateProposal.start}}" ng-model="dateProposal.start" bs-datepicker  data-date-format="dd-MM.yyyy">
     <input name="timeStart" class="form-control" type="text" size="8" ng-model="dateProposal.end" bs-timepicker data-time-format="HH:mm" data-arrow-behavior="picker" data-minute-step="5" data-length="1">
@@ -18,4 +20,5 @@
 </div>
 <div>
   <a ng-click='editDoodle.addDateProposal()'>Neuer Terminvorschlag</a>
+  <a ng-click='editDoodle.postDoodle()'>Fertig</a>
 </div>

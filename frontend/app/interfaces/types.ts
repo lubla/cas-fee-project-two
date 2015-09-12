@@ -41,7 +41,7 @@ module Home.Interfaces {
      * @interface IDateProposal
      */
     export interface IDateProposal {
-        id: string;
+        _id: string;
 
         /**
          * The start date of the proposal.
@@ -65,7 +65,7 @@ module Home.Interfaces {
      * @interface IDoodle
      */
     export interface IDoodle {
-        id: string;
+        _id: string;
 
         /**
          * The id of the user that has created the Doodle.

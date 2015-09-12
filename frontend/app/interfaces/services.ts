@@ -14,8 +14,20 @@ module Home.Interfaces {
 
         /**
          * Creates a new doodle.
+         *
+         * @returns {IPromise<Home.Interfaces.IDoodle>}
          */
         createNewDoodle():ng.IPromise<Home.Interfaces.IDoodle>;
+
+
+        /**
+         * Adds a new doodle to the doodle database.
+         *
+         * @param doodle
+         * @returns {IPromise<Home.Interfaces.IDoodle>}
+         */
+        postDoodle(doodle:Home.Interfaces.IDoodle):ng.IPromise<Home.Interfaces.IDoodle>;
+
     }
 
 

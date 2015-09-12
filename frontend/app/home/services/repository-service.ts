@@ -23,7 +23,7 @@ module Home.Services {
     }
 
     export class DateProposal implements Home.Interfaces.IDateProposal {
-        id:string;
+        _id:string;
         /**
          * The start date of the proposal.
          */
@@ -44,7 +44,7 @@ module Home.Services {
 
         constructor() {
 
-            this.id = Home.Utilities.Uuid.new();
+            this._id = Home.Utilities.Uuid.new();
             this.start = new Date();
             this.start.setMinutes(0, 0, 0);
             this.end = this.start;
@@ -55,7 +55,7 @@ module Home.Services {
 
 
     export class Doodle implements Home.Interfaces.IDoodle {
-        id:string;
+        _id:string;
 
         /**
          * The id of the user that has created the Doodle.
@@ -85,7 +85,7 @@ module Home.Services {
 
         constructor(ownerId:string) {
             console.log('create doodle');
-            this.id = '';
+            this._id = Home.Utilities.Uuid.new();
             this.ownerId = ownerId;
             this.title = '';
             this.dateProposals = new Array<Home.Interfaces.IDateProposal>();
@@ -127,7 +127,7 @@ module Home.Services {
             var found = false;
             index = this.dateProposals.length - 1;
             while (index >= 0 && !found) {
-                if (this.dateProposals[index].id === id) {
+                if (this.dateProposals[index]._id === id) {
                     found = true;
                 }
                 else {
@@ -164,9 +164,11 @@ module Home.Services {
                         deferred.resolve(response.data)
                     }
                     else {
-                        deferred.reject(response.statusText);
+                        deferred.reject(new Error(response.statusText));
                     }
-                });
+                })
+                .catch(err => deferred.reject(err));
+
 
             return deferred.promise;
         }
@@ -187,7 +189,9 @@ module Home.Services {
                         deferred.reject(new Error('Unexpected response'))
                     }
 
-                });
+                })
+                .catch(err => deferred.reject(err));
+
 
             return deferred.promise;
         }
@@ -212,13 +216,17 @@ module Home.Services {
                         deferred.resolve(this.loggedInUser);
                     }
 
-                });
+                })
+                .catch(err => deferred.reject(err));
+
 
             return deferred.promise;
         }
 
         /**
          * Creates a new doodle.
+         *
+         * @returns {IPromise<Home.Interfaces.IDoodle>}
          */
         createNewDoodle():ng.IPromise<Home.Interfaces.IDoodle> {
             var deferred = this.$q.defer();
@@ -230,6 +238,32 @@ module Home.Services {
             return deferred.promise;
         }
 
+        /**
+         * Adds a new doodle to the doodle database.
+         *
+         * @param doodle
+         * @returns {IPromise<Home.Interfaces.IDoodle>}
+         */
+        postDoodle(doodle:Home.Interfaces.IDoodle):ng.IPromise<Home.Interfaces.IDoodle> {
+
+            var deferred = this.$q.defer();
+            this.$http
+                .post('/postDoodle', doodle)
+                .then(response => {
+                    if (response.status === 200) {
+                        // OK.
+                        deferred.resolve(response.data)
+                    }
+                    else {
+                        console.log("status:" + response.status)
+                        deferred.reject(new Error(response.statusText));
+                    }
+                })
+                .catch(err => deferred.reject(err));
+
+
+            return deferred.promise;
+        }
 
         get():string {
             return name;

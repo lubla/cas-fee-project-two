@@ -26,7 +26,7 @@ function setupServer(repository) {
 
     app.use(express.static(path.join(__dirname, '../frontend/build/app')));
 
-    // Make the repository available in the routers.
+    // Make the repository available in the routes.
     app.use(function(req,res,next){
         req.repository = repository;
         next();
@@ -40,6 +40,7 @@ function setupServer(repository) {
     app.use('/', indexRoute);
     app.use('/getUserProfiles', require('./routes/getUserProfiles'));
     app.use('/registerUser', require('./routes/registerUser'));
+    app.use('/postDoodle', require('./routes/postDoodle'));
 
     // Forward 404 to error handler to error handler.
     app.use(function (req, res, next) {
@@ -63,7 +64,8 @@ function setupServer(repository) {
         }
 
         console.log(errorInfo);
-        res.send(errorInfo.replace(/\n/g, '<br>'));
+        next(err);
+        // res.send(errorInfo.replace(/\n/g, '<br>'));
     }
 
     app.use(errorHandler);
