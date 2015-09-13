@@ -1,4 +1,5 @@
 <h2>doodleRegistered</h2>
 <p>{{doodleRegistered.ctrlName}}</p>
-<p>Ihr Doodle wurde registiert!</p>
+<p ng-show="doodleRegistered.isNewDoodle">Ihr Doodle wurde registriert!</p>
+<p ng-show="!doodleRegistered.isNewDoodle">Ihr Doodle wurde aktualisiert!</p>
 <p>Link zur Bearbeitung: <a href="http://localhost:3000/#/EditDoodle?id={{doodleRegistered.doodleId}}">http://localhost:3000/#/EditDoodle?id={{doodleRegistered.doodleId}}</a></p>

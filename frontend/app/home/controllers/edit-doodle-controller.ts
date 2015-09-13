@@ -12,6 +12,7 @@ module Home.Controllers {
         doodle:Home.Interfaces.IDoodle;
         id:string;
         errorMessage:string;
+        isNewDoodle: boolean;
 
         // $inject annotation.
         // It provides $injector with information about dependencies to be injected into constructor
@@ -29,10 +30,12 @@ module Home.Controllers {
             this.ctrlName = 'EditDoodleCtrl';
             if (!$routeParams.id) {
                 // No id specified in route => Create a new doodle.
+                this.isNewDoodle = true;
                 this.repository.createNewDoodle().then(doodle => this.doodle = doodle);
             }
             else {
                 // Id specified => Get the doodle from db.
+                this.isNewDoodle = false;
                 repository
                     .getDoodle($routeParams.id)
                     .then(doodle => this.doodle = doodle)
@@ -46,28 +49,47 @@ module Home.Controllers {
         }
 
         addDateProposal():void {
-            this.$log.debug('addDateProposal');
             this.doodle.addNewDateProposal();
 
         }
 
         deleteDateProposal(id:string):void {
-            this.$log.debug('deleteDateProposal');
             this.doodle.deleteDateProposal(id);
         }
 
-        postDoodle():void {
-            this.$log.debug('postDoodle');
-            this.repository
-                .postDoodle(this.doodle)
-                .then(doodle => {
-                    this.$location.search('id', this.doodle._id);
-                    this.$location.path('/DoodleRegistered');
-                })
-                .catch(err => {
-                    this.$log.debug("problem adding doodle");
-                    this.errorMessage = err.statusText;
-                });
+        setPostOrPutDoodleLocation() {
+            this.$location.search('id', this.doodle._id);
+            this.$location.search('isNewDoodle', this.isNewDoodle);
+            this.$location.path('/DoodleRegistered');
+
+        }
+
+        /**
+         *  Posts the doodle if it is a new doodle, puts the doodle if it is an existing doodle.
+         */
+        postOrPutDoodle():void {
+            if(this.isNewDoodle) {
+                this.$log.debug('postDoodle');
+                this.repository
+                    .postDoodle(this.doodle)
+                    .then(doodle => {
+                        this.setPostOrPutDoodleLocation();
+                    })
+                    .catch(err => {
+                        this.errorMessage = err.statusText;
+                    });
+            }
+            else {
+                this.$log.debug('putDoodle');
+                this.repository
+                    .putDoodle(this.doodle)
+                    .then(doodle => {
+                        this.setPostOrPutDoodleLocation();
+                    })
+                    .catch(err => {
+                        this.errorMessage = err.statusText;
+                    });
+            }
 
         }
 

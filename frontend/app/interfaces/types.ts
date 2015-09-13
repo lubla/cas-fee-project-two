@@ -30,7 +30,7 @@ module Home.Interfaces {
      * @interface IUserProfile
      */
     export interface  IUserProfile {
-        id: string;
+        _id: string;
         email: string;
         passwordHash: string;
     }

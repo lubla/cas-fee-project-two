@@ -7,6 +7,11 @@ module Home.Controllers{
     ctrlName: string;
     loginMessage: string;
 
+    /**
+     * Indicates if "My Doodles" link is shown.
+     */
+    showMyDoodles: boolean;
+
     // $inject annotation.
     // It provides $injector with information about dependencies to be injected into constructor
     // it is better to have it close to the constructor, because the parameters must match in count and type.
@@ -24,9 +29,11 @@ module Home.Controllers{
       this.$log.debug('home controller called');
       if(this.repository.loggedInUser != null)  {
         this.loginMessage = 'Hallo ' + this.repository.loggedInUser.email;
+        this.showMyDoodles = true;
       }
-
-
+      else {
+        this.showMyDoodles = false;
+      }
     }
   }
 

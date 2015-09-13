@@ -83,14 +83,42 @@ module Home.Services {
         isExpired:boolean;
 
 
-        constructor(ownerId:string) {
-            console.log('create doodle');
-            this._id = Home.Utilities.Uuid.new();
-            this.ownerId = ownerId;
-            this.title = '';
-            this.dateProposals = new Array<Home.Interfaces.IDateProposal>();
-            this.isExpired = false;
+        /**
+         * Constructor to create a new doodle
+         *
+         * @param ownerId
+         */
+        constructor(ownerId:string);
+
+        /**
+         * Creates a doodle from a pain javascript doodle (JSON doodle). If
+         * no doodle is specified then a new doodle is created.
+         *
+         * @param doodle
+         */
+        constructor(doodle:any);
+
+        constructor(doodleOrOwnerId:any | string) {
+            if (typeof doodleOrOwnerId === 'string') {
+                var ownerId:string = doodleOrOwnerId;
+                this._id = Home.Utilities.Uuid.new();
+                this.ownerId = ownerId;
+                this.title = '';
+                this.place = '';
+                this.dateProposals = new Array<Home.Interfaces.IDateProposal>();
+                this.isExpired = false;
+            }
+            else {
+                var doodle:any = doodleOrOwnerId;
+                this._id = doodle._id;
+                this.ownerId = doodle.ownerId;
+                this.title = doodle.title;
+                this.place = doodle.place;
+                this.dateProposals = doodle.dateProposals;
+                this.isExpired = doodle.isExpired;
+            }
         }
+
 
         /**
          * Adds a new date proposal.
@@ -231,7 +259,7 @@ module Home.Services {
         createNewDoodle():ng.IPromise<Home.Interfaces.IDoodle> {
             var deferred = this.$q.defer();
 
-            var doodle = new Doodle(this.loggedInUser ? this.loggedInUser.id : '');
+            var doodle = new Doodle(this.loggedInUser ? this.loggedInUser._id : '');
             deferred.resolve(doodle);
 
 
@@ -252,7 +280,7 @@ module Home.Services {
                 .then(response => {
                     if (response.status === 200) {
                         // OK.
-                        deferred.resolve(response.data)
+                        deferred.resolve(new Doodle(response.data));
                     }
                     else {
                         console.log("status:" + response.status)
@@ -278,7 +306,7 @@ module Home.Services {
                 .then(response => {
                     if (response.status === 200) {
                         // OK.
-                        deferred.resolve(response.data)
+                        deferred.resolve(new Doodle(response.data));
                     }
                     else {
                         console.log("status:" + response.status)
@@ -290,6 +318,32 @@ module Home.Services {
 
             return deferred.promise;
 
+        }
+
+        /**
+         * Updates an existing doodle.
+         *
+         * @param doodle The doodle to update.
+         * @returns {IPromise<Home.Interfaces.IDoodle>} A promise with the updated doodle as result.
+         */
+        putDoodle(doodle:Home.Interfaces.IDoodle):ng.IPromise<Home.Interfaces.IDoodle> {
+            var deferred = this.$q.defer();
+            this.$http
+                .put('/putDoodle', doodle)
+                .then(response => {
+                    if (response.status === 200) {
+                        // OK.
+                        deferred.resolve(new Doodle(response.data));
+                    }
+                    else {
+                        console.log("status:" + response.status)
+                        deferred.reject(new Error(response.statusText));
+                    }
+                })
+                .catch(err => deferred.reject(err));
+
+
+            return deferred.promise;
         }
 
 

@@ -24,7 +24,7 @@ module Home.Interfaces {
          * Adds a new doodle to the doodle database.
          *
          * @param doodle
-         * @returns {IPromise<Home.Interfaces.IDoodle>}
+         * @returns {IPromise<Home.Interfaces.IDoodle>} A promise with the added doodle as result.
          */
         postDoodle(doodle:Home.Interfaces.IDoodle):ng.IPromise<Home.Interfaces.IDoodle>;
 
@@ -32,9 +32,17 @@ module Home.Interfaces {
          * Gets a doodle from the doodle database.
          *
          * @param id Id of the doodle
-         * @returns {IPromise<Home.Interfaces.IDoodle>}
+         * @returns {IPromise<Home.Interfaces.IDoodle>} A promise with the retrieved doodle as result.
          */
         getDoodle(id:string):ng.IPromise<Home.Interfaces.IDoodle>;
+
+        /**
+         * Updates an existing doodle.
+         *
+         * @param doodle The doodle to update.
+         * @returns {IPromise<Home.Interfaces.IDoodle>} A promise with the updated doodle as result.
+         */
+        putDoodle(doodle:Home.Interfaces.IDoodle):ng.IPromise<Home.Interfaces.IDoodle>;
 
     }
 
