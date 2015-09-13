@@ -60,7 +60,7 @@ module Home.Services {
         /**
          * The id of the user that has created the Doodle.
          */
-        ownerId:string;
+        userId:string;
 
         /**
          * The title of the Doodle.
@@ -86,9 +86,9 @@ module Home.Services {
         /**
          * Constructor to create a new doodle
          *
-         * @param ownerId
+         * @param userId
          */
-        constructor(ownerId:string);
+        constructor(userId:string);
 
         /**
          * Creates a doodle from a pain javascript doodle (JSON doodle). If
@@ -98,20 +98,20 @@ module Home.Services {
          */
         constructor(doodle:any);
 
-        constructor(doodleOrOwnerId:any | string) {
-            if (typeof doodleOrOwnerId === 'string') {
-                var ownerId:string = doodleOrOwnerId;
+        constructor(doodleOrUserId:any | string) {
+            if (typeof doodleOrUserId === 'string') {
+                var userId:string = doodleOrUserId;
                 this._id = Home.Utilities.Uuid.new();
-                this.ownerId = ownerId;
+                this.userId = userId;
                 this.title = '';
                 this.place = '';
                 this.dateProposals = new Array<Home.Interfaces.IDateProposal>();
                 this.isExpired = false;
             }
             else {
-                var doodle:any = doodleOrOwnerId;
+                var doodle:any = doodleOrUserId;
                 this._id = doodle._id;
-                this.ownerId = doodle.ownerId;
+                this.userId = doodle.userId;
                 this.title = doodle.title;
                 this.place = doodle.place;
                 this.dateProposals = doodle.dateProposals;
@@ -317,8 +317,37 @@ module Home.Services {
 
 
             return deferred.promise;
-
         }
+
+        /**
+         * Gets all doodles for a user
+         *
+         * @param userId
+         * @returns {ng.IPromise<Array<Home.Interfaces.IDoodle>>} A promise with the doodles of the user as result.
+         */
+        getDoodlesForUser(userId:string):ng.IPromise<Array<Home.Interfaces.IDoodle>> {
+            var deferred = this.$q.defer();
+            this.$http
+                .get('/getDoodlesForUser?userId=' + userId)
+                .then(response => {
+                    if (response.status === 200) {
+                        // OK.
+                        var doodles = new Array<Home.Interfaces.IDoodle>();
+                        var doodleArray = <Array<any>> response.data;
+                        doodleArray.forEach(doodle => doodles.push(new Doodle(doodle)));
+                        deferred.resolve(doodles);
+                    }
+                    else {
+                        console.log("status:" + response.status)
+                        deferred.reject(new Error(response.statusText));
+                    }
+                })
+                .catch(err => deferred.reject(err));
+
+
+            return deferred.promise;
+        }
+
 
         /**
          * Updates an existing doodle.

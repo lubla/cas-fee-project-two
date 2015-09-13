@@ -138,9 +138,20 @@ var serverRepository = (function () {
             return defer.promise;
         };
 
+        Repository.prototype.getDoodlesForUser = function (userId) {
+
+            var cursor = this.mongoDb.collection(doodlesCollectionName)
+                .find({"userId": userId});
+//            .find();
+
+            return cursor.toArray();
+        };
+
         return {
             Repository: Repository
         }
+
+
 
 
     }()

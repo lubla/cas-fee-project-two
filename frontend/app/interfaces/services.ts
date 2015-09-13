@@ -44,6 +44,13 @@ module Home.Interfaces {
          */
         putDoodle(doodle:Home.Interfaces.IDoodle):ng.IPromise<Home.Interfaces.IDoodle>;
 
+        /**
+         * Gets all doodles for a user
+         *
+         * @param userId
+         * @returns {ng.IPromise<Array<Home.Interfaces.IDoodle>>} A promise with the doodles of the user as result.
+         */
+        getDoodlesForUser(userId:string):ng.IPromise<Array<Home.Interfaces.IDoodle>>;
     }
 
 

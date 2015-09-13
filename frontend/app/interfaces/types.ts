@@ -70,7 +70,7 @@ module Home.Interfaces {
         /**
          * The id of the user that has created the Doodle.
          */
-        ownerId: string;
+        userId: string;
 
         /**
          * The title of the Doodle.

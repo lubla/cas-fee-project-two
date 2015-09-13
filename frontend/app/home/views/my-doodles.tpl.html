@@ -1,2 +1,7 @@
 <h2>myDoodles</h2>
 <p>{{myDoodles.ctrlName}}</p>
+<p>Error: {{myDoodles.errorMessage}}</p>
+
+<div ng-repeat="doodle in myDoodles.doodles">
+  <p>Id: {{doodle._id}}</p>
+</div>
