@@ -3,7 +3,7 @@ module Home.Controllers {
     'use strict';
 
     interface IEditDoodleRouteParams extends ng.route.IRouteParamsService {
-        id: string;
+        doodleId: string;
     }
 
     class EditDoodleCtrl {
@@ -28,7 +28,7 @@ module Home.Controllers {
                     private repository:Home.Interfaces.IRepository) {
 
             this.ctrlName = 'EditDoodleCtrl';
-            if (!$routeParams.id) {
+            if (!$routeParams.doodleId) {
                 // No id specified in route => Create a new doodle.
                 this.isNewDoodle = true;
                 this.repository.createNewDoodle().then(doodle => this.doodle = doodle);
@@ -37,7 +37,7 @@ module Home.Controllers {
                 // Id specified => Get the doodle from db.
                 this.isNewDoodle = false;
                 repository
-                    .getDoodle($routeParams.id)
+                    .getDoodle($routeParams.doodleId)
                     .then(doodle => this.doodle = doodle)
                     .catch(err => {
                         this.$log.debug("problem getting doodle");
@@ -53,12 +53,12 @@ module Home.Controllers {
 
         }
 
-        deleteDateProposal(id:string):void {
-            this.doodle.deleteDateProposal(id);
+        deleteDateProposal(dateProposalId:string):void {
+            this.doodle.deleteDateProposal(dateProposalId);
         }
 
         setPostOrPutDoodleLocation() {
-            this.$location.search('id', this.doodle._id);
+            this.$location.search('doodleId', this.doodle._id);
             this.$location.search('isNewDoodle', this.isNewDoodle);
             this.$location.path('/DoodleRegistered');
 

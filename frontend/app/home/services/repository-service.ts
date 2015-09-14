@@ -134,38 +134,11 @@ module Home.Services {
         /**
          * Deletes a date proposal.
          *
-         * @param id The id of the data proposal to delete.
+         * @param dateProposalId The id of the data proposal to delete.
          */
-        deleteDateProposal(id:string) {
-
-            var index = this.findDateProposalIndex(id);
-            if (index >= 0) {
-                this.dateProposals.splice(index, 1);
-            }
+        deleteDateProposal(dateProposalId:string) {
+            Home.Utilities.ArrayUtilities.RemoveWhere(this.dateProposals, dateProposal => dateProposal._id === dateProposalId);
         }
-
-        /**
-         * Finds the index of a date proposal with a given id.
-         *
-         * @param id The id of the date proposal.
-         * @returns {Number} Then index of the data proposal or -1 if it is not found.
-         */
-        findDateProposalIndex(id:string) {
-            var index:number;
-            var found = false;
-            index = this.dateProposals.length - 1;
-            while (index >= 0 && !found) {
-                if (this.dateProposals[index]._id === id) {
-                    found = true;
-                }
-                else {
-                    index--;
-                }
-            }
-
-            return index;
-        }
-
     }
 
 
@@ -296,17 +269,43 @@ module Home.Services {
         /**
          * Gets a doodle from the doodle database.
          *
-         * @param id Id of the doodle
+         * @param doodleId Id of the doodle
          * @returns {IPromise<Home.Interfaces.IDoodle>}
          */
-        getDoodle(id:string):ng.IPromise<Home.Interfaces.IDoodle> {
+        getDoodle(doodleId:string):ng.IPromise<Home.Interfaces.IDoodle> {
             var deferred = this.$q.defer();
             this.$http
-                .get('/getDoodle?id=' + id)
+                .get('/getDoodle?doodleId=' + doodleId)
                 .then(response => {
                     if (response.status === 200) {
                         // OK.
                         deferred.resolve(new Doodle(response.data));
+                    }
+                    else {
+                        console.log("status:" + response.status)
+                        deferred.reject(new Error(response.statusText));
+                    }
+                })
+                .catch(err => deferred.reject(err));
+
+
+            return deferred.promise;
+        }
+
+        /**
+         * Deletes a doodle.
+         *
+         * @param doodleId The id of the doodle to delete.
+         * @returns {ng.IPromise<boolean>} A promise with a boolean value as result that indicates if the delete succeeded.
+         */
+        deleteDoodle(doodleId:string):ng.IPromise<boolean> {
+            var deferred = this.$q.defer();
+            this.$http
+                .delete('/deleteDoodle?doodleId=' + doodleId)
+                .then(response => {
+                    if (response.status === 200) {
+                        // OK.
+                        deferred.resolve(response.data);
                     }
                     else {
                         console.log("status:" + response.status)

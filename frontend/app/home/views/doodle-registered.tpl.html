@@ -2,4 +2,4 @@
 <p>{{doodleRegistered.ctrlName}}</p>
 <p ng-show="doodleRegistered.isNewDoodle">Ihr Doodle wurde registriert!</p>
 <p ng-show="!doodleRegistered.isNewDoodle">Ihr Doodle wurde aktualisiert!</p>
-<p>Link zur Bearbeitung: <a href="http://localhost:3000/#/EditDoodle?id={{doodleRegistered.doodleId}}">http://localhost:3000/#/EditDoodle?id={{doodleRegistered.doodleId}}</a></p>
+<p>Link zur Bearbeitung: <a href="{{doodleRegistered.doodleLink}}">{{doodleRegistered.doodleLink}}</a></p>

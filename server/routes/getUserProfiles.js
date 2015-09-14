@@ -11,7 +11,7 @@ var urlencodedParser = bodyParser.urlencoded({ extended: false });
 
 router.get('/', urlencodedParser, function (req, res, next) {
 
-    req.repository.getUserProfiles(req.query)
+    req.repository.getUserProfiles(req.query.email, req.query.passwordHash)
         .then(function (result) {
             res.send(result);
         })

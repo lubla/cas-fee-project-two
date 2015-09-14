@@ -6,7 +6,7 @@ module Home.Controllers {
 
         ctrlName:string;
         doodles:Array<Home.Interfaces.IDoodle>;
-        errorMessage: string;
+        errorMessage:string;
 
 
         // $inject annotation.
@@ -25,9 +25,29 @@ module Home.Controllers {
                 .getDoodlesForUser(repository.loggedInUser._id)
                 .then(doodles => this.doodles = doodles)
                 .catch(err => {
-                    this.$log.debug("problem getting doodlea");
+                    this.$log.debug("problem getting doodle");
                     this.errorMessage = err.statusText;
                 });
+        }
+
+        deleteDoodle(doodleId:string):void {
+
+            this.$log.debug('deleteDoodle');
+            this.repository
+                .deleteDoodle(doodleId)
+                .then(doodle => {
+                    Home.Utilities.ArrayUtilities
+                        .RemoveWhere(this.doodles, doodle => doodle._id === doodleId);
+                })
+                .catch(err => {
+                    this.errorMessage = err.statusText;
+                });
+        }
+
+        editDoodle(doodleId:string):void {
+            this.$location.search('doodleId', doodleId);
+            this.$location.search('isNewDoodle', false);
+            this.$location.path('/EditDoodle');
         }
     }
 

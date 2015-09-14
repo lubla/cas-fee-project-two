@@ -44,6 +44,7 @@ function setupServer(repository) {
     app.use('/getDoodlesForUser', require('./routes/getDoodlesForUser'));
     app.use('/postDoodle', require('./routes/postDoodle'));
     app.use('/putDoodle', require('./routes/putDoodle'));
+    app.use('/deleteDoodle', require('./routes/deleteDoodle'));
 
     // Forward 404 to error handler to error handler.
     app.use(function (req, res, next) {

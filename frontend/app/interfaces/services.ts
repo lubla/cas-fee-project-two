@@ -31,10 +31,10 @@ module Home.Interfaces {
         /**
          * Gets a doodle from the doodle database.
          *
-         * @param id Id of the doodle
+         * @param doodleId Id of the doodle.
          * @returns {IPromise<Home.Interfaces.IDoodle>} A promise with the retrieved doodle as result.
          */
-        getDoodle(id:string):ng.IPromise<Home.Interfaces.IDoodle>;
+        getDoodle(doodleId:string):ng.IPromise<Home.Interfaces.IDoodle>;
 
         /**
          * Updates an existing doodle.
@@ -47,11 +47,18 @@ module Home.Interfaces {
         /**
          * Gets all doodles for a user
          *
-         * @param userId
+         * @param userId The id of the user.
          * @returns {ng.IPromise<Array<Home.Interfaces.IDoodle>>} A promise with the doodles of the user as result.
          */
         getDoodlesForUser(userId:string):ng.IPromise<Array<Home.Interfaces.IDoodle>>;
+
+        /**
+         * Deletes a doodle.
+         *
+         * @param doodleId The id of the doodle to delete.
+         * @returns {ng.IPromise<boolean>} A promise with a boolean value as result that indicates if the delete succeeded.
+         */
+        deleteDoodle(doodleId:string):ng.IPromise<boolean>;
+
     }
-
-
 }

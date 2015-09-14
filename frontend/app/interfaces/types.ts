@@ -105,7 +105,7 @@ module Home.Interfaces {
          *
          * @param id The id of the data proposal to delete.
          */
-        deleteDateProposal(id: string): void;
+        deleteDateProposal(dateProposalId: string): void;
 
     }
 }

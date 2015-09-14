@@ -26,10 +26,10 @@ var serverRepository = (function () {
         Repository.prototype.constructor = Repository;
 
 
-        Repository.prototype.getUserProfiles = function (user) {
+        Repository.prototype.getUserProfiles = function (email, passwordHash) {
 
             var cursor = this.mongoDb.collection(userProfilesCollectionName)
-                .find({$and: [{'email': user.email}, {'passwordHash': user.passwordHash}]});
+                .find({$and: [{'email': email}, {'passwordHash': passwordHash}]});
 
             return cursor.toArray();
         };
@@ -117,11 +117,10 @@ var serverRepository = (function () {
 
         };
 
-
-        Repository.prototype.getDoodle = function getDoodle(id) {
+        Repository.prototype.getDoodle = function getDoodle(doodleId) {
 
             var cursor = this.mongoDb.collection(doodlesCollectionName)
-                .find({_id: id});
+                .find({_id: doodleId});
 
             var defer = Q.defer();
 
@@ -138,11 +137,28 @@ var serverRepository = (function () {
             return defer.promise;
         };
 
+        Repository.prototype.deleteDoodle = function getDoodle(doodleId) {
+
+            var removeResult = this.mongoDb.collection(doodlesCollectionName)
+                .remove({_id: doodleId});
+
+            var defer = Q.defer();
+
+            removeResult
+                .then(function(result) {
+                    defer.resolve("Removed");
+                })
+                .catch(function (err) {
+                    defer.reject(err);
+                });
+
+            return defer.promise;
+        };
+
         Repository.prototype.getDoodlesForUser = function (userId) {
 
             var cursor = this.mongoDb.collection(doodlesCollectionName)
                 .find({"userId": userId});
-//            .find();
 
             return cursor.toArray();
         };
