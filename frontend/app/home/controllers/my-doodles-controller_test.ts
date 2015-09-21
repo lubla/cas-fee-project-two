@@ -8,8 +8,8 @@ describe('MyDoodlesCtrl', function () {
 
   beforeEach(module('home'));
 
-  beforeEach(inject(function ($rootScope, $controller) {
-    ctrl = $controller('MyDoodlesCtrl');
+  beforeEach(inject(function ($rootScope, $controller, $log, $location, $http, Repository) {
+    ctrl = $controller('MyDoodlesCtrl', $log, $location, $http, Repository);
   }));
 
   it('should have ctrlName as MyDoodlesCtrl', function () {

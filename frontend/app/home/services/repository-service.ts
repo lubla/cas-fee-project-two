@@ -142,7 +142,7 @@ module Home.Services {
     }
 
 
-    class Repository implements Home.Interfaces.IRepository {
+    export class Repository implements Home.Interfaces.IRepository {
         public static $inject = ['$log', '$http', '$q'];
 
         name:string;
