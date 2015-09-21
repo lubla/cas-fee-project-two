@@ -10,7 +10,6 @@ module Home.Controllers {
 
         ctrlName:string;
         doodle:Home.Interfaces.IDoodle;
-        id:string;
         errorMessage:string;
         isNewDoodle: boolean;
 
@@ -60,8 +59,8 @@ module Home.Controllers {
         setPostOrPutDoodleLocation() {
             this.$location.search('doodleId', this.doodle._id);
             this.$location.search('isNewDoodle', this.isNewDoodle);
+            this.$location.search('registerId', this.doodle.registerId);
             this.$location.path('/DoodleRegistered');
-
         }
 
         /**

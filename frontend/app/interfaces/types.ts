@@ -65,12 +65,25 @@ module Home.Interfaces {
      * @interface IDoodle
      */
     export interface IDoodle {
+
+        /**
+         * The id of the doodle.
+         */
         _id: string;
 
         /**
          * The id of the user that has created the Doodle.
          */
         userId: string;
+
+
+        /**
+         * The id of the doodle to register for it.
+         * This id is introduced to have two ids for a doodle:
+         * One for the owner (_id, to edit the doodle) and one to register
+         * (registerId, to register).
+         */
+        registerId: string;
 
         /**
          * The title of the Doodle.
@@ -103,9 +116,48 @@ module Home.Interfaces {
         /**
          * Deletes a date proposal.
          *
-         * @param id The id of the data proposal to delete.
+         * @param dateProposalId The id of the data proposal to delete.
          */
-        deleteDateProposal(dateProposalId: string): void;
+        deleteDateProposal(dateProposalId:string): void;
+
+        /**
+         * Adds a new name to the names that have accepted a date proposal.
+         *
+         * @param dateProposalId The id of the data proposal.
+         * @param name The name to add.
+         */
+        addAcceptedNameToDateProposal(dateProposalId:string, name: string): void;
+
+        /**
+         * Deletes a name from the names that have accepted a new date proposal.
+         *
+         * @param dateProposalId The id of the data proposal.
+         * @param name The name to delete.
+         */
+        deleteAcceptedNameFromDateProposal(dateProposalId:string, name: string): void;
+
+        /**
+         * Gets a date proposal for an id.
+         *
+         * @param dateProposalId The id of the date proposal.
+         */
+        getDatePoposal(dateProposalId: string): IDateProposal;
+
 
     }
+
+    /**
+     *
+     */
+    export interface IDateProposalAccepted {
+        dateProposalId: string;
+        name: string;
+    }
+
+    export interface IRegisterDoodleChanges {
+        doodleId: string;
+        datePropolalsAccepted: Array<IDateProposalAccepted>;
+        datePropolalsRejected: Array<IDateProposalAccepted>;
+    }
+
 }

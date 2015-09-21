@@ -41,6 +41,7 @@ function setupServer(repository) {
     app.use('/getUserProfiles', require('./routes/getUserProfiles'));
     app.use('/registerUser', require('./routes/registerUser'));
     app.use('/getDoodle', require('./routes/getDoodle'));
+    app.use('/getDoodleRegister', require('./routes/getDoodleRegister'));
     app.use('/getDoodlesForUser', require('./routes/getDoodlesForUser'));
     app.use('/postDoodle', require('./routes/postDoodle'));
     app.use('/putDoodle', require('./routes/putDoodle'));

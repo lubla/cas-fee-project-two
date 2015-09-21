@@ -18,10 +18,23 @@ module Home.Utilities {
                 if (predicate(array[index])) {
                     result.push(index);
                 }
-                index--;
+                index++;
             }
 
             return result;
+        }
+
+        static FindFirst<T>(array:Array<T>, predicate:Func<T,boolean>):T {
+            var index:number;
+            index = 0;
+            while (index < array.length) {
+                if (predicate(array[index])) {
+                    return array[index];
+                }
+                index++;
+            }
+
+            return null;
         }
 
         static RemoveWhere<T>(array:Array<T>, predicate:Func<T,boolean>):number {

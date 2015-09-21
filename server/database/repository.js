@@ -129,8 +129,37 @@ var serverRepository = (function () {
                     defer.reject(new Error("Cannot get doodle: " + err.toString()));
                 }
                 else {
-                    defer.resolve(doodle);
+                    if(doodle) {
+                        defer.resolve(doodle);
+                    }
+                    else {
+                        defer.reject(new Error("Cannot get doodle for id: " + doodleId));
+                    }
 
+                }
+            });
+
+            return defer.promise;
+        };
+
+        Repository.prototype.getDoodleRegister = function getDoodleRegister(registerId) {
+
+            var cursor = this.mongoDb.collection(doodlesCollectionName)
+                .find({registerId: registerId});
+
+            var defer = Q.defer();
+
+            cursor.nextObject(function (err, doodle) {
+                if (err) {
+                    defer.reject(new Error("Cannot get doodle: " + err.toString()));
+                }
+                else {
+                    if(doodle) {
+                        defer.resolve(doodle);
+                    }
+                    else {
+                        defer.reject(new Error("Cannot get doodle for register id: " + doodleId));
+                    }
                 }
             });
 

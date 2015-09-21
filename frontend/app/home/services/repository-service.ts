@@ -48,19 +48,33 @@ module Home.Services {
             this.start = new Date();
             this.start.setMinutes(0, 0, 0);
             this.end = this.start;
-            this.end.setHours(this.start.getHours() + 1)
+            this.end.setHours(this.start.getHours() + 1);
+            this.acceptedBy = new Array<string>();
         }
 
     }
 
 
     export class Doodle implements Home.Interfaces.IDoodle {
+        /**
+         * The id of the doodle.
+         */
         _id:string;
 
         /**
          * The id of the user that has created the Doodle.
          */
         userId:string;
+
+
+        /**
+         * The id of the doodle to register for it.
+         * This id is introduced to have two ids for a doodle:
+         * One for the owner (_id, to edit the doodle) and one to register
+         * (registerId, to register).
+         */
+        registerId: string;
+
 
         /**
          * The title of the Doodle.
@@ -103,6 +117,7 @@ module Home.Services {
                 var userId:string = doodleOrUserId;
                 this._id = Home.Utilities.Uuid.new();
                 this.userId = userId;
+                this.registerId = Home.Utilities.Uuid.new();
                 this.title = '';
                 this.place = '';
                 this.dateProposals = new Array<Home.Interfaces.IDateProposal>();
@@ -112,6 +127,7 @@ module Home.Services {
                 var doodle:any = doodleOrUserId;
                 this._id = doodle._id;
                 this.userId = doodle.userId;
+                this.registerId = doodle.registerId;
                 this.title = doodle.title;
                 this.place = doodle.place;
                 this.dateProposals = doodle.dateProposals;
@@ -139,6 +155,38 @@ module Home.Services {
         deleteDateProposal(dateProposalId:string) {
             Home.Utilities.ArrayUtilities.RemoveWhere(this.dateProposals, dateProposal => dateProposal._id === dateProposalId);
         }
+
+        /**
+         * Adds a new name to the names that have accepted a date proposal.
+         *
+         * @param dateProposalId The id of the data proposal.
+         * @param name The name to add.
+         */
+        addAcceptedNameToDateProposal(dateProposalId:string, name: string): void {
+            var dateProposal = this.getDatePoposal(dateProposalId);
+            dateProposal.acceptedBy.push(name);
+        }
+
+        /**
+         * Deletes a name from the names that have accepted a new date proposal.
+         *
+         * @param dateProposalId The id of the data proposal.
+         * @param name The name to delete.
+         */
+        deleteAcceptedNameFromDateProposal(dateProposalId:string, name: string): void {
+            var dateProposal = this.getDatePoposal(dateProposalId);
+            Home.Utilities.ArrayUtilities.RemoveWhere(dateProposal.acceptedBy, acceptedBy => acceptedBy === name);
+        }
+
+        /**
+         * Gets a date proposal for an id.
+         *
+         * @param dateProposalId The id of the date proposal.
+         */
+        getDatePoposal(dateProposalId: string): Home.Interfaces.IDateProposal {
+            return Home.Utilities.ArrayUtilities.FindFirst(this.dateProposals, dateProposal => dateProposal._id === dateProposalId);
+        }
+
     }
 
 
@@ -291,6 +339,32 @@ module Home.Services {
 
             return deferred.promise;
         }
+
+        /**
+         * Gets a doodle from the doodle database to register for the doodle.
+         *
+         * @param registerId The register Id of the doodle.
+         * @returns {IPromise<Home.Interfaces.IDoodle>} A promise with the retrieved doodle as result.
+         */
+        getDoodleRegister(registerId:string):ng.IPromise<Home.Interfaces.IDoodle>{
+                var deferred = this.$q.defer();
+                this.$http
+                    .get('/getDoodleRegister?registerId=' + registerId)
+                    .then(response => {
+                        if (response.status === 200) {
+                            // OK.
+                            deferred.resolve(new Doodle(response.data));
+                        }
+                        else {
+                            console.log("status:" + response.status)
+                            deferred.reject(new Error(response.statusText));
+                        }
+                    })
+                    .catch(err => deferred.reject(err));
+
+
+                return deferred.promise;
+            }
 
         /**
          * Deletes a doodle.

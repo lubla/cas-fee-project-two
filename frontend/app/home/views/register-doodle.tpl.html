@@ -1,0 +1,32 @@
+<h2>registerDoodle</h2>
+<p>{{registerDoodle.ctrlName}}</p>
+<p>Error: {{registerDoodle.errorMessage}}</p>
+<p>Ihr Name:
+  <input type="text" ng-model="registerDoodle.name" value="{{registerDoodle.name}}"/>
+</p>
+
+<p>Was: {{registerDoodle.doodle.title}}</p>
+<p>Wo: {{registerDoodle.doodle.place}}</p>
+
+
+<div ng-repeat="dateProposal in registerDoodle.doodle.dateProposals">
+  <p>
+    {{dateProposal.start | date:'dd.MM.yyyy HH.mm'}}-{{dateProposal.end | date:'dd.MM.yyyy HH.mm'}}
+  </p>
+
+  <p>
+    <button ng-disabled="registerDoodle.acceptDateProposalIsDisabled(dateProposal._id)" ng-click='registerDoodle.acceptDateProposal(dateProposal._id)'>Ja</button>
+    <button ng-disabled="registerDoodle.rejectDateProposalIsDisabled(dateProposal._id)" ng-click='registerDoodle.rejectDateProposal(dateProposal._id)'>Nein</button>
+
+  <div>
+    Passt für:
+    <span ng-repeat="acceptedBy in dateProposal.acceptedBy">
+      {{acceptedBy}}
+    </span>
+  </div>
+  </p>
+  <p>
+    -------------------------
+  </p>
+</div>
+

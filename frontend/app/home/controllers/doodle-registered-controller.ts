@@ -4,14 +4,17 @@ module  Home.Controllers {
 
     interface IDoodleRegisteredRouteParams extends ng.route.IRouteParamsService {
         doodleId: string;
+        registerId: string;
         isNewDoodle;
     }
     class DoodleRegisteredCtrl {
 
         ctrlName:string;
         doodleId:string;
+        registerId:string;
         isNewDoodle:boolean;
-        doodleLink:string;
+        editDoodleLink:string;
+        registerDoodleLink:string;
 
         // $inject annotation.
         // It provides $injector with information about dependencies to be injected into constructor
@@ -28,8 +31,10 @@ module  Home.Controllers {
 
             this.ctrlName = 'DoodleRegisteredCtrl';
             this.doodleId = $routeParams.doodleId;
+            this.registerId = $routeParams.registerId;
             this.isNewDoodle = $routeParams.isNewDoodle;
-            this.doodleLink = 'http://localhost:3000/#/EditDoodle?doodleId=' + this.doodleId;
+            this.editDoodleLink = 'http://localhost:3000/#/EditDoodle?doodleId=' + this.doodleId;
+            this.registerDoodleLink = 'http://localhost:3000/#/RegisterDoodle?registerId=' + this.registerId;
         }
     }
 

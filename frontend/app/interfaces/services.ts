@@ -37,6 +37,15 @@ module Home.Interfaces {
         getDoodle(doodleId:string):ng.IPromise<Home.Interfaces.IDoodle>;
 
         /**
+         * Gets a doodle from the doodle database to register for the doodle.
+         *
+         * @param registerId The register Id of the doodle.
+         * @returns {IPromise<Home.Interfaces.IDoodle>} A promise with the retrieved doodle as result.
+         */
+        getDoodleRegister(registerId:string):ng.IPromise<Home.Interfaces.IDoodle>;
+
+
+        /**
          * Updates an existing doodle.
          *
          * @param doodle The doodle to update.
@@ -59,6 +68,8 @@ module Home.Interfaces {
          * @returns {ng.IPromise<boolean>} A promise with a boolean value as result that indicates if the delete succeeded.
          */
         deleteDoodle(doodleId:string):ng.IPromise<boolean>;
+
+
 
     }
 }
