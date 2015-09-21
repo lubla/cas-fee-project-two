@@ -4,13 +4,18 @@
 
 <div ng-repeat="doodle in myDoodles.doodles">
   <p>Id: {{doodle._id}}</p>
-
-  <p>
-    <a ng-click='myDoodles.deleteDoodle(doodle._id)'>Löschen</a>
-  </p>
+  <p>Titel: {{doodle.title}}</p>
 
   <p>
     <a ng-click='myDoodles.editDoodle(doodle._id)'>Bearbeiten</a>
+  </p>
+
+  <p>
+    <a ng-click='myDoodles.registerDoodle(doodle.registerId)'>Status</a>
+  </p>
+
+  <p>
+    <a ng-click='myDoodles.deleteDoodle(doodle._id)'>Löschen</a>
   </p>
 
 </div>

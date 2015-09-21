@@ -14,7 +14,9 @@ module Home.Controllers {
         /**
          * Name of the person that registers.
          */
-        name: string;
+        name:string;
+
+        private doodleRegisterNameKey = 'doodleRegisterName';
 
 
         // $inject annotation.
@@ -30,7 +32,12 @@ module Home.Controllers {
                     private $routeParams:IRegisterDoodleRouteParams,
                     private repository:Home.Interfaces.IRepository) {
             this.ctrlName = 'RegisterDoodleCtrl';
-            this.name = '';
+
+            // Use the name from the local storage (if available).
+            this.name = localStorage.getItem(this.doodleRegisterNameKey);
+            if(!this.name) {
+                this.name = '';
+            }
 
             repository
                 .getDoodleRegister($routeParams.registerId)
@@ -42,7 +49,7 @@ module Home.Controllers {
 
         }
 
-        private getDatePoposal(dateProposalId: string): Home.Interfaces.IDateProposal {
+        private getDatePoposal(dateProposalId:string):Home.Interfaces.IDateProposal {
             return Home.Utilities.ArrayUtilities.FindFirst(this.doodle.dateProposals, dateProposal => dateProposal._id === dateProposalId);
 
         }
@@ -72,6 +79,20 @@ module Home.Controllers {
         rejectDateProposalIsDisabled(dateProposalId:string):boolean {
             var isRegistered = this.isRegistered(dateProposalId);
             return !this.isRegistered(dateProposalId);
+        }
+
+        putDoodle():void {
+            // Store the current name in the local storage.
+            localStorage.setItem(this.doodleRegisterNameKey, this.name);
+
+            this.repository
+                .putDoodle(this.doodle)
+                .then(doodle => {
+                    this.$location.path('/RegisteredForDoodle');
+                })
+                .catch(err => {
+                    this.errorMessage = err.statusText;
+                });
         }
     }
 

@@ -54,6 +54,11 @@ module home {
               templateUrl: 'home/views/register-doodle.tpl.html',
               controller: 'RegisterDoodleCtrl',
               controllerAs: 'registerDoodle'
+            })
+            .when('/RegisteredForDoodle', {
+              templateUrl: 'home/views/registered-for-doodle.tpl.html',
+              controller: 'RegisteredForDoodleCtrl',
+              controllerAs: 'registeredForDoodle'
             });
     }
 }

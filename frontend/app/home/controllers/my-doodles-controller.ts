@@ -49,6 +49,12 @@ module Home.Controllers {
             this.$location.search('isNewDoodle', false);
             this.$location.path('/EditDoodle');
         }
+
+        registerDoodle(registerId:string):void {
+            this.$location.search('registerId', registerId);
+            this.$location.path('/RegisterDoodle');
+        }
+
     }
 
 

@@ -42,8 +42,6 @@ module Home.Controllers {
                         this.$log.debug("problem getting doodle");
                         this.errorMessage = err.statusText;
                     });
-
-
             }
         }
 
