@@ -1,0 +1,16 @@
+.doodle-date-form:last-child {
+	margin: 0 0 1em 0;
+}
+
+.doodle-date-form__label {
+	font-weight: normal;
+	color: #ccc;
+}
+
+.doodle-date-form__input {
+	border: none;
+	border-bottom: 1px solid lighten($divider-color, 20%);
+	text-align: left;
+	margin-left: 1em;
+}
+

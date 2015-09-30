@@ -1,0 +1,20 @@
+.inline-button {
+	color: $primary-color;
+	text-align: center;
+	text-transform: uppercase;
+}
+
+.inline-button:hover {
+	color: darken($primary-color, 10%);
+	text-decoration: none;
+}
+
+.inline-button:active {
+	color: $primary-color;
+	text-decoration: none;
+}
+
+.inline-button_full-width {
+	width: 100%;
+	display: block;
+}

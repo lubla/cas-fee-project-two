@@ -1,0 +1,13 @@
+.header {
+	background-color: $primary-color;
+	color: $inverted-text-color;
+}
+
+.header__link,
+.header__link:hover,
+.header__link:visited,
+.header__link:focus,
+.header__link:active {
+	color: $inverted-text-color;
+	text-decoration: none;
+}
