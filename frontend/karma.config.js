@@ -24,10 +24,12 @@ preprocessors[templateDir + '**/*-directive.tpl.html'] = ['ng-html2js'];
 module.exports = {
   browsers: ['PhantomJS'],
   frameworks: ['jasmine', 'sinon'],
-  reporters: ['failed', 'coverage'],
+  reporters: ['failed', 'coverage', 'progress'],
   preprocessors: preprocessors,
   ngHtml2JsPreprocessor: {
     stripPrefix: templateDir
   },
   singleRun: true
+//  logLevel: "DEBUG"
+
 };

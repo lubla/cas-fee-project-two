@@ -65,9 +65,15 @@ module Home.Interfaces {
          * Deletes a doodle.
          *
          * @param doodleId The id of the doodle to delete.
-         * @returns {ng.IPromise<boolean>} A promise with a boolean value as result that indicates if the delete succeeded.
          */
         deleteDoodle(doodleId:string):ng.IPromise<boolean>;
+
+        /**
+         * Gets the name of the repository.
+         *
+         * @returns {string} The name of the repository.
+         */
+        get():string;
 
 
 
