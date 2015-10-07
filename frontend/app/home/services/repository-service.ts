@@ -225,13 +225,9 @@ module Home.Services {
         getUserProfiles(user:Home.Interfaces.IUser):ng.IPromise<Array<Home.Interfaces.IUserProfile>> {
 
             var deferred = this.$q.defer();
-
-            console.log("in getUserProfiles");
-
             this.$http
-                .get('http://localhost:3000/getUserProfiles?email=' + user.email + '&passwordHash=' + Home.Utilities.Hash.MD5(user.password))
+                .get('/getUserProfiles?email=' + user.email + '&passwordHash=' + Home.Utilities.Hash.MD5(user.password))
                 .then(response => {
-                    console.log("have response");
                     var userProfiles = response.data;
                     if (userProfiles instanceof Array) {
                         deferred.resolve(userProfiles);

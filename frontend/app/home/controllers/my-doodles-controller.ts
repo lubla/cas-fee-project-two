@@ -21,13 +21,16 @@ module Home.Controllers {
                     private $http:ng.IHttpService,
                     private repository:Home.Interfaces.IRepository) {
             this.ctrlName = 'MyDoodlesCtrl';
-            repository
-                .getDoodlesForUser(repository.loggedInUser._id)
-                .then(doodles => this.doodles = doodles)
-                .catch(err => {
-                    this.$log.debug("problem getting doodle");
-                    this.errorMessage = err.statusText;
-                });
+
+            if(repository.loggedInUser) {
+                repository
+                    .getDoodlesForUser(repository.loggedInUser._id)
+                    .then(doodles => this.doodles = doodles)
+                    .catch(err => {
+                        this.$log.debug("problem getting doodle");
+                        this.errorMessage = err.statusText;
+                    });
+            }
         }
 
         deleteDoodle(doodleId:string):void {
