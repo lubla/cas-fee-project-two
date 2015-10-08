@@ -100,12 +100,12 @@ module Home.Services {
         /**
          * Constructor to create a new doodle
          *
-         * @param userId
+         * @param userId The id of the user that creates the doodle.
          */
         constructor(userId:string);
 
         /**
-         * Creates a doodle from a pain javascript doodle (JSON doodle). If
+         * Creates a doodle from a plain javascript doodle (JSON doodle). If
          * no doodle is specified then a new doodle is created.
          *
          * @param doodle
@@ -278,11 +278,22 @@ module Home.Services {
         createNewDoodle():ng.IPromise<Home.Interfaces.IDoodle> {
             var deferred = this.$q.defer();
 
-            var doodle = new Doodle(this.loggedInUser ? this.loggedInUser._id : '');
+            var doodle = this.createNewDoodleSync(this.loggedInUser ? this.loggedInUser._id : '');
             deferred.resolve(doodle);
 
 
             return deferred.promise;
+        }
+
+        /**
+         * Creates a new doodle sync version to simplify unit testing.
+         *
+         * @param userId The id of the user that creates to doodle (An anonymous doodle is created if not specified).
+         *
+         * @returns {Home.Interfaces.IDoodle}
+         */
+        createNewDoodleSync(userId: string):Home.Interfaces.IDoodle {
+            return new Doodle(userId ? userId : '');
         }
 
         /**
