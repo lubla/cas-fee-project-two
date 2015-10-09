@@ -36,8 +36,8 @@ function setupServer(repository) {
     //app.use(bodyParser.json());
 
     // Routes.
-    var indexRoute = require('./routes/index');
-    app.use('/', indexRoute);
+    //var indexRoute = require('./routes/index');
+    //app.use('/', indexRoute);
     app.use('/getUserProfiles', require('./routes/getUserProfiles'));
     app.use('/registerUser', require('./routes/registerUser'));
     app.use('/getDoodle', require('./routes/getDoodle'));
@@ -70,7 +70,6 @@ function setupServer(repository) {
 
         console.log(errorInfo);
         next(err);
-        // res.send(errorInfo.replace(/\n/g, '<br>'));
     }
 
     app.use(errorHandler);
@@ -90,15 +89,8 @@ function setupServer(repository) {
 }
 
 var repository = require('./database/repository');
-var r = new repository.Repository(setupServer);
 
-//var mongodbUrl = 'mongodb://localhost:27017/test';
-//var c = MongoClient.connect(mongodbUrl, function(err, mongoDb) {
-//    assert.equal(null, err);
-//    setupServer(mongoDb);
-//    console.log("Connected to server " + mongodbUrl);
-////    db.close();
-//});
-//
-//var t = c;
+// Create an instance of the repository which is then passed to the setupServer callback.
+new repository.Repository(setupServer);
+
 
