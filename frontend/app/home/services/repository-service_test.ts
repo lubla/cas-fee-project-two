@@ -41,14 +41,31 @@ describe('Repository', function () {
 
     var doodle:Home.Interfaces.IDoodle;
 
+    /**
+     * Initializes the test doodle.
+     */
     function createDoodle() {
         doodle = repository.createNewDoodleSync(userId);
         doodle.place = place;
         doodle.title = title;
-        for(var dateProposal: number = 0; dateProposal < dateProposalCount; dateProposal++) {
+        for (var dateProposal:number = 0; dateProposal < dateProposalCount; dateProposal++) {
             doodle.addNewDateProposal();
         }
     }
+
+    /**
+     * Checks if a doodle is the test doodle.
+     *
+     * @param doodle The test doodle.
+     */
+    function expectDoodle(doodle) {
+        expect(doodle).toBeDefined();
+        expect(doodle.userId).toBe(userId);
+        expect(doodle.dateProposals.length).toBe(dateProposalCount);
+        expect(doodle.place).toBe(place);
+        expect(doodle.title).toBe(title);
+    }
+
 
     function loginUser():void {
         repository.login(user);
@@ -70,9 +87,25 @@ describe('Repository', function () {
         $httpBackend.when('POST', '/postDoodle', doodle)
             .respond(doodle);
 
+        // http backend definition for the put doodle request.
+        $httpBackend.when('PUT', '/putDoodle', doodle)
+            .respond(doodle);
+
         // http backend definition for the get doodle request.
         $httpBackend.when('GET', '/getDoodle?doodleId=' + doodle._id)
             .respond(doodle);
+
+        // http backend definition for the get doodles for user request.
+        $httpBackend.when('GET', '/getDoodlesForUser?userId=' + userId)
+            .respond([doodle, doodle, doodle]);
+
+        // http backend definition for the get doodle for register request.
+        $httpBackend.when('GET', '/getDoodleRegister?registerId=' + doodle.registerId)
+            .respond(doodle);
+
+        // http backend definition for the delete doodle request.
+        $httpBackend.when('DELETE', '/deleteDoodle?doodleId=' + doodle._id)
+            .respond(true);
 
         // http backend to register a user.
         $httpBackend.when('POST', '/registerUser', userRegister)
@@ -115,6 +148,8 @@ describe('Repository', function () {
 
         loginUser();
 
+        // Note repository.createNewDoodle is async but not using $http =>
+        // use the done() function (to indicate that the callback is called) together $rootScope.$apply() (to pump to event loop).
         var result = repository.createNewDoodle();
         result.then(doodle => {
             expect(doodle).toBeDefined();
@@ -128,18 +163,55 @@ describe('Repository', function () {
         $rootScope.$apply();
     });
 
-    it('post doodle should return the posted doodle', function (done) {
-        var result = repository.postDoodle(doodle);
-        result.then(doodle => {
-            expect(doodle).toBeDefined();
-            expect(doodle.userId).toBe(userId);
-            expect(doodle.dateProposals.length).toBe(dateProposalCount);
-            expect(doodle.place).toBe(place);
-            expect(doodle.title).toBe(title);
-            done();
-        });
+    it('post doodle should return the posted doodle (i.e. the test doodle)', function () {
+        repository
+            .postDoodle(doodle)
+            .then(doodle => expectDoodle(doodle));
+
         $httpBackend.flush();
     });
 
+    it('put doodle should return the updated doodle (i.e. the test doodle)', function () {
+        repository
+            .putDoodle(doodle)
+            .then(doodle => expectDoodle(doodle));
+
+        $httpBackend.flush();
+    });
+
+    it('get doodle should return the test doodle', function () {
+        repository
+            .getDoodle(doodle._id)
+            .then(doodle => expectDoodle(doodle));
+
+        $httpBackend.flush();
+    });
+
+    it('get doodle for register should return the test doodle', function () {
+        repository
+            .getDoodleRegister(doodle.registerId)
+            .then(doodle => expectDoodle(doodle));
+
+        $httpBackend.flush();
+    });
+
+    it('get doodle for user should return an array of test doodles', function () {
+        repository
+            .getDoodlesForUser(userId)
+            .then(doodles => {
+                expect(doodles.constructor === Array).toBe(true);
+                doodles.forEach(doodle => expectDoodle(doodle));
+            });
+
+        $httpBackend.flush();
+    });
+
+    it('delete doodle should return true', function () {
+        repository
+            .deleteDoodle(doodle._id)
+            .then(deleted => expect(deleted).toBe(true));
+
+        $httpBackend.flush();
+    });
 
 });

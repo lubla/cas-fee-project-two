@@ -12,5 +12,7 @@ module frontend {
       'ngRoute',
       'mgcrea.ngStrap',
       'home'
+        //, 'angular-linq'
     ]);
+
 }
