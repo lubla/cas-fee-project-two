@@ -4,15 +4,14 @@
 var EditDoodlePagePo = require('./edit-doodle.po');
 
 describe('Edit doodle page', function () {
-  var editDoodlePage;
+  var page;
 
   beforeEach(function () {
-    editDoodlePage = new EditDoodlePagePo();
+    page = new EditDoodlePagePo();
     browser.get('/#/EditDoodle');
   });
 
   it('should say EditDoodleCtrl', function () {
-    expect(editDoodlePage.heading.getText()).toEqual('editDoodle');
-    expect(editDoodlePage.text.getText()).toEqual('EditDoodleCtrl');
+    expect(page.header.getText()).toEqual('Doodle');
   });
 });

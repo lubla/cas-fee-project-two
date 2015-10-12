@@ -4,15 +4,14 @@
 var LoginPagePo = require('./login.po');
 
 describe('Login page', function () {
-  var loginPage;
+  var page;
 
   beforeEach(function () {
-    loginPage = new LoginPagePo();
+    page = new LoginPagePo();
     browser.get('/#/Login');
   });
 
   it('should say LoginCtrl', function () {
-    expect(loginPage.heading.getText()).toEqual('login');
-    expect(loginPage.text.getText()).toEqual('LoginCtrl');
+    expect(page.header.getText()).toEqual('Doodle');
   });
 });

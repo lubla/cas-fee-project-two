@@ -4,15 +4,14 @@
 var MyDoodlesPagePo = require('./my-doodles.po');
 
 describe('My doodles page', function () {
-  var myDoodlesPage;
+  var page;
 
   beforeEach(function () {
-    myDoodlesPage = new MyDoodlesPagePo();
+    page = new MyDoodlesPagePo();
     browser.get('/#/MyDoodles');
   });
 
   it('should say MyDoodlesCtrl', function () {
-    expect(myDoodlesPage.heading.getText()).toEqual('myDoodles');
-    expect(myDoodlesPage.text.getText()).toEqual('MyDoodlesCtrl');
+    expect(page.header.getText()).toEqual('Doodle');
   });
 });

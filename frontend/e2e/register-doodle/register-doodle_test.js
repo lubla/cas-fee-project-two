@@ -4,15 +4,14 @@
 var RegisterDoodlePagePo = require('./register-doodle.po');
 
 describe('Register doodle page', function () {
-  var registerDoodlePage;
+  var page;
 
   beforeEach(function () {
-    registerDoodlePage = new RegisterDoodlePagePo();
+    page = new RegisterDoodlePagePo();
     browser.get('/#/RegisterDoodle');
   });
 
   it('should say RegisterDoodleCtrl', function () {
-    expect(registerDoodlePage.heading.getText()).toEqual('registerDoodle');
-    expect(registerDoodlePage.text.getText()).toEqual('RegisterDoodleCtrl');
+    expect(page.header.getText()).toEqual('Doodle');
   });
 });

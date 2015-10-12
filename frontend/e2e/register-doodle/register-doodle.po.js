@@ -1,9 +1,10 @@
 /* global element, by */
 'use strict';
 
+var e2eConstants = require('../e2eCommon').constants;
+
 function RegisterDoodlePage() {
-  this.text = element(by.tagName('p'));
-  this.heading = element(by.tagName('h2'));
+  this.header = element(by.css(e2eConstants.css.header));
 }
 
 module.exports = RegisterDoodlePage;

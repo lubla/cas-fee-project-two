@@ -25,7 +25,7 @@ Style: CSS
 Polymer: No
 Framework: AngularStrap
 ngRoute: Yes
-Bower: Angular Sanatize
+Bower: Angular Sanitize
 
 NOTE:
 The generator will overwrite files that are already in the project. REVERT ALL CHANGES WHEN THE GENERATOR HAS FINISHED.
@@ -36,6 +36,12 @@ Run the frontend:
 3. Run gulp build
 4. Load http://localhost:3000/#/home (Configure a webstorm debug configuration with this url for index.html). 
 
+Prerequistie to run the e2e test
+================================
+
+1. Install silenium standalone:
+node node_modules\protractor\bin\webdriver-manager update
 
 
+2. Download and install java.
 

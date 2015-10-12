@@ -4,15 +4,14 @@
 var RegisteredForDoodlePagePo = require('./registered-for-doodle.po');
 
 describe('Registered for doodle page', function () {
-  var registeredForDoodlePage;
+  var page;
 
   beforeEach(function () {
-    registeredForDoodlePage = new RegisteredForDoodlePagePo();
+    page = new RegisteredForDoodlePagePo();
     browser.get('/#/RegisteredForDoodle');
   });
 
   it('should say RegisteredForDoodleCtrl', function () {
-    expect(registeredForDoodlePage.heading.getText()).toEqual('registeredForDoodle');
-    expect(registeredForDoodlePage.text.getText()).toEqual('RegisteredForDoodleCtrl');
+    expect(page.header.getText()).toEqual('Doodle');
   });
 });

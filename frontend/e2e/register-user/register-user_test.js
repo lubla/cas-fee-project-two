@@ -4,15 +4,14 @@
 var RegisterUserPagePo = require('./register-user.po');
 
 describe('Register user page', function () {
-  var registerUserPage;
+  var page;
 
   beforeEach(function () {
-    registerUserPage = new RegisterUserPagePo();
+    page = new RegisterUserPagePo();
     browser.get('/#/RegisterUser');
   });
 
   it('should say RegisterUserCtrl', function () {
-    expect(registerUserPage.heading.getText()).toEqual('registerUser');
-    expect(registerUserPage.text.getText()).toEqual('RegisterUserCtrl');
+    expect(page.header.getText()).toEqual('Doodle');
   });
 });

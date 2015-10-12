@@ -4,15 +4,14 @@
 var HomePagePo = require('./home.po');
 
 describe('Home page', function () {
-  var homePage;
+  var page;
 
   beforeEach(function () {
-    homePage = new HomePagePo();
+    page = new HomePagePo();
     browser.get('/#/home');
   });
 
   it('should say HomeCtrl', function () {
-    expect(homePage.heading.getText()).toEqual('home');
-    expect(homePage.text.getText()).toEqual('HomeCtrl');
+    expect(page.header.getText()).toEqual('Doodle');
   });
 });
