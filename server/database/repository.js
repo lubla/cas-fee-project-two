@@ -124,20 +124,24 @@ var serverRepository = (function () {
 
             var defer = Q.defer();
 
-            cursor.nextObject(function (err, doodle) {
-                if (err) {
-                    defer.reject(new Error("Cannot get doodle: " + err.toString()));
-                }
-                else {
-                    if(doodle) {
-                        defer.resolve(doodle);
+            // Make an closure here to have the doodleId inside of the nextObject callback.
+            // ??? Why is this not needed for cursor and defer ???
+            (function (doodleId) {
+                cursor.nextObject(function (err, doodle) {
+                    if (err) {
+                        defer.reject(new Error("Cannot get doodle: " + err.toString()));
                     }
                     else {
-                        defer.reject(new Error("Cannot get doodle for id: " + doodleId));
-                    }
+                        if (doodle) {
+                            defer.resolve(doodle);
+                        }
+                        else {
+                            defer.reject(new Error("Cannot get doodle for id: " + doodleId));
+                        }
 
-                }
-            });
+                    }
+                });
+            })(doodleId);
 
             return defer.promise;
         };
@@ -149,19 +153,25 @@ var serverRepository = (function () {
 
             var defer = Q.defer();
 
-            cursor.nextObject(function (err, doodle) {
-                if (err) {
-                    defer.reject(new Error("Cannot get doodle: " + err.toString()));
-                }
-                else {
-                    if(doodle) {
-                        defer.resolve(doodle);
+
+            // Make an closure here to have the registerId inside of the nextObject callback.
+            // ??? Why is this not needed for cursor and defer ???
+            (function (registerId) {
+
+                cursor.nextObject(function (err, doodle) {
+                    if (err) {
+                        defer.reject(new Error("Cannot get doodle: " + err.toString()));
                     }
                     else {
-                        defer.reject(new Error("Cannot get doodle for register id: " + doodleId));
+                        if (doodle) {
+                            defer.resolve(doodle);
+                        }
+                        else {
+                            defer.reject(new Error("Cannot get doodle for register id: " + registerId));
+                        }
                     }
-                }
-            });
+                });
+            })(registerId);
 
             return defer.promise;
         };
@@ -174,7 +184,7 @@ var serverRepository = (function () {
             var defer = Q.defer();
 
             removeResult
-                .then(function(result) {
+                .then(function (result) {
                     defer.resolve("Removed");
                 })
                 .catch(function (err) {
@@ -195,8 +205,6 @@ var serverRepository = (function () {
         return {
             Repository: Repository
         }
-
-
 
 
     }()
