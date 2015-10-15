@@ -1,5 +1,5 @@
 ///<reference path='../../../typings/tsd.d.ts' />
-
+///<reference path='../services/repository-service-common_test.ts' />
 /* global describe, beforeEach, it, expect, inject, module */
 'use strict';
 
@@ -8,8 +8,9 @@ describe('HomeCtrl', function () {
 
   beforeEach(module('home'));
 
-  beforeEach(inject(function ($rootScope, $controller) {
+  beforeEach(inject(function ($rootScope, $controller, Repository) {
     ctrl = $controller('HomeCtrl');
+    Home.UnitTestCommon.RepositoryTest.createDoodle(Repository);
   }));
 
   it('should have ctrlName as HomeCtrl', function () {

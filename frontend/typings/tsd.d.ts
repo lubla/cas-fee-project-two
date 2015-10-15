@@ -7,3 +7,7 @@
 /// <reference path="karma-jasmine/karma-jasmine.d.ts" />
 /// <reference path="lodash/lodash.d.ts" />
 /// <reference path="sinon/sinon.d.ts" />
+
+// !!! angular-protractor and selenium-webdriver typings commented out due to name clash with jquery typing !!!
+// /// <reference path="angular-protractor/angular-protractor.d.ts" />
+// /// <reference path="selenium-webdriver/selenium-webdriver.d.ts" />

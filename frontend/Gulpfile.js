@@ -44,7 +44,7 @@ config.buildTestDirectiveTemplatesDir = path.join(config.buildTestDir, 'template
 config.buildUnitTestsDir = path.join(config.buildTestDir, config.unitTestDir);
 config.buildUnitTestFiles = path.join(config.buildUnitTestsDir, '**/*_test.js');
 
-config.e2eFiles = path.join('e2e', '**/*.js');
+config.e2eFiles = path.join('e2e', '**/*.ts');
 config.unitTestFiles = path.join(config.unitTestDir, '**/*_test.ts');
 
 config.tsSourceProject = $.typescript.createProject({
@@ -55,6 +55,12 @@ config.tsSourceProject = $.typescript.createProject({
 config.tsTestProject = $.typescript.createProject({
   declarationFiles: false,
   noExternalResolve: false
+});
+
+config.tsE2eTestProject = $.typescript.createProject({
+  declarationFiles: false,
+  noExternalResolve: false,
+  module: "commonjs"
 });
 
 for (key in gulpFiles) {
