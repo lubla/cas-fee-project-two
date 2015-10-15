@@ -5,30 +5,10 @@ npm install -g tsd
 
 In frontend folder
 ==================
+npm cache clean
 npm install
+bower install
 
-In project root folder (parent of frontend folder!)
-===================================================
-yo ng-poly
-
-Generator Options:
-App Name: frontend
-Version: 1.4 (RC)
-Structure: app/module1/controllers/…js
-Markup: HTML
-Scripting Language: TypeScript
-Controller As: Yes
-Test Language: TypeScript
-Testing Framework: Jasmine
-E2e: Jasmine
-Style: CSS
-Polymer: No
-Framework: AngularStrap
-ngRoute: Yes
-Bower: Angular Sanitize
-
-NOTE:
-The generator will overwrite files that are already in the project. REVERT ALL CHANGES WHEN THE GENERATOR HAS FINISHED.
 
 Run the frontend:
 1. Start the server
@@ -40,8 +20,7 @@ Prerequistie to run the e2e test
 ================================
 
 1. Install silenium standalone:
-node node_modules\protractor\bin\webdriver-manager update
-
+gulp webdriverUpdate
 
 2. Download and install java.
 
