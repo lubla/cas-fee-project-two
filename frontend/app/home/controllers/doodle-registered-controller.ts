@@ -33,8 +33,9 @@ module  Home.Controllers {
             this.doodleId = $routeParams.doodleId;
             this.registerId = $routeParams.registerId;
             this.isNewDoodle = $routeParams.isNewDoodle;
-            this.editDoodleLink = 'http://localhost:3000/#/EditDoodle?doodleId=' + this.doodleId;
-            this.registerDoodleLink = 'http://localhost:3000/#/RegisterDoodle?registerId=' + this.registerId;
+            var serverUrl = $location.absUrl().substr(0, $location.absUrl().length - $location.url().length)
+            this.editDoodleLink = serverUrl + '/EditDoodle?doodleId=' + this.doodleId;
+            this.registerDoodleLink = serverUrl + '/RegisterDoodle?registerId=' + this.registerId;
         }
     }
 

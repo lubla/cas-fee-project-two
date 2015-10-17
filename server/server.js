@@ -75,7 +75,9 @@ function setupServer(repository) {
     app.use(errorHandler);
 
     // Start server.
-    var server = app.listen(3000, function () {
+//    var server = app.listen(80, '0.0.0.0', function () { // accept clients from any IP.
+
+    var server = app.listen(3000, function () {   // accept clients from localhost only.
         var host = server.address().address;
         var port = server.address().port;
 
