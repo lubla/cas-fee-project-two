@@ -17,7 +17,7 @@ describe('Doodle registered page', function () {
     //var i2 = new E2eTest.Common.TextConstants();
 
     beforeEach(function () {
-        browser.get('/#/DoodleRegistered');
+        browser.get(e2eCommon.Destinations.doodleRegistered);
     });
 
     it('should have the doodle header', function () {

@@ -10,6 +10,11 @@ export class CssConstants {
     }
 }
 
+export class Destinations {
+    static doodleRegistered = '/#/DoodleRegistered';
+    static editDoodle = '/#/EditDoodle';
+}
+
 export class TextConstants {
     static header = 'Doodle';
 }
@@ -67,6 +72,20 @@ export class Tests {
     static ngClickElement(clickCallback:string,
                           clickCallbackParameter:string = ''):protractor.ElementFinder {
         return element(by.css.call(null, '[ng-click="' + clickCallback + '(' + clickCallbackParameter + ')"]'));
+    }
+
+    static isDestiniation(destination:string,
+                          excludeParameter:boolean = true) {
+        browser.getCurrentUrl().then(url => {
+            var currentDestination = url.substr(browser.baseUrl.length);
+            if(excludeParameter) {
+                var parameterStart = currentDestination.indexOf('?');
+                if(parameterStart >= 0){
+                    currentDestination = currentDestination.substr(0, parameterStart);
+                }
+            }
+            expect(currentDestination).toBe(destination);
+        })
     }
 
 }

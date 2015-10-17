@@ -10,7 +10,7 @@ import e2eCommon = require('../e2eCommon');
 describe('Edit doodle page', function () {
 
     beforeEach(function () {
-        browser.get('/#/EditDoodle');
+        browser.get(e2eCommon.Destinations.editDoodle);
     });
 
     it('should have the doodle header', function () {
@@ -59,8 +59,7 @@ describe('Edit doodle page', function () {
         var postOrPutDoodle = e2eCommon.Tests.ngClickElement(e2eCommon.BindingNames.editDoodlePostOrPutDoodleCallback);
         postOrPutDoodle.click();
 
-        var url = browser.getCurrentUrl().then(url => console.log("url:"  + url));
-
+        e2eCommon.Tests.isDestiniation(e2eCommon.Destinations.doodleRegistered);
 
     });
 });

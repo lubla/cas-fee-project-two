@@ -9,7 +9,11 @@ exports.config = {
     browserName: 'chrome',
     chromeOptions: {
       args: ['--test-type']
-    }
+    },
+  },
+
+  suites: {
+    imageManagement: './build/test/e2e/**/*_test.js'
   },
 
   jasmineNodeOpts: {
