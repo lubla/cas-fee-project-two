@@ -6,6 +6,10 @@
 	background-color: white;
 }
 
+.button_small {
+	padding: 0.1em 0.5em;
+}
+
 .button:hover {
 	color: $inverted-text-color;
 	background-color: $primary-color;
@@ -26,7 +30,6 @@
 
 .button_primary {
 	border: 1px solid $inverted-text-color;
-	padding: 1em;
 	color: $inverted-text-color;
 	text-align: center;
 	background-color: $primary-color;
@@ -34,4 +37,22 @@
 
 .button_primary:hover {
 	background-color: lighten($primary-color, 10%);
+}
+
+.button_negative {
+	border: 1px solid red;
+	color: red;
+}
+
+.button_negative:hover {
+	border: 1px solid white;
+	color: white;
+	background-color: red;
+}
+
+
+.button_negative-inverted {
+	border: 1px solid white;
+	color: white;
+	background-color: red;
 }

@@ -55,6 +55,7 @@ module Home.Controllers {
         }
 
         acceptDateProposal(dateProposalId:string) {
+            console.log(this.name);
             this.doodle.addAcceptedNameToDateProposal(dateProposalId, this.name);
         }
 

@@ -1,35 +1,36 @@
-<h2>registerDoodle</h2>
-<p>{{registerDoodle.ctrlName}}</p>
-<p>Error: {{registerDoodle.errorMessage}}</p>
-<p>Ihr Name:
-  <input type="text" ng-model="registerDoodle.name" value="{{registerDoodle.name}}"/>
-</p>
-
-<p>Was: {{registerDoodle.doodle.title}}</p>
-<p>Wo: {{registerDoodle.doodle.place}}</p>
+<h2>{{registerDoodle.doodle.title}}</h2>
+<p>{{registerDoodle.doodle.place}}</p>
 
 
-<div ng-repeat="dateProposal in registerDoodle.doodle.dateProposals">
-  <p>
-    {{dateProposal.start | date:'dd.MM.yyyy HH.mm'}}-{{dateProposal.end | date:'dd.MM.yyyy HH.mm'}}
-  </p>
+<div class="card">
+  <h3>Wann hast du Zeit?</h3>
+  <hr>
+  <div ng-repeat="dateProposal in registerDoodle.doodle.dateProposals">
+      <div class="dateProposal__date-time">
+        <span class="dateProposal__date">{{dateProposal.start | date:'EEEE, dd. MM. yyyy'}}</span> <span class="dateProposal__time">{{dateProposal.start | date:'HH:MM'}}</span>
+      </div>
+      <button ng-show="registerDoodle.acceptDateProposalIsDisabled(dateProposal._id)" ng-click='registerDoodle.acceptDateProposal(dateProposal._id)' class="button button_small button_primary">Habe Zeit</button>
+      <button ng-show="registerDoodle.rejectDateProposalIsDisabled(dateProposal._id)" ng-click='registerDoodle.acceptDateProposal(dateProposal._id)' class="button button_small">Habe Zeit</button>
 
-  <p>
-    <button ng-disabled="registerDoodle.acceptDateProposalIsDisabled(dateProposal._id)" ng-click='registerDoodle.acceptDateProposal(dateProposal._id)'>Ja</button>
-    <button ng-disabled="registerDoodle.rejectDateProposalIsDisabled(dateProposal._id)" ng-click='registerDoodle.rejectDateProposal(dateProposal._id)'>Nein</button>
-
-  <div>
-    Passt für:
-    <span ng-repeat="acceptedBy in dateProposal.acceptedBy">
-      {{acceptedBy}}
-    </span>
+      <button ng-show="registerDoodle.rejectDateProposalIsDisabled(dateProposal._id)" ng-click='registerDoodle.rejectDateProposal(dateProposal._id)' class="button button_small button_negative-inverted">Keine Zeit</button>
+      <button ng-show="registerDoodle.acceptDateProposalIsDisabled(dateProposal._id)" ng-click='registerDoodle.rejectDateProposal(dateProposal._id)' class="button button_small button_negative">Keine Zeit</button>
+      <div class="dateProposal__participations text-muted">
+        Passt fÃ¼r:
+        <span ng-repeat="acceptedBy in dateProposal.acceptedBy">
+          {{acceptedBy}}
+        </span>
+      </div>
+    <hr>
   </div>
-  </p>
-  <p>
-    -------------------------
-  </p>
+<div>
+
+
+<div class="form-group">
+  <label for="location" class="form-group__label">Dein Name</label>
+  <input id="location"  class="form-group__input form-group__input_big" type="text" ng-model="registerDoodle.name" value="{{registerDoodle.name}}"  placeholder="Name"/>
 </div>
+
 <p>
-  <a ng-click='registerDoodle.putDoodle()'>Fertig</a>
+  <a ng-click='registerDoodle.putDoodle()' class="button button_primary button_full-width">Absenden</a>
 </p>
 
