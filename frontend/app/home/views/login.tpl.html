@@ -1,21 +1,26 @@
 <h2>Login</h2>
-<p>{{login.ctrlName}}</p>
-<div>
-  <p>Email Adresse: </p>
-  <input type="text" ng-model="login.user.email" value="{{login.user.email}}"/>
 
-  <p>Passwort: </p>
-  <input type="password" ng-model="login.user.password" value="{{login.user.password}}"/>
+<div class="errorMessage">
+  {{login.errorMessage}}
+</div>
 
-  <div class="errorMessage">
-    {{login.errorMessage}}
-  </div>
+
+<div class="form-group">
+  <label for="email" class="form-group__label">Email</label>
+  <input id="email"  class="form-group__input" type="text" ng-model="login.user.email" value="{{login.user.email}}"  placeholder="Email"/>
+</div>
+
+<div class="form-group">
+  <label for="password" class="form-group__label">Password</label>
+  <input id="password"  class="form-group__input" type="text" ng-model="login.user.password" value="{{login.user.password}}"  placeholder="Password"/>
+</div>
+
 
 </div>
 <p>
-<a ng-click='login.getUserProfiles()'>Login</a>
+<a ng-click='login.getUserProfiles()' class="button button_full-width">Login</a>
 </p>
 
 <p>
-<a href="#/RegisterUser">Neu Registrieren</a>
+	<a href="#/RegisterUser">Neu Registrieren</a>
 </p>

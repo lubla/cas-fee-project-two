@@ -1,13 +1,8 @@
 <p>{{home.loginMessage}}</p>
 
-<ul>
-  <li>
-    <a href="#/EditDoodle">Neuer Doodle</a>
-  </li>
-  <li>
-    <a href="#/Login">Login</a>
-  </li>
-  <li ng-show="home.showMyDoodles">
-    <a href="#/MyDoodles">Meine Doodles</a>
-  </li>
-</ul>
+<p><a href="#/EditDoodle" class="button button_full-width button_primary">Neuen Termin finden</a></p>
+<p>Finden Sie mit Doodle einfach einen Termin der für alle passt.</p>
+
+<p><a ng-show="home.showMyDoodles" href="#/MyDoodles" class="button button_full-width">Meine Doodles</a></p>
+<p><a ng-hide="home.loginMessage" href="#/Login" class="button button_full-width">Login</a></p>
+
