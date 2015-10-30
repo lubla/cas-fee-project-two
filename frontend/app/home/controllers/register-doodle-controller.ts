@@ -72,14 +72,9 @@ module Home.Controllers {
             return Home.Utilities.ArrayUtilities.FindFirst(dateProposal.acceptedBy, acceptedBy => acceptedBy === this.name) != null;
         }
 
-        acceptDateProposalIsDisabled(dateProposalId:string):boolean {
+        isAccepted(dateProposalId:string):boolean {
             var isRegistered = this.isRegistered(dateProposalId);
             return this.nameIsEmtpy() || this.isRegistered(dateProposalId);
-        }
-
-        rejectDateProposalIsDisabled(dateProposalId:string):boolean {
-            var isRegistered = this.isRegistered(dateProposalId);
-            return !this.isRegistered(dateProposalId);
         }
 
         putDoodle():void {

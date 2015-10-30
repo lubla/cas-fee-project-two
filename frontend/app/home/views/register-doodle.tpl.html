@@ -9,11 +9,11 @@
       <div class="dateProposal__date-time">
         <span class="dateProposal__date">{{dateProposal.start | date:'EEEE, dd. MM. yyyy'}}</span> <span class="dateProposal__time">{{dateProposal.start | date:'HH:MM'}}</span>
       </div>
-      <button ng-show="registerDoodle.acceptDateProposalIsDisabled(dateProposal._id)" ng-click='registerDoodle.acceptDateProposal(dateProposal._id)' class="button button_small button_primary">Habe Zeit</button>
-      <button ng-show="registerDoodle.rejectDateProposalIsDisabled(dateProposal._id)" ng-click='registerDoodle.acceptDateProposal(dateProposal._id)' class="button button_small">Habe Zeit</button>
+      <button ng-show="registerDoodle.isAccepted(dateProposal._id)" ng-click='registerDoodle.acceptDateProposal(dateProposal._id)' class="button button_small button_primary">Habe Zeit</button>
+      <button ng-hide="registerDoodle.isAccepted(dateProposal._id)" ng-click='registerDoodle.acceptDateProposal(dateProposal._id)' class="button button_small">Habe Zeit</button>
 
-      <button ng-show="registerDoodle.rejectDateProposalIsDisabled(dateProposal._id)" ng-click='registerDoodle.rejectDateProposal(dateProposal._id)' class="button button_small button_negative-inverted">Keine Zeit</button>
-      <button ng-show="registerDoodle.acceptDateProposalIsDisabled(dateProposal._id)" ng-click='registerDoodle.rejectDateProposal(dateProposal._id)' class="button button_small button_negative">Keine Zeit</button>
+      <button ng-hide="registerDoodle.isAccepted(dateProposal._id)" ng-click='registerDoodle.rejectDateProposal(dateProposal._id)' class="button button_small button_negative-inverted">Keine Zeit</button>
+      <button ng-show="registerDoodle.isAccepted(dateProposal._id)" ng-click='registerDoodle.rejectDateProposal(dateProposal._id)' class="button button_small button_negative">Keine Zeit</button>
       <div class="dateProposal__participations text-muted">
         Passt für:
         <span ng-repeat="acceptedBy in dateProposal.acceptedBy">
