@@ -36,7 +36,7 @@
 }
 
 .button_primary:hover {
-	background-color: lighten($primary-color, 10%);
+	background-color: darken($primary-color, 10%);
 }
 
 .button_negative {
