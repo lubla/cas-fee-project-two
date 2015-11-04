@@ -1,14 +1,21 @@
 <h2>Register User</h2>
-<p>{{registerUser.ctrlName}}</p>
 <div>
-  <p>Email Adresse: </p>
-  <input type="text" ng-model="registerUser.user.email" value="{{registerUser.user.email}}"/>
 
-  <p>Passwort: </p>
-  <input type="password" ng-model="registerUser.user.password" value="{{registerUser.user.password}}"/>
+  <div class="form-group">
+    <label for="email" class="form-group__label">Email</label>
+    <input id="email"  class="form-group__input" type="text" ng-model="registerUser.user.email" value="{{registerUser.user.email}}"  placeholder="Email"/>
+  </div>
 
-  <p>Passwort best&aumltigen: </p>
-  <input type="password" ng-model="registerUser.passwordConfirmation" value="{{registerUser.passwordConfirmation}}"/>
+  <div class="form-group">
+    <label for="password" class="form-group__label">Password</label>
+    <input id="password"  class="form-group__input" type="text" ng-model="registerUser.user.password" value="{{registerUser.user.password}}"  placeholder="Password"/ type="">
+  </div>
+
+  <div class="form-group">
+    <label for="passwordConfirmation" class="form-group__label">Password bestätigen</label>
+    <input id="passwordConfirmation"  class="form-group__input" type="text" ng-model="registerUser.passwordConfirmation" value="{{registerUser.passwordConfirmation}}"  placeholder="Password Confirmation"/>
+  </div>
+
 
   <div class="errorMessage">
     {{registerUser.errorMessage}}
@@ -17,6 +24,8 @@
 </div>
 
 <p>
-  <a ng-click='registerUser.registerUser()'>Registrieren</a>
-</p>
+  <a ng-click='registerUser.registerUser()' class="button button_primary button_full-width">Registrieren</a>
+</p><p> 
+  <a ng-click='registerUser.registerUser()' class="button button_full-width">Abbrechen</a> 
 
+</p>
