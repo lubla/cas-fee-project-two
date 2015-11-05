@@ -1,0 +1,20 @@
+.alert {
+  display: block;
+  padding: 1em;
+  color: $primary-color;
+  border: 1px solid $primary-color;
+}
+
+.alert_success {
+  color: $color-success;
+  border: 1px solid $color-success;
+}
+
+.alert_error {
+  color: $color-error;
+  border: 1px solid $color-error;
+}
+
+
+
+

@@ -1,6 +1,8 @@
-<h2>doodleRegistered</h2>
-<p>{{doodleRegistered.ctrlName}}</p>
-<p ng-show="doodleRegistered.isNewDoodle">Ihr Doodle wurde registriert!</p>
-<p ng-show="!doodleRegistered.isNewDoodle">Ihr Doodle wurde aktualisiert!</p>
-<p>Link zur Bearbeitung: <a href="{{doodleRegistered.editDoodleLink}}">{{doodleRegistered.editDoodleLink}}</a></p>
-<p>Link zum Registrieren: <a href="{{doodleRegistered.registerDoodleLink}}">{{doodleRegistered.registerDoodleLink}}</a></p>
+<div class="alert">
+  <h2>Doodle!</h2>
+  <p ng-show="doodleRegistered.isNewDoodle">Ihr Doodle wurde registriert!</p>
+  <p ng-show="!doodleRegistered.isNewDoodle">Ihr Doodle wurde aktualisiert!</p>
+</div>
+
+<p>Link für die Teilnahme: <a href="{{doodleRegistered.registerDoodleLink}}">{{doodleRegistered.registerDoodleLink}}</a></p>
+<p>Link zur Adminstration: <a href="{{doodleRegistered.editDoodleLink}}">{{doodleRegistered.editDoodleLink}}</a></p>

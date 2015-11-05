@@ -1,4 +1,4 @@
-/* 
+/*
 Convention for Notation according to BEM:
 
 module-name
@@ -21,3 +21,9 @@ module-name__item-name_state
 @import 'modules/doodle-date-form';
 @import 'modules/cards';
 @import 'modules/dateProposal';
+@import 'modules/alerts';
+
+
+// Animations
+
+@import 'animations/shake';
