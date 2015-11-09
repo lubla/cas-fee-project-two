@@ -39,13 +39,14 @@ function setupServer(repository) {
     //var indexRoute = require('./routes/index');
     //app.use('/', indexRoute);
     app.use('/userProfile', require('./routes/userProfile'));
+    app.use('/doodle', require('./routes/doodle'));
 //    app.use('/registerUser', require('./routes/registerUser'));
-    app.use('/getDoodle', require('./routes/getDoodle'));
-    app.use('/getDoodleRegister', require('./routes/getDoodleRegister'));
-    app.use('/getDoodlesForUser', require('./routes/getDoodlesForUser'));
-    app.use('/postDoodle', require('./routes/postDoodle'));
-    app.use('/putDoodle', require('./routes/putDoodle'));
-    app.use('/deleteDoodle', require('./routes/deleteDoodle'));
+//    app.use('/getDoodle', require('./routes/getDoodle'));
+//    app.use('/getDoodleRegister', require('./routes/getDoodleRegister'));
+//    app.use('/getDoodlesForUser', require('./routes/getDoodlesForUser'));
+//    app.use('/postDoodle', require('./routes/postDoodle'));
+//    app.use('/putDoodle', require('./routes/putDoodle'));
+//    app.use('/deleteDoodle', require('./routes/deleteDoodle'));
 
     // Forward 404 to error handler to error handler.
     app.use(function (req, res, next) {

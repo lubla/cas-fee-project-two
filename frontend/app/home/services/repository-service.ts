@@ -306,7 +306,7 @@ module Home.Services {
 
             var deferred = this.$q.defer();
             this.$http
-                .post('/postDoodle', doodle)
+                .post('/doodle', doodle)
                 .then(response => {
                     if (response.status === 200) {
                         // OK.
@@ -332,7 +332,7 @@ module Home.Services {
         getDoodle(doodleId:string):ng.IPromise<Home.Interfaces.IDoodle> {
             var deferred = this.$q.defer();
             this.$http
-                .get('/getDoodle?doodleId=' + doodleId)
+                .get('/doodle?doodleId=' + doodleId)
                 .then(response => {
                     if (response.status === 200) {
                         // OK.
@@ -358,7 +358,7 @@ module Home.Services {
         getDoodleRegister(registerId:string):ng.IPromise<Home.Interfaces.IDoodle>{
                 var deferred = this.$q.defer();
                 this.$http
-                    .get('/getDoodleRegister?registerId=' + registerId)
+                    .get('/doodle?registerId=' + registerId)
                     .then(response => {
                         if (response.status === 200) {
                             // OK.
@@ -384,7 +384,7 @@ module Home.Services {
         deleteDoodle(doodleId:string):ng.IPromise<boolean> {
             var deferred = this.$q.defer();
             this.$http
-                .delete('/deleteDoodle?doodleId=' + doodleId)
+                .delete('/doodle?doodleId=' + doodleId)
                 .then(response => {
                     if (response.status === 200) {
                         // OK.
@@ -410,7 +410,7 @@ module Home.Services {
         getDoodlesForUser(userId:string):ng.IPromise<Array<Home.Interfaces.IDoodle>> {
             var deferred = this.$q.defer();
             this.$http
-                .get('/getDoodlesForUser?userId=' + userId)
+                .get('/doodle?userId=' + userId)
                 .then(response => {
                     if (response.status === 200) {
                         // OK.
@@ -440,7 +440,7 @@ module Home.Services {
         putDoodle(doodle:Home.Interfaces.IDoodle):ng.IPromise<Home.Interfaces.IDoodle> {
             var deferred = this.$q.defer();
             this.$http
-                .put('/putDoodle', doodle)
+                .put('/doodle', doodle)
                 .then(response => {
                     if (response.status === 200) {
                         // OK.
