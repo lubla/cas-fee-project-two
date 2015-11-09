@@ -7,7 +7,7 @@
   <hr>
   <div ng-repeat="dateProposal in registerDoodle.doodle.dateProposals">
       <div class="dateProposal__date-time">
-        <span class="dateProposal__date">{{dateProposal.start | date:'EEEE, dd. MM. yyyy'}}</span> <span class="dateProposal__time">{{dateProposal.start | date:'HH:MM'}}</span>
+        <span class="dateProposal__date">{{dateProposal.start | date:'EEEE, dd. MM. yyyy'}}</span> <span class="dateProposal__time">{{dateProposal.start | date:'HH:mm'}}</span>
       </div>
       <button ng-show="registerDoodle.isAccepted(dateProposal._id)" ng-click='registerDoodle.acceptDateProposal(dateProposal._id)' class="button button_small button_primary">Habe Zeit</button>
       <button ng-hide="registerDoodle.isAccepted(dateProposal._id)" ng-click='registerDoodle.acceptDateProposal(dateProposal._id)' class="button button_small">Habe Zeit</button>
