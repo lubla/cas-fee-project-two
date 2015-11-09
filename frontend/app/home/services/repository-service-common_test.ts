@@ -74,35 +74,35 @@ module Home.UnitTestCommon {
 
         static setupRepositoryBackend($httpBackend:ng.IHttpBackendService):void {
             // http backend definition for the post doodle request.
-            $httpBackend.when('POST', '/postDoodle', RepositoryTest.doodle)
+            $httpBackend.when('POST', '/doodle', RepositoryTest.doodle)
                 .respond(RepositoryTest.doodle);
 
             // http backend definition for the put doodle request.
-            $httpBackend.when('PUT', '/putDoodle', RepositoryTest.doodle)
+            $httpBackend.when('PUT', '/doodle', RepositoryTest.doodle)
                 .respond(RepositoryTest.doodle);
 
             // http backend definition for the get doodle request.
-            $httpBackend.when('GET', '/getDoodle?doodleId=' + RepositoryTest.doodle._id)
+            $httpBackend.when('GET', '/doodle?doodleId=' + RepositoryTest.doodle._id)
                 .respond(RepositoryTest.doodle);
 
             // http backend definition for the get doodles for user request.
-            $httpBackend.when('GET', '/getDoodlesForUser?userId=' + RepositoryTest.userId)
+            $httpBackend.when('GET', '/doodle?userId=' + RepositoryTest.userId)
                 .respond([RepositoryTest.doodle, RepositoryTest.doodle, RepositoryTest.doodle]);
 
             // http backend definition for the get doodle for register request.
-            $httpBackend.when('GET', '/getDoodleRegister?registerId=' + RepositoryTest.doodle.registerId)
+            $httpBackend.when('GET', '/doodle?registerId=' + RepositoryTest.doodle.registerId)
                 .respond(RepositoryTest.doodle);
 
             // http backend definition for the delete doodle request.
-            $httpBackend.when('DELETE', '/deleteDoodle?doodleId=' + RepositoryTest.doodle._id)
+            $httpBackend.when('DELETE', '/doodle?doodleId=' + RepositoryTest.doodle._id)
                 .respond(true);
 
             // http backend to register a user.
-            $httpBackend.when('POST', '/registerUser', RepositoryTest.userRegister)
+            $httpBackend.when('POST', '/userProfile', RepositoryTest.userRegister)
                 .respond(RepositoryTest.userProfile);
 
             // http backend definition for the get user profile request.
-            $httpBackend.when('GET', '/getUserProfiles?email=' + RepositoryTest.user.email + '&passwordHash=' + Home.Utilities.Hash.MD5(RepositoryTest.user.password))
+            $httpBackend.when('GET', '/userProfile?email=' + RepositoryTest.user.email + '&passwordHash=' + Home.Utilities.Hash.MD5(RepositoryTest.user.password))
                 .respond([RepositoryTest.userProfile]);
 
         }
