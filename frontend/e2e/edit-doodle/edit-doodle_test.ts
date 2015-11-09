@@ -9,6 +9,8 @@ import e2eCommon = require('../e2eCommon');
 
 describe('Edit doodle page', function () {
 
+    console.log("edit doodle")
+
     beforeEach(function () {
         browser.get(e2eCommon.Destinations.editDoodle);
     });

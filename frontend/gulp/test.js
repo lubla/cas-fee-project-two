@@ -1,6 +1,7 @@
 'use strict';
 
 var karmaConf = require('../karma.config.js');
+var debug = require('gulp-debug')
 
 // karmaConf.files get populated in karmaFiles
 karmaConf.files = [
@@ -61,6 +62,7 @@ module.exports = function (gulp, $, config) {
     // run e2e tests - SERVER MUST BE RUNNING FIRST
     gulp.task('e2eTest', ['lint', 'build:e2eTest'], function () {
         return gulp.src(config.buildE2eTests)
+            .pipe(debug())
             .pipe($.protractor.protractor({
                 configFile: 'protractor.config.js'
             }))
