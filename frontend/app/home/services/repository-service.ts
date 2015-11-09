@@ -205,7 +205,7 @@ module Home.Services {
             var deferred = this.$q.defer();
             var userRegister = new UserRegister(user);
             this.$http
-                .post('/registerUser', userRegister)
+                .post('/userProfile', userRegister)
                 .then(response => {
                     if (response.status === 200) {
                         // OK.
@@ -226,7 +226,7 @@ module Home.Services {
 
             var deferred = this.$q.defer();
             this.$http
-                .get('/getUserProfiles?email=' + user.email + '&passwordHash=' + Home.Utilities.Hash.MD5(user.password))
+                .get('/userProfile?email=' + user.email + '&passwordHash=' + Home.Utilities.Hash.MD5(user.password))
                 .then(response => {
                     var userProfiles = response.data;
                     if (userProfiles instanceof Array) {

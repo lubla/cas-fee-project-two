@@ -38,8 +38,8 @@ function setupServer(repository) {
     // Routes.
     //var indexRoute = require('./routes/index');
     //app.use('/', indexRoute);
-    app.use('/getUserProfiles', require('./routes/getUserProfiles'));
-    app.use('/registerUser', require('./routes/registerUser'));
+    app.use('/userProfile', require('./routes/userProfile'));
+//    app.use('/registerUser', require('./routes/registerUser'));
     app.use('/getDoodle', require('./routes/getDoodle'));
     app.use('/getDoodleRegister', require('./routes/getDoodleRegister'));
     app.use('/getDoodlesForUser', require('./routes/getDoodlesForUser'));
