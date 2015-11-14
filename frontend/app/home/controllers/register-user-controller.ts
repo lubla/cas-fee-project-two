@@ -44,7 +44,7 @@ module Home.Controllers {
                     .then(userProfile => {
                         console.log(this.user);
                         this.repository
-                            .login(this.user)
+                            .login(this.user, false)
                             .then((result) => {
                                 this.$location.path('/Home');
                             })

@@ -6,9 +6,9 @@ exports.config = {
   baseUrl: 'http://' + buildConfig.host + ':' + buildConfig.port,
   seleniumServerJar: glob.sync('./node_modules/protractor/selenium/selenium-server-standalone-*.jar').join(),
   capabilities: {
-    browserName: 'firefox',
+    //browserName: 'firefox',
     //browserName: 'ie',
-    //browserName: 'chrome',
+    browserName: 'chrome',
     chromeOptions: {
       args: ['--test-type']
     },

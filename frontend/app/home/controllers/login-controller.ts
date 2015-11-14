@@ -7,6 +7,7 @@ module Home.Controllers {
         ctrlName:string;
 
         user:Home.Services.User;
+        stayLoggedIn: boolean;
         errorMessage:string;
 
         // $inject annotation.
@@ -24,12 +25,13 @@ module Home.Controllers {
             this.$log.debug('Login controller called');
             this.$log.debug('Repository name: ' + repository.name);
             this.user = new Home.Services.User('', '');
+            this.stayLoggedIn = true;
         }
 
-        getUserProfiles():void {
+        login():void {
             this.$log.debug('getUserProfiles');
             this.repository
-                .login(this.user)
+                .login(this.user, this.stayLoggedIn)
                 .then(userProfile => {
                     this.$location.path('/Home')
                 })

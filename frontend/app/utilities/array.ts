@@ -13,7 +13,7 @@ module Home.Utilities {
         static FindIndices<T>(array:Array<T>, predicate:Func<T,boolean>):Array<number> {
             var index:number;
             index = 0;
-            var result = new Array<number>()
+            var result = new Array<number>();
             while (index < array.length) {
                 if (predicate(array[index])) {
                     result.push(index);
@@ -51,5 +51,16 @@ module Home.Utilities {
 
             return deletedCount;
         }
+
+        static Select<TSource, TResult>(array:Array<TSource>, selector:Func<TSource,TResult>):Array<TResult> {
+            return array.map(selector);
+            //var result = new Array<TResult>();
+            //for(var element in array) {
+            //    result.push(selector(element));
+            //}
+            //
+            //return result;
+        }
+
     }
 }

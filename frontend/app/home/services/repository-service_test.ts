@@ -33,7 +33,7 @@ describe('Repository', function () {
     });
 
     it('login should set loggedInUser and return the user profile of the user', function () {
-        var result = repository.login(Home.UnitTestCommon.RepositoryTest.user);
+        var result = repository.login(Home.UnitTestCommon.RepositoryTest.user, false);
         result.then(userProfile => {
             expect(repository.loggedInUser).not.toBe(null);
             expect(userProfile).toBeDefined();

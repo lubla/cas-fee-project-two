@@ -22,6 +22,24 @@ module Home.Services {
         }
     }
 
+    export class UserProfile implements Home.Interfaces.IUserProfile {
+        _id: string;
+        email: string;
+        passwordHash: string;
+
+
+        /**
+         * Constructs a user profile from user profile data that is stored as json object.
+         *
+         * @param userProfile
+         */
+        constructor(userProfile: any){
+            this._id = userProfile._id;
+            this.email = userProfile.email;
+            this.passwordHash = userProfile.passwordHash;
+        }
+    }
+
     export class DateProposal implements Home.Interfaces.IDateProposal {
         _id:string;
         /**
@@ -193,11 +211,39 @@ module Home.Services {
     export class Repository implements Home.Interfaces.IRepository {
         public static $inject = ['$log', '$http', '$q'];
 
+        /**
+         * Local storage key to store the user profile of the logged in user.
+         *
+         * @type {string}
+         */
+        private loggedInUserKey = 'loggedInUser';
+
         name:string;
         loggedInUser:Home.Interfaces.IUserProfile;
 
         constructor(private $log:ng.ILogService, private $http:ng.IHttpService, private $q:ng.IQService) {
             this.name = 'Repository';
+            this.loggedInUser = this.getLoggedInUserFromLocalStorage();
+        }
+
+        private getLoggedInUserFromLocalStorage() : Home.Interfaces.IUserProfile {
+            var localStorageLoggedInUser = localStorage.getItem(this.loggedInUserKey);
+            if (localStorageLoggedInUser) {
+                return new UserProfile(JSON.parse(localStorage.getItem(this.loggedInUserKey)));
+            }
+            else {
+                return null;
+            }
+        }
+
+        private setLoggedInUserInLocalStorage(userProfile : Home.Interfaces.IUserProfile) {
+            if(userProfile) {
+                localStorage.setItem(this.loggedInUserKey, JSON.stringify(userProfile));
+            }
+            else {
+                localStorage.removeItem(this.loggedInUserKey);
+
+            }
         }
 
         registerUser(user:Home.Interfaces.IUser):ng.IPromise<Home.Interfaces.IUserProfile> {
@@ -209,7 +255,8 @@ module Home.Services {
                 .then(response => {
                     if (response.status === 200) {
                         // OK.
-                        deferred.resolve(response.data)
+                        this.loggedInUser = new UserProfile(response.data)
+                        deferred.resolve(this.loggedInUser);
                     }
                     else {
                         deferred.reject(new Error(response.statusText));
@@ -230,7 +277,7 @@ module Home.Services {
                 .then(response => {
                     var userProfiles = response.data;
                     if (userProfiles instanceof Array) {
-                        deferred.resolve(userProfiles);
+                        deferred.resolve(Home.Utilities.ArrayUtilities.Select(userProfiles, userProfile => new UserProfile(userProfile)));
                     }
                     else {
                         deferred.reject(new Error('Unexpected response'))
@@ -243,11 +290,17 @@ module Home.Services {
             return deferred.promise;
         }
 
-        login(user:Home.Interfaces.IUser):ng.IPromise<Home.Interfaces.IUserProfile> {
+        logout(): void{
+            this.loggedInUser = null;
+            this.setLoggedInUserInLocalStorage(null);
+
+        }
+
+        login(user:Home.Interfaces.IUser, stayLoggedIn: boolean):ng.IPromise<Home.Interfaces.IUserProfile> {
             var deferred = this.$q.defer();
 
             // Reset the the logged in user.
-            this.loggedInUser = null;
+            this.logout();
             this
                 .getUserProfiles(user)
                 .then(userProfiles => {
@@ -260,6 +313,9 @@ module Home.Services {
                     }
                     else {
                         this.loggedInUser = userProfiles[0];
+                        if(stayLoggedIn) {
+                            this.setLoggedInUserInLocalStorage(this.loggedInUser);
+                        }
                         deferred.resolve(this.loggedInUser);
                     }
 

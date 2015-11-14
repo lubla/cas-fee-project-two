@@ -67,7 +67,7 @@ module Home.UnitTestCommon {
         }
 
         static loginUser(repository:Home.Interfaces.IRepository, $httpBackend:ng.IHttpBackendService):void {
-            repository.login(RepositoryTest.user);
+            repository.login(RepositoryTest.user, false);
             $httpBackend.flush();
         }
 
