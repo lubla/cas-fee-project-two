@@ -50,7 +50,7 @@ module Home.Controllers {
         }
 
         private getDatePoposal(dateProposalId:string):Home.Interfaces.IDateProposal {
-            return Home.Utilities.ArrayUtilities.FindFirst(this.doodle.dateProposals, dateProposal => dateProposal._id === dateProposalId);
+            return Home.Utilities.ArrayUtilities.findFirst(this.doodle.dateProposals, dateProposal => dateProposal._id === dateProposalId);
 
         }
 
@@ -69,7 +69,7 @@ module Home.Controllers {
 
         private isRegistered(dateProposalId:string):boolean {
             var dateProposal = this.doodle.getDatePoposal(dateProposalId);
-            return Home.Utilities.ArrayUtilities.FindFirst(dateProposal.acceptedBy, acceptedBy => acceptedBy === this.name) != null;
+            return Home.Utilities.ArrayUtilities.findFirst(dateProposal.acceptedBy, acceptedBy => acceptedBy === this.name) != null;
         }
 
         isAccepted(dateProposalId:string):boolean {

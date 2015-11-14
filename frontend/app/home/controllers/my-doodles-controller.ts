@@ -40,7 +40,7 @@ module Home.Controllers {
                 .deleteDoodle(doodleId)
                 .then(doodle => {
                     Home.Utilities.ArrayUtilities
-                        .RemoveWhere(this.doodles, doodle => doodle._id === doodleId);
+                        .removeWhere(this.doodles, doodle => doodle._id === doodleId);
                 })
                 .catch(err => {
                     this.errorMessage = err.statusText;

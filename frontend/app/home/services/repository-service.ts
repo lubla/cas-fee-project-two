@@ -171,7 +171,7 @@ module Home.Services {
          * @param dateProposalId The id of the data proposal to delete.
          */
         deleteDateProposal(dateProposalId:string) {
-            Home.Utilities.ArrayUtilities.RemoveWhere(this.dateProposals, dateProposal => dateProposal._id === dateProposalId);
+            Home.Utilities.ArrayUtilities.removeWhere(this.dateProposals, dateProposal => dateProposal._id === dateProposalId);
         }
 
         /**
@@ -193,7 +193,7 @@ module Home.Services {
          */
         deleteAcceptedNameFromDateProposal(dateProposalId:string, name: string): void {
             var dateProposal = this.getDatePoposal(dateProposalId);
-            Home.Utilities.ArrayUtilities.RemoveWhere(dateProposal.acceptedBy, acceptedBy => acceptedBy === name);
+            Home.Utilities.ArrayUtilities.removeWhere(dateProposal.acceptedBy, acceptedBy => acceptedBy === name);
         }
 
         /**
@@ -202,7 +202,7 @@ module Home.Services {
          * @param dateProposalId The id of the date proposal.
          */
         getDatePoposal(dateProposalId: string): Home.Interfaces.IDateProposal {
-            return Home.Utilities.ArrayUtilities.FindFirst(this.dateProposals, dateProposal => dateProposal._id === dateProposalId);
+            return Home.Utilities.ArrayUtilities.findFirst(this.dateProposals, dateProposal => dateProposal._id === dateProposalId);
         }
 
     }
@@ -277,7 +277,7 @@ module Home.Services {
                 .then(response => {
                     var userProfiles = response.data;
                     if (userProfiles instanceof Array) {
-                        deferred.resolve(Home.Utilities.ArrayUtilities.Select(userProfiles, userProfile => new UserProfile(userProfile)));
+                        deferred.resolve(Home.Utilities.ArrayUtilities.select(userProfiles, userProfile => new UserProfile(userProfile)));
                     }
                     else {
                         deferred.reject(new Error('Unexpected response'))
