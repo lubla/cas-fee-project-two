@@ -13,18 +13,19 @@ module Home.Controllers {
         // It provides $injector with information about dependencies to be injected into constructor
         // it is better to have it close to the constructor, because the parameters must match in count and type.
         // See http://docs.angularjs.org/guide/di
-        public static $inject = ['$log', '$location', '$http', 'Repository'];
+        public static $inject = ['$log', '$location', '$http', 'Repository', 'UserManagement'];
 
         // dependencies are injected via AngularJS $injector
         constructor(private $log:ng.ILogService,
                     private $location:ng.ILocationService,
                     private $http:ng.IHttpService,
-                    private repository:Home.Interfaces.IRepository) {
+                    private repository:Home.Interfaces.IRepository,
+                    private userManagement: Home.Interfaces.IUserManagement) {
             this.ctrlName = 'MyDoodlesCtrl';
 
-            if(repository.loggedInUser) {
+            if(userManagement.loggedInUser) {
                 repository
-                    .getDoodlesForUser(repository.loggedInUser._id)
+                    .getDoodlesForUser(userManagement.loggedInUser._id)
                     .then(doodles => this.doodles = doodles)
                     .catch(err => {
                         this.$log.debug("problem getting doodle");

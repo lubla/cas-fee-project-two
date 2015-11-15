@@ -35,6 +35,7 @@ module Home.Interfaces {
         passwordHash: string;
     }
 
+
     /**
      * Stores the data of a Doodle date proposal.
      *
@@ -154,10 +155,5 @@ module Home.Interfaces {
         name: string;
     }
 
-    export interface IRegisterDoodleChanges {
-        doodleId: string;
-        datePropolalsAccepted: Array<IDateProposalAccepted>;
-        datePropolalsRejected: Array<IDateProposalAccepted>;
-    }
 
 }
