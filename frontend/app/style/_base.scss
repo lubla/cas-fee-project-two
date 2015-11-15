@@ -2,6 +2,13 @@ body {
 	color: $primary-text-color;
 }
 
+a,
+a:hover
+{
+  color: $primary-color;
+  text-decoration: none;
+}
+
 hr { margin: 1em -1em;
 
 }

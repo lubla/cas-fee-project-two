@@ -1,6 +1,12 @@
 .header {
-	background-color: $primary-color;
-	color: $inverted-text-color;
+//	background-color: $primary-color;
+//	color: $inverted-text-color;
+  text-transform: uppercase;
+  padding: 1em;
+}
+
+.header__title {
+  font-size: 2rem;
 }
 
 .header__link,
@@ -8,6 +14,6 @@
 .header__link:visited,
 .header__link:focus,
 .header__link:active {
-	color: $inverted-text-color;
+//	color: $inverted-text-color;
 	text-decoration: none;
 }

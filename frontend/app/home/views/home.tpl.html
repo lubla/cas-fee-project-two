@@ -1,7 +1,10 @@
 <p>{{home.loginMessage}} <a ng-show="home.loginMessage" ng-click="home.logout()" class="button button_small">Logout</a></p>
 
-<p><a href="#/EditDoodle" class="button button_full-width button_primary">Neuen Termin finden</a></p>
-<p>Finden Sie mit Doodle einfach einen Termin der für alle passt.</p>
+<a href="#/EditDoodle"><div class="button button_primary">
+  <h1>Neuen Termin finden</h1>
+  Der einfachste Weg einen Termin für alle zu finden.
+</div></a>
+
 
 <p><a ng-show="home.showMyDoodles" href="#/MyDoodles" class="button button_full-width">Meine Doodles</a></p>
 <p><a ng-hide="home.loginMessage" href="#/Login" class="button button_full-width">Login</a></p>
