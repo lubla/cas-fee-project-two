@@ -14,13 +14,13 @@ module Home.Controllers {
         // It provides $injector with information about dependencies to be injected into constructor
         // it is better to have it close to the constructor, because the parameters must match in count and type.
         // See http://docs.angularjs.org/guide/di
-        public static $inject = ['$log', '$location', '$http', 'Repository'];
+        public static $inject = ['$log', '$location', '$http', 'UserManagement'];
 
         // dependencies are injected via AngularJS $injector
         constructor(private $log:ng.ILogService,
                     private $location:ng.ILocationService,
                     private $http:ng.IHttpService,
-                    private repository:Home.Interfaces.IRepository) {
+                    private userManagement: Home.Interfaces.IUserManagement) {
 
             this.ctrlName = 'RegisterUserCtrl';
             this.user = new Home.Services.User('', '');
@@ -39,11 +39,10 @@ module Home.Controllers {
                 this.errorMessage = 'Email Adresse ungültig!';
             }
             else {
-                this.repository
+                this.userManagement
                     .registerUser(this.user)
                     .then(userProfile => {
-                        console.log(this.user);
-                        this.repository
+                        this.userManagement
                             .login(this.user, false)
                             .then((result) => {
                                 this.$location.path('/Home');

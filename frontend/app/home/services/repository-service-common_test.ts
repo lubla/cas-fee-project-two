@@ -66,8 +66,8 @@ module Home.UnitTestCommon {
             expect(doodle.title).toBe(RepositoryTest.title);
         }
 
-        static loginUser(repository:Home.Interfaces.IRepository, $httpBackend:ng.IHttpBackendService):void {
-            repository.login(RepositoryTest.user, false);
+        static loginUser(userManagement:Home.Interfaces.IUserManagement, $httpBackend:ng.IHttpBackendService):void {
+            userManagement.login(RepositoryTest.user, false);
             $httpBackend.flush();
         }
 

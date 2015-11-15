@@ -11,6 +11,7 @@
 
 describe('Repository', function () {
     var repository:Home.Interfaces.IRepository;
+    var userManagement:Home.Interfaces.IUserManagement;
     var $httpBackend: ng.IHttpBackendService;
     var $rootScope;
 
@@ -22,6 +23,7 @@ describe('Repository', function () {
         $httpBackend = $injector.get('$httpBackend');
         repository = $injector.get('Repository');
         $rootScope = $injector.get('$rootScope');
+        userManagement = $injector.get('UserManagement');
 
         Home.UnitTestCommon.RepositoryTest.createDoodle(repository);
 
@@ -33,9 +35,9 @@ describe('Repository', function () {
     });
 
     it('login should set loggedInUser and return the user profile of the user', function () {
-        var result = repository.login(Home.UnitTestCommon.RepositoryTest.user, false);
+        var result = userManagement.login(Home.UnitTestCommon.RepositoryTest.user, false);
         result.then(userProfile => {
-            expect(repository.loggedInUser).not.toBe(null);
+            expect(userManagement.loggedInUser).not.toBe(null);
             expect(userProfile).toBeDefined();
             expect(userProfile.passwordHash).toBe(Home.Utilities.Hash.MD5(Home.UnitTestCommon.RepositoryTest.password));
             expect(userProfile.email).toBe(Home.UnitTestCommon.RepositoryTest.email);
@@ -44,9 +46,9 @@ describe('Repository', function () {
     });
 
     it('register user should set loggedInUser and return the profile of the user', function () {
-        var result = repository.registerUser(Home.UnitTestCommon.RepositoryTest.user);
+        var result = userManagement.registerUser(Home.UnitTestCommon.RepositoryTest.user);
         result.then(userProfile => {
-            expect(repository.loggedInUser).not.toBe(null);
+            expect(userManagement.loggedInUser).not.toBe(null);
             expect(userProfile).toBeDefined();
             expect(userProfile.passwordHash).toBe(Home.Utilities.Hash.MD5(Home.UnitTestCommon.RepositoryTest.password));
             expect(userProfile.email).toBe(Home.UnitTestCommon.RepositoryTest.email);
@@ -56,7 +58,7 @@ describe('Repository', function () {
 
     it('create new doodle should return an empty doodle', function (done) {
 
-        Home.UnitTestCommon.RepositoryTest.loginUser(repository, $httpBackend);
+        Home.UnitTestCommon.RepositoryTest.loginUser(userManagement, $httpBackend);
 
         // Note repository.createNewDoodle is async but not using $http =>
         // use the done() function (to indicate that the callback is called) together $rootScope.$apply() (to pump to event loop).

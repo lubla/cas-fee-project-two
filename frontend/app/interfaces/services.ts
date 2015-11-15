@@ -5,12 +5,6 @@ module Home.Interfaces {
     "use strict"
 
     export interface  IRepository {
-        name: string;
-        loggedInUser: Home.Interfaces.IUserProfile;
-        login(user: Home.Interfaces.IUser, stayLoggedIn: boolean):ng.IPromise<Home.Interfaces.IUserProfile>;
-        logout();
-        getUserProfiles(user: Home.Interfaces.IUser):ng.IPromise<Array<Home.Interfaces.IUserProfile>>;
-        registerUser(user: Home.Interfaces.IUser):ng.IPromise<Home.Interfaces.IUserProfile>;
 
         /**
          * Creates a new doodle.
@@ -86,4 +80,18 @@ module Home.Interfaces {
 
 
     }
+
+    /**
+     * User management service.
+     *
+     * @interface IUserManagement
+     */
+    export interface IUserManagement {
+        loggedInUser: Home.Interfaces.IUserProfile;
+        login(user: Home.Interfaces.IUser, stayLoggedIn: boolean):ng.IPromise<Home.Interfaces.IUserProfile>;
+        logout();
+        getUserProfiles(user: Home.Interfaces.IUser):ng.IPromise<Array<Home.Interfaces.IUserProfile>>;
+        registerUser(user: Home.Interfaces.IUser):ng.IPromise<Home.Interfaces.IUserProfile>;
+
+    }    
 }
