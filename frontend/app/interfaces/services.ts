@@ -11,7 +11,7 @@ module Home.Interfaces {
          *
          * @returns {IPromise<Home.Interfaces.IDoodle>}
          */
-        createNewDoodle():ng.IPromise<Home.Interfaces.IDoodle>;
+        createNewDoodle(userId: string):ng.IPromise<Home.Interfaces.IDoodle>;
 
         /**
          * Creates a new doodle sync version to simplify unit testing.

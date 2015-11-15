@@ -66,12 +66,6 @@ module Home.UnitTestCommon {
             expect(doodle.title).toBe(RepositoryTest.title);
         }
 
-        static loginUser(userManagement:Home.Interfaces.IUserManagement, $httpBackend:ng.IHttpBackendService):void {
-            userManagement.login(RepositoryTest.user, false);
-            $httpBackend.flush();
-        }
-
-
         static setupRepositoryBackend($httpBackend:ng.IHttpBackendService):void {
             // http backend definition for the post doodle request.
             $httpBackend.when('POST', '/doodle', RepositoryTest.doodle)
@@ -96,14 +90,6 @@ module Home.UnitTestCommon {
             // http backend definition for the delete doodle request.
             $httpBackend.when('DELETE', '/doodle?doodleId=' + RepositoryTest.doodle._id)
                 .respond(true);
-
-            // http backend to register a user.
-            $httpBackend.when('POST', '/userProfile', RepositoryTest.userRegister)
-                .respond(RepositoryTest.userProfile);
-
-            // http backend definition for the get user profile request.
-            $httpBackend.when('GET', '/userProfile?email=' + RepositoryTest.user.email + '&passwordHash=' + Home.Utilities.Hash.MD5(RepositoryTest.user.password))
-                .respond([RepositoryTest.userProfile]);
 
         }
 

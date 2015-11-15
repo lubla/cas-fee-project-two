@@ -173,22 +173,21 @@ module Home.Services {
 
 
     export class Repository implements Home.Interfaces.IRepository {
-        public static $inject = ['$log', '$http', '$q', 'UserManagement'];
+        public static $inject = ['$log', '$http', '$q'];
 
         constructor(private $log:ng.ILogService,
                     private $http:ng.IHttpService,
-                    private $q:ng.IQService,
-                    private userManagement: Home.Interfaces.IUserManagement) {
+                    private $q:ng.IQService) {
         }
         /**
          * Creates a new doodle.
          *
          * @returns {IPromise<Home.Interfaces.IDoodle>}
          */
-        createNewDoodle():ng.IPromise<Home.Interfaces.IDoodle> {
+        createNewDoodle(userId: string):ng.IPromise<Home.Interfaces.IDoodle> {
             var deferred = this.$q.defer();
 
-            var doodle = this.createNewDoodleSync(this.userManagement.loggedInUser ? this.userManagement.loggedInUser._id : '');
+            var doodle = this.createNewDoodleSync(userId);
             deferred.resolve(doodle);
 
 

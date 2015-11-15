@@ -11,7 +11,6 @@
 
 describe('Repository', function () {
     var repository:Home.Interfaces.IRepository;
-    var userManagement:Home.Interfaces.IUserManagement;
     var $httpBackend: ng.IHttpBackendService;
     var $rootScope;
 
@@ -23,7 +22,6 @@ describe('Repository', function () {
         $httpBackend = $injector.get('$httpBackend');
         repository = $injector.get('Repository');
         $rootScope = $injector.get('$rootScope');
-        userManagement = $injector.get('UserManagement');
 
         Home.UnitTestCommon.RepositoryTest.createDoodle(repository);
 
@@ -34,35 +32,11 @@ describe('Repository', function () {
         expect(repository.get()).toEqual('Repository');
     });
 
-    it('login should set loggedInUser and return the user profile of the user', function () {
-        var result = userManagement.login(Home.UnitTestCommon.RepositoryTest.user, false);
-        result.then(userProfile => {
-            expect(userManagement.loggedInUser).not.toBe(null);
-            expect(userProfile).toBeDefined();
-            expect(userProfile.passwordHash).toBe(Home.Utilities.Hash.MD5(Home.UnitTestCommon.RepositoryTest.password));
-            expect(userProfile.email).toBe(Home.UnitTestCommon.RepositoryTest.email);
-        });
-        $httpBackend.flush();
-    });
-
-    it('register user should set loggedInUser and return the profile of the user', function () {
-        var result = userManagement.registerUser(Home.UnitTestCommon.RepositoryTest.user);
-        result.then(userProfile => {
-            expect(userManagement.loggedInUser).not.toBe(null);
-            expect(userProfile).toBeDefined();
-            expect(userProfile.passwordHash).toBe(Home.Utilities.Hash.MD5(Home.UnitTestCommon.RepositoryTest.password));
-            expect(userProfile.email).toBe(Home.UnitTestCommon.RepositoryTest.email);
-        });
-        $httpBackend.flush();
-    });
-
     it('create new doodle should return an empty doodle', function (done) {
-
-        Home.UnitTestCommon.RepositoryTest.loginUser(userManagement, $httpBackend);
 
         // Note repository.createNewDoodle is async but not using $http =>
         // use the done() function (to indicate that the callback is called) together $rootScope.$apply() (to pump to event loop).
-        var result = repository.createNewDoodle();
+        var result = repository.createNewDoodle(Home.UnitTestCommon.RepositoryTest.userId);
         result.then(doodle => {
             expect(doodle).toBeDefined();
             expect(doodle.userId).toBe(Home.UnitTestCommon.RepositoryTest.userId);
