@@ -1,7 +1,12 @@
 ///<reference path='../../../typings/tsd.d.ts' />
+///<reference path='z_rest-service-consumer.ts' />
 
 
 module Home.Services {
+
+//    import IDeferred = angular.IDeferred;
+//    import RestServiceConsumer = Home.Services.RestServiceConsumer;
+
     'use strict';
 
     export class User implements Home.Interfaces.IUser {
@@ -42,7 +47,15 @@ module Home.Services {
         }
     }
 
-    export class UserManagement implements Home.Interfaces.IUserManagement{
+    export class UserManagement extends RestServiceConsumer implements Home.Interfaces.IUserManagement {
+
+        constructor($log:ng.ILogService,
+                    $http:ng.IHttpService,
+                    $q:ng.IQService) {
+            super($log, $http, $q);
+            this.loggedInUser = this.getLoggedInUserFromLocalStorage();
+        }
+
 
         /**
          * Local storage key to store the user profile of the logged in user.
@@ -53,16 +66,8 @@ module Home.Services {
 
         loggedInUser:Home.Interfaces.IUserProfile;
 
-        public static $inject = ['$log', '$http', '$q'];
 
-        constructor(private $log:ng.ILogService,
-                    private $http:ng.IHttpService,
-                    private $q:ng.IQService) {
-
-            this.loggedInUser = this.getLoggedInUserFromLocalStorage();
-        }
-
-        private getLoggedInUserFromLocalStorage() : Home.Interfaces.IUserProfile {
+        private getLoggedInUserFromLocalStorage():Home.Interfaces.IUserProfile {
             var localStorageLoggedInUser = localStorage.getItem(this.loggedInUserKey);
             if (localStorageLoggedInUser) {
                 return new UserProfile(JSON.parse(localStorage.getItem(this.loggedInUserKey)));
@@ -72,8 +77,8 @@ module Home.Services {
             }
         }
 
-        private setLoggedInUserInLocalStorage(userProfile : Home.Interfaces.IUserProfile) {
-            if(userProfile) {
+        private setLoggedInUserInLocalStorage(userProfile:Home.Interfaces.IUserProfile) {
+            if (userProfile) {
                 localStorage.setItem(this.loggedInUserKey, JSON.stringify(userProfile));
             }
             else {
@@ -89,16 +94,15 @@ module Home.Services {
             this.$http
                 .post('/userProfile', userRegister)
                 .then(response => {
-                    if (response.status === 200) {
-                        // OK.
-                        this.loggedInUser = new UserProfile(response.data);
-                        deferred.resolve(this.loggedInUser);
-                    }
-                    else {
-                        deferred.reject(new Error(response.statusText));
-                    }
+                    RestServiceConsumer.resolveResponse(
+                        deferred,
+                        response,
+                        () => {
+                            this.loggedInUser = new UserProfile(response.data);
+                            return new UserProfile(this.loggedInUser);
+                        });
                 })
-                .catch(err => deferred.reject(err));
+                .catch(error => RestServiceConsumer.rejectError(deferred, error));
 
 
             return deferred.promise;
@@ -111,28 +115,27 @@ module Home.Services {
             this.$http
                 .get('/userProfile?email=' + user.email + '&passwordHash=' + Home.Utilities.Hash.MD5(user.password))
                 .then(response => {
-                    var userProfiles = response.data;
-                    if (userProfiles instanceof Array) {
-                        deferred.resolve(Home.Utilities.ArrayUtilities.select(userProfiles, userProfile => new UserProfile(userProfile)));
-                    }
-                    else {
-                        deferred.reject(new Error('Unexpected response'))
-                    }
-
+                    RestServiceConsumer.resolveResponse(
+                        deferred,
+                        response,
+                        () => {
+                            var userProfiles = <Array<any>> response.data;
+                            return Home.Utilities.ArrayUtilities.select(userProfiles, userProfile => new UserProfile(userProfile))
+                        });
                 })
-                .catch(err => deferred.reject(err));
+                .catch(error => RestServiceConsumer.rejectError(deferred, error));
 
 
             return deferred.promise;
         }
 
-        logout(): void{
+        logout():void {
             this.loggedInUser = null;
             this.setLoggedInUserInLocalStorage(null);
 
         }
 
-        login(user:Home.Interfaces.IUser, stayLoggedIn: boolean):ng.IPromise<Home.Interfaces.IUserProfile> {
+        login(user:Home.Interfaces.IUser, stayLoggedIn:boolean):ng.IPromise<Home.Interfaces.IUserProfile> {
             var deferred = this.$q.defer();
 
             // Reset the the logged in user.
@@ -149,14 +152,14 @@ module Home.Services {
                     }
                     else {
                         this.loggedInUser = userProfiles[0];
-                        if(stayLoggedIn) {
+                        if (stayLoggedIn) {
                             this.setLoggedInUserInLocalStorage(this.loggedInUser);
                         }
                         deferred.resolve(this.loggedInUser);
                     }
 
                 })
-                .catch(err => deferred.reject(err));
+                .catch(error => RestServiceConsumer.rejectError(deferred, error));
 
 
             return deferred.promise;

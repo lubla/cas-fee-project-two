@@ -1,7 +1,12 @@
 ///<reference path='../../../typings/tsd.d.ts' />
-module Home.Services {
-    'use strict';
+///<reference path='z_rest-service-consumer.ts' />
 
+module Home.Services {
+
+    //import IDeferred = angular.IDeferred;
+    //import RestServiceConsumer = Home.Services.RestServiceConsumer;
+
+    'use strict';
 
 
     export class DateProposal implements Home.Interfaces.IDateProposal {
@@ -16,9 +21,6 @@ module Home.Services {
          */
         end:Date;
 
-
-        test:string;
-
         /**
          * The list of the names of the people that have accepted the proposal.
          */
@@ -31,7 +33,7 @@ module Home.Services {
             this.start.setMinutes(0, 0, 0);
             this.end = this.start;
             this.end.setHours(this.start.getHours() + 1);
-            this.acceptedBy = new Array<string>();
+            this.acceptedBy = [];
         }
 
     }
@@ -55,7 +57,7 @@ module Home.Services {
          * One for the owner (_id, to edit the doodle) and one to register
          * (registerId, to register).
          */
-        registerId: string;
+        registerId:string;
 
 
         /**
@@ -102,7 +104,7 @@ module Home.Services {
                 this.registerId = Home.Utilities.Uuid.new();
                 this.title = '';
                 this.place = '';
-                this.dateProposals = new Array<Home.Interfaces.IDateProposal>();
+                this.dateProposals = [];
                 this.isExpired = false;
             }
             else {
@@ -144,7 +146,7 @@ module Home.Services {
          * @param dateProposalId The id of the data proposal.
          * @param name The name to add.
          */
-        addAcceptedNameToDateProposal(dateProposalId:string, name: string): void {
+        addAcceptedNameToDateProposal(dateProposalId:string, name:string):void {
             var dateProposal = this.getDatePoposal(dateProposalId);
             dateProposal.acceptedBy.push(name);
         }
@@ -155,7 +157,7 @@ module Home.Services {
          * @param dateProposalId The id of the data proposal.
          * @param name The name to delete.
          */
-        deleteAcceptedNameFromDateProposal(dateProposalId:string, name: string): void {
+        deleteAcceptedNameFromDateProposal(dateProposalId:string, name:string):void {
             var dateProposal = this.getDatePoposal(dateProposalId);
             Home.Utilities.ArrayUtilities.removeWhere(dateProposal.acceptedBy, acceptedBy => acceptedBy === name);
         }
@@ -165,45 +167,34 @@ module Home.Services {
          *
          * @param dateProposalId The id of the date proposal.
          */
-        getDatePoposal(dateProposalId: string): Home.Interfaces.IDateProposal {
+        getDatePoposal(dateProposalId:string):Home.Interfaces.IDateProposal {
             return Home.Utilities.ArrayUtilities.findFirst(this.dateProposals, dateProposal => dateProposal._id === dateProposalId);
         }
 
     }
 
 
-    export class Repository implements Home.Interfaces.IRepository {
-        public static $inject = ['$log', '$http', '$q'];
 
-        constructor(private $log:ng.ILogService,
-                    private $http:ng.IHttpService,
-                    private $q:ng.IQService) {
+
+    export class Repository extends RestServiceConsumer implements Home.Interfaces.IRepository {
+
+        constructor($log:ng.ILogService,
+                    $http:ng.IHttpService,
+                    $q:ng.IQService) {
+            super($log, $http, $q);
         }
+
         /**
          * Creates a new doodle.
-         *
-         * @returns {IPromise<Home.Interfaces.IDoodle>}
-         */
-        //createNewDoodle(userId: string):ng.IPromise<Home.Interfaces.IDoodle> {
-        //    var deferred = this.$q.defer();
-        //
-        //    var doodle = this.createNewDoodleSync(userId);
-        //    deferred.resolve(doodle);
-        //
-        //
-        //    return deferred.promise;
-        //}
-
-        /**
-         * Creates a new doodle sync version to simplify unit testing.
          *
          * @param userId The id of the user that creates to doodle (An anonymous doodle is created if not specified).
          *
          * @returns {Home.Interfaces.IDoodle}
          */
-        createNewDoodle(userId: string):Home.Interfaces.IDoodle {
+        createNewDoodle(userId:string):Home.Interfaces.IDoodle {
             return new Doodle(userId ? userId : '');
         }
+
 
         /**
          * Adds a new doodle to the doodle database.
@@ -214,20 +205,16 @@ module Home.Services {
         postDoodle(doodle:Home.Interfaces.IDoodle):ng.IPromise<Home.Interfaces.IDoodle> {
 
             var deferred = this.$q.defer();
+
             this.$http
                 .post('/doodle', doodle)
                 .then(response => {
-                    if (response.status === 200) {
-                        // OK.
-                        deferred.resolve(new Doodle(response.data));
-                    }
-                    else {
-                        console.log("status:" + response.status)
-                        deferred.reject(new Error(response.statusText));
-                    }
+                    RestServiceConsumer.resolveResponse(
+                        deferred,
+                        response,
+                        () => new Doodle(response.data));
                 })
-                .catch(err => deferred.reject(err));
-
+                .catch(error => RestServiceConsumer.rejectError(deferred, error));
 
             return deferred.promise;
         }
@@ -239,20 +226,18 @@ module Home.Services {
          * @returns {IPromise<Home.Interfaces.IDoodle>}
          */
         getDoodle(doodleId:string):ng.IPromise<Home.Interfaces.IDoodle> {
+
             var deferred = this.$q.defer();
+
             this.$http
                 .get('/doodle?doodleId=' + doodleId)
                 .then(response => {
-                    if (response.status === 200) {
-                        // OK.
-                        deferred.resolve(new Doodle(response.data));
-                    }
-                    else {
-                        console.log("status:" + response.status)
-                        deferred.reject(new Error(response.statusText));
-                    }
+                    RestServiceConsumer.resolveResponse(
+                        deferred,
+                        response,
+                        () => new Doodle(response.data));
                 })
-                .catch(err => deferred.reject(err));
+                .catch(error => RestServiceConsumer.rejectError(deferred, error));
 
 
             return deferred.promise;
@@ -264,25 +249,22 @@ module Home.Services {
          * @param registerId The register Id of the doodle.
          * @returns {IPromise<Home.Interfaces.IDoodle>} A promise with the retrieved doodle as result.
          */
-        getDoodleRegister(registerId:string):ng.IPromise<Home.Interfaces.IDoodle>{
-                var deferred = this.$q.defer();
-                this.$http
-                    .get('/doodle?registerId=' + registerId)
-                    .then(response => {
-                        if (response.status === 200) {
-                            // OK.
-                            deferred.resolve(new Doodle(response.data));
-                        }
-                        else {
-                            console.log("status:" + response.status)
-                            deferred.reject(new Error(response.statusText));
-                        }
-                    })
-                    .catch(err => deferred.reject(err));
+        getDoodleRegister(registerId:string):ng.IPromise<Home.Interfaces.IDoodle> {
 
+            var deferred = this.$q.defer();
 
-                return deferred.promise;
-            }
+            this.$http
+                .get('/doodle?registerId=' + registerId)
+                .then(response => {
+                    RestServiceConsumer.resolveResponse(
+                        deferred,
+                        response,
+                        () => new Doodle(response.data));
+                })
+                .catch(error => RestServiceConsumer.rejectError(deferred, error));
+
+            return deferred.promise;
+        }
 
         /**
          * Deletes a doodle.
@@ -291,21 +273,18 @@ module Home.Services {
          * @returns {ng.IPromise<boolean>} A promise with a boolean value as result that indicates if the delete succeeded.
          */
         deleteDoodle(doodleId:string):ng.IPromise<boolean> {
+
             var deferred = this.$q.defer();
+
             this.$http
                 .delete('/doodle?doodleId=' + doodleId)
                 .then(response => {
-                    if (response.status === 200) {
-                        // OK.
-                        deferred.resolve(response.data);
-                    }
-                    else {
-                        console.log("status:" + response.status)
-                        deferred.reject(new Error(response.statusText));
-                    }
+                    RestServiceConsumer.resolveResponse(
+                        deferred,
+                        response,
+                        () => <Boolean> response.data);
                 })
-                .catch(err => deferred.reject(err));
-
+                .catch(error => RestServiceConsumer.rejectError(deferred, error));
 
             return deferred.promise;
         }
@@ -317,24 +296,21 @@ module Home.Services {
          * @returns {ng.IPromise<Array<Home.Interfaces.IDoodle>>} A promise with the doodles of the user as result.
          */
         getDoodlesForUser(userId:string):ng.IPromise<Array<Home.Interfaces.IDoodle>> {
+
             var deferred = this.$q.defer();
+
             this.$http
                 .get('/doodle?userId=' + userId)
                 .then(response => {
-                    if (response.status === 200) {
-                        // OK.
-                        var doodles = new Array<Home.Interfaces.IDoodle>();
-                        var doodleArray = <Array<any>> response.data;
-                        doodleArray.forEach(doodle => doodles.push(new Doodle(doodle)));
-                        deferred.resolve(doodles);
-                    }
-                    else {
-                        console.log("status:" + response.status);
-                        deferred.reject(new Error(response.statusText));
-                    }
+                    RestServiceConsumer.resolveResponse(
+                        deferred,
+                        response,
+                        () => {
+                            var doodleArray = <Array<any>> response.data;
+                            return Home.Utilities.ArrayUtilities.select(doodleArray, doodle => new Doodle(doodle));
+                        });
                 })
-                .catch(err => deferred.reject(err));
-
+                .catch(error => RestServiceConsumer.rejectError(deferred, error));
 
             return deferred.promise;
         }
@@ -347,21 +323,18 @@ module Home.Services {
          * @returns {IPromise<Home.Interfaces.IDoodle>} A promise with the updated doodle as result.
          */
         putDoodle(doodle:Home.Interfaces.IDoodle):ng.IPromise<Home.Interfaces.IDoodle> {
+
             var deferred = this.$q.defer();
+
             this.$http
                 .put('/doodle', doodle)
                 .then(response => {
-                    if (response.status === 200) {
-                        // OK.
-                        deferred.resolve(new Doodle(response.data));
-                    }
-                    else {
-                        console.log("status:" + response.status)
-                        deferred.reject(new Error(response.statusText));
-                    }
+                    RestServiceConsumer.resolveResponse(
+                        deferred,
+                        response,
+                        () => new Doodle(response.data));
                 })
-                .catch(err => deferred.reject(err));
-
+                .catch(error => RestServiceConsumer.rejectError(deferred, error));
 
             return deferred.promise;
         }
