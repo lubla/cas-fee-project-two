@@ -9,18 +9,11 @@ module Home.Interfaces {
         /**
          * Creates a new doodle.
          *
-         * @returns {IPromise<Home.Interfaces.IDoodle>}
-         */
-        createNewDoodle(userId: string):ng.IPromise<Home.Interfaces.IDoodle>;
-
-        /**
-         * Creates a new doodle sync version to simplify unit testing.
-         *
          * @param userId The id of the user that creates to doodle (An anonymous doodle is created if not specified).
          *
          * @returns {Home.Interfaces.IDoodle}
          */
-        createNewDoodleSync(userId: string):Home.Interfaces.IDoodle;
+        createNewDoodle(userId: string):Home.Interfaces.IDoodle;
 
         /**
          * Adds a new doodle to the doodle database.

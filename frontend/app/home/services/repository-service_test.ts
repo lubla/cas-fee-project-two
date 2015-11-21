@@ -32,21 +32,13 @@ describe('Repository', function () {
         expect(repository.get()).toEqual('Repository');
     });
 
-    it('create new doodle should return an empty doodle', function (done) {
-
-        // Note repository.createNewDoodle is async but not using $http =>
-        // use the done() function (to indicate that the callback is called) together $rootScope.$apply() (to pump to event loop).
-        var result = repository.createNewDoodle(Home.UnitTestCommon.RepositoryTest.userId);
-        result.then(doodle => {
-            expect(doodle).toBeDefined();
-            expect(doodle.userId).toBe(Home.UnitTestCommon.RepositoryTest.userId);
-            expect(doodle.dateProposals.length).toBe(0);
-            expect(doodle.place).toBe('');
-            expect(doodle.title).toBe('');
-            done();
-        });
-
-        $rootScope.$apply();
+    it('create new doodle should return an empty doodle', function () {
+        var doodle = repository.createNewDoodle(Home.UnitTestCommon.RepositoryTest.userId);
+        expect(doodle).toBeDefined();
+        expect(doodle.userId).toBe(Home.UnitTestCommon.RepositoryTest.userId);
+        expect(doodle.dateProposals.length).toBe(0);
+        expect(doodle.place).toBe('');
+        expect(doodle.title).toBe('');
     });
 
     it('post doodle should return the posted doodle (i.e. the test doodle)', function () {

@@ -31,9 +31,7 @@ module Home.Controllers {
             if (!$routeParams.doodleId) {
                 // No id specified in route => Create a new doodle.
                 this.isNewDoodle = true;
-                this.repository
-                    .createNewDoodle(this.userManagement.loggedInUser ? this.userManagement.loggedInUser._id : '')
-                    .then(doodle => this.doodle = doodle);
+                this.doodle = this.repository.createNewDoodle(this.userManagement.loggedInUser ? this.userManagement.loggedInUser._id : '');
             }
             else {
                 // Id specified => Get the doodle from db.

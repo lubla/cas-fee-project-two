@@ -184,15 +184,15 @@ module Home.Services {
          *
          * @returns {IPromise<Home.Interfaces.IDoodle>}
          */
-        createNewDoodle(userId: string):ng.IPromise<Home.Interfaces.IDoodle> {
-            var deferred = this.$q.defer();
-
-            var doodle = this.createNewDoodleSync(userId);
-            deferred.resolve(doodle);
-
-
-            return deferred.promise;
-        }
+        //createNewDoodle(userId: string):ng.IPromise<Home.Interfaces.IDoodle> {
+        //    var deferred = this.$q.defer();
+        //
+        //    var doodle = this.createNewDoodleSync(userId);
+        //    deferred.resolve(doodle);
+        //
+        //
+        //    return deferred.promise;
+        //}
 
         /**
          * Creates a new doodle sync version to simplify unit testing.
@@ -201,7 +201,7 @@ module Home.Services {
          *
          * @returns {Home.Interfaces.IDoodle}
          */
-        createNewDoodleSync(userId: string):Home.Interfaces.IDoodle {
+        createNewDoodle(userId: string):Home.Interfaces.IDoodle {
             return new Doodle(userId ? userId : '');
         }
 

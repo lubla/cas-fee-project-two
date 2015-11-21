@@ -45,7 +45,7 @@ module Home.UnitTestCommon {
          * Initializes the test doodle.
          */
         static createDoodle(repository:Home.Interfaces.IRepository) {
-            RepositoryTest.doodle = repository.createNewDoodleSync(RepositoryTest.userId);
+            RepositoryTest.doodle = repository.createNewDoodle(RepositoryTest.userId);
             RepositoryTest.doodle.place = RepositoryTest.place;
             RepositoryTest.doodle.title = RepositoryTest.title;
             for (var dateProposal:number = 0; dateProposal < RepositoryTest.dateProposalCount; dateProposal++) {
