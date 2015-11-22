@@ -32,7 +32,7 @@ module Home.Services {
 
         protected static rejectError<TResult>(deferred:IDeferred<TResult>,
                                               error:any):void {
-            deferred.reject(error);
+            deferred.reject(new Error(error.data ? error.data : error.statusText));
         }
     }
 }
