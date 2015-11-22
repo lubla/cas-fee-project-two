@@ -34,27 +34,47 @@ var serverRepository = (function () {
             return cursor.toArray();
         };
 
-        Repository.prototype.registerUser = function (user) {
-            var insertResult = this.mongoDb.collection(userProfilesCollectionName)
-                .insert(user);
+        Repository.prototype.getUserProfilesForEmail = function (email) {
 
+            var cursor = this.mongoDb.collection(userProfilesCollectionName)
+                .find({$and: [{'email': email}]});
+
+            return cursor.toArray();
+        };
+
+
+        Repository.prototype.registerUser = function (user) {
             var defer = Q.defer();
 
-            insertResult
-                .then(function (result) {
-                    // Check if one user has been added.
-                    if (result.result.n == 1) {
-                        // Return the added user.
-                        defer.resolve(result.ops[0]);
+            this.getUserProfilesForEmail(user.email)
+                .then(function (userProfiles) {
+                    if (userProfiles.length > 0) {
+                        defer.reject(new Error("User already registered."));
                     }
                     else {
-                        console.log('reject');
-                        defer.reject(new Error("Cannot register user"));
+                        var insertResult = this.mongoDb.collection(userProfilesCollectionName)
+                            .insert(user);
+                        insertResult
+                            .then(function (result) {
+                                // Check if one user has been added.
+                                if (result.result.n == 1) {
+                                    // Return the added user.
+                                    defer.resolve(result.ops[0]);
+                                }
+                                else {
+                                    console.log('reject');
+                                    defer.reject(new Error("Cannot register user"));
+                                }
+                            })
+                            .catch(function (err) {
+                                defer.reject(err);
+                            });
                     }
                 })
                 .catch(function (err) {
                     defer.reject(err);
                 });
+
 
             return defer.promise;
         };

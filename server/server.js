@@ -65,6 +65,8 @@ function setupServer(repository) {
         }
 
         console.log(errorInfo);
+
+        err.stack = undefined; // Don't send the stack to  the browser.
         next(err);
     }
 
