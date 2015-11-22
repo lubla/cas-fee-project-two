@@ -1,6 +1,13 @@
 ///<reference path='../../../typings/tsd.d.ts' />
 
-/* global describe, beforeEach, it, expect, inject, module */
+
+/**
+ * Controller of the register user page which allows the registration of a new user.
+ *
+ * The page shows input fields for the user email, password and password confirmation.
+ *
+ */
+
 'use strict';
 
 describe('RegisteredForDoodleCtrl', function () {

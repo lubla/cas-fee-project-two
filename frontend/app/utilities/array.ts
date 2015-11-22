@@ -24,7 +24,7 @@ module Home.Utilities {
             return result;
         }
 
-        static findFirst<T>(array:Array<T>, predicate:Func<T,boolean>):T {
+        static findFirstOrDefault<T>(array:Array<T>, predicate:Func<T,boolean>):T {
             var index:number;
             index = 0;
             while (index < array.length) {

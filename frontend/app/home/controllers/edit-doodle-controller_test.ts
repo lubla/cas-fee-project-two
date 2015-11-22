@@ -1,6 +1,11 @@
 ///<reference path='../../../typings/tsd.d.ts' />
 
-/* global describe, beforeEach, it, expect, inject, module */
+/**
+ * Edit doodle controller unit test.
+ *
+ * Checks the controller name only.
+ */
+
 'use strict';
 
 describe('EditDoodleCtrl', function () {

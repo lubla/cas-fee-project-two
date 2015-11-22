@@ -1,4 +1,12 @@
 ///<reference path='../../../typings/tsd.d.ts' />
+
+/**
+ * Controller for the edit doodle page which is displayed create a new  doodle or to update an existing doodle.
+ *
+ * The page allows to set the doodle title, place and date proposals.
+ *
+ */
+
 module Home.Controllers {
     'use strict';
 
@@ -6,17 +14,36 @@ module Home.Controllers {
         doodleId: string;
     }
 
+    /**
+     * The edit doodle controller.
+     */
     class EditDoodleCtrl {
 
+        /**
+         * The controller name. Used in unit tests.
+         */
         ctrlName:string;
+
+        /**
+         * The doodle that is edited.
+         */
         doodle:Home.Interfaces.IDoodle;
+
+        /**
+         * Error message if something goes wrong.
+         */
         errorMessage:string;
+
+        /**
+         * Indicates if it is an new doodle that has to be added to the database or an existing doodle the has to be updated in the database.
+         */
         isNewDoodle:boolean;
 
-        // $inject annotation.
-        // It provides $injector with information about dependencies to be injected into constructor
-        // it is better to have it close to the constructor, because the parameters must match in count and type.
-        // See http://docs.angularjs.org/guide/di
+        /**
+         * The controller injections.
+         *
+         * @type {string[]}
+         */
         public static $inject = ['$log', '$location', '$http', '$routeParams', 'Repository', 'UserManagement'];
 
         // dependencies are injected via AngularJS $injector
@@ -28,6 +55,8 @@ module Home.Controllers {
                     private userManagement:Home.Interfaces.IUserManagement) {
 
             this.ctrlName = 'EditDoodleCtrl';
+
+            // Initialize the doodlee.
             if (!$routeParams.doodleId) {
                 // No id specified in route => Create a new doodle.
                 this.isNewDoodle = true;
@@ -46,16 +75,27 @@ module Home.Controllers {
             }
         }
 
+        /**
+         * ng-click callback to add a new date proposal.
+         */
         addDateProposal():void {
             this.doodle.addNewDateProposal();
 
         }
 
+        /**
+         * ng-click callback to delete an existing date proposal.
+         *
+         * @param dateProposalId   The id of the date proposal to delete.
+         */
         deleteDateProposal(dateProposalId:string):void {
             this.doodle.deleteDateProposal(dateProposalId);
         }
 
-        setPostOrPutDoodleLocation() {
+        /**
+         * Sets the location to the doodle registered page and sets up its search parameters.
+         */
+        setDoodleRegisteredLocation() {
             this.$location.search('doodleId', this.doodle._id);
             this.$location.search('isNewDoodle', this.isNewDoodle);
             this.$location.search('registerId', this.doodle.registerId);
@@ -63,26 +103,24 @@ module Home.Controllers {
         }
 
         /**
-         *  Posts the doodle if it is a new doodle, puts the doodle if it is an existing doodle.
+         *  ng-click callback the stores the doodle in the database.
          */
         postOrPutDoodle():void {
             if (this.isNewDoodle) {
-                this.$log.debug('postDoodle');
                 this.repository
                     .postDoodle(this.doodle)
                     .then(doodle => {
-                        this.setPostOrPutDoodleLocation();
+                        this.setDoodleRegisteredLocation();
                     })
                     .catch(err => {
                         this.errorMessage = err.statusText;
                     });
             }
             else {
-                this.$log.debug('putDoodle');
                 this.repository
                     .putDoodle(this.doodle)
                     .then(doodle => {
-                        this.setPostOrPutDoodleLocation();
+                        this.setDoodleRegisteredLocation();
                     })
                     .catch(err => {
                         this.errorMessage = err.statusText;
@@ -95,11 +133,7 @@ module Home.Controllers {
 
 
     /**
-     * @ngdoc object
-     * @name home.controller:EditDoodleCtrl
-     *
-     * @description
-     *
+     * Register the controller.
      */
     angular
         .module('home')

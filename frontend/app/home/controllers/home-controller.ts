@@ -1,10 +1,29 @@
 ///<reference path='../../../typings/tsd.d.ts' />
+
+/**
+ * Controller of the home page which is displayed create a new  doodle or to update an existing doodle.
+ *
+ * The page allows to register a new user, to login and logout a user, and to administrate the doodles of a user which is logged in.
+ *
+ */
+
+
 module Home.Controllers {
     'use strict';
 
+    /**
+     * The home controller.
+     */
     class HomeCtrl {
 
+        /**
+         * The controller name. Used in unit tests.
+         */
         ctrlName:string;
+
+        /**
+         * Hello message, displayed if the user is logged in.
+         */
         loginMessage:string;
 
         /**
@@ -12,24 +31,26 @@ module Home.Controllers {
          */
         showMyDoodles:boolean;
 
-        // $inject annotation.
-        // It provides $injector with information about dependencies to be injected into constructor
-        // it is better to have it close to the constructor, because the parameters must match in count and type.
-        // See http://docs.angularjs.org/guide/di
+        /**
+         * The controller injections.
+         *
+         * @type {string[]}
+         */
         public static $inject = ['$log', '$location', '$http', 'UserManagement'];
 
-        // dependencies are injected via AngularJS $injector
         constructor(private $log:ng.ILogService,
                     private $location:ng.ILocationService,
                     private $http:ng.IHttpService,
                     private userManagement: Home.Interfaces.IUserManagement) {
 
             this.ctrlName = 'HomeCtrl';
-            this.$log.debug('home controller called');
-            this.SetupLoggedInControls();
+            this.setupLoggedInControls();
         }
 
-        private SetupLoggedInControls() {
+        /**
+         * Show/hide logic that depends on the user logged in state.
+         */
+        private setupLoggedInControls() {
             if (this.userManagement.loggedInUser != null) {
                 this.showMyDoodles = true;
                 this.loginMessage = 'Hallo ' + this.userManagement.loggedInUser.email;
@@ -40,19 +61,18 @@ module Home.Controllers {
             }
         };
 
+        /**
+         * ng-click callback to log out the user.
+         */
         public logout():void {
             this.userManagement.logout();
-            this.SetupLoggedInControls();
+            this.setupLoggedInControls();
         }
     }
 
 
     /**
-     * @ngdoc object
-     * @name home.controller:HomeCtrl
-     *
-     * @description
-     *
+     * Register the controller.
      */
     angular
         .module('home')

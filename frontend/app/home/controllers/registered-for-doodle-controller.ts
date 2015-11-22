@@ -1,33 +1,44 @@
 ///<reference path='../../../typings/tsd.d.ts' />
+
+
+/**
+ * Controller of the registered for doodle page.
+ *
+ *  The page shows that user has successfully registered for a doodle.
+ *
+ */
+
 module RegisteredForDoodleCtrl {
   'use strict';
 
+  /**
+   * The registered for doodle  controller.
+   */
   class RegisteredForDoodleCtrl {
 
-    ctrlName: string
+    /**
+     * The controller name. Used in unit tests.
+     */
+    ctrlName: string;
 
-    // $inject annotation.
-    // It provides $injector with information about dependencies to be injected into constructor
-    // it is better to have it close to the constructor, because the parameters must match in count and type.
-    // See http://docs.angularjs.org/guide/di
+    /**
+     * The controller injections.
+     *
+     * @type {string[]}
+     */
     public static $inject = [
     ];
 
     // dependencies are injected via AngularJS $injector
     constructor() {
-      var vm = this;
-      vm.ctrlName = 'RegisteredForDoodleCtrl';
+      this.ctrlName = 'RegisteredForDoodleCtrl';
     }
   }
 
 
   /**
-  * @ngdoc object
-  * @name home.controller:RegisteredForDoodleCtrl
-  *
-  * @description
-  *
-  */
+   * Register the controller.
+   */
   angular
     .module('home')
     .controller('RegisteredForDoodleCtrl', RegisteredForDoodleCtrl);

@@ -1,4 +1,13 @@
 ///<reference path='../../../typings/tsd.d.ts' />
+
+
+/**
+ * Controller for the doodle registered page which is displayed when a new doodle has been stored in the doodle database.
+ *
+ * The page shows two links: To edit the doodle (for creator of the doodle) and to register for the doodle (for the doodle participiants).
+ *
+ */
+
 module  Home.Controllers {
     'use strict';
 
@@ -7,19 +16,48 @@ module  Home.Controllers {
         registerId: string;
         isNewDoodle;
     }
+
+    /**
+     * The doodle registered controller.
+     */
     class DoodleRegisteredCtrl {
 
+        /**
+         * The controller name. Used in unit tests.
+         */
         ctrlName:string;
+
+        /**
+         * The id of the doodle. Used to create the link to edit the doodle.
+         */
         doodleId:string;
+
+        /**
+         * The register id of the doodle. Used the create link to register for the doodle.
+         */
         registerId:string;
+
+        /**
+         * Indicates if the new doodle has been added to the database or if a existing doodle has been updated.
+         */
         isNewDoodle:boolean;
+
+        /**
+         * The link to edit the doodle.
+         */
         editDoodleLink:string;
+
+        /**
+         * The link to register for the doodle.
+         */
         registerDoodleLink:string;
 
-        // $inject annotation.
-        // It provides $injector with information about dependencies to be injected into constructor
-        // it is better to have it close to the constructor, because the parameters must match in count and type.
-        // See http://docs.angularjs.org/guide/di
+
+        /**
+         * The controller injections.
+         *
+         * @type {string[]}
+         */
         public static $inject = ['$log', '$location', '$http', '$routeParams', 'Repository'];
 
         // dependencies are injected via AngularJS $injector
@@ -41,11 +79,7 @@ module  Home.Controllers {
 
 
     /**
-     * @ngdoc object
-     * @name home.controller:DoodleRegisteredCtrl
-     *
-     * @description
-     *
+     * Register the controller.
      */
     angular
         .module('home')

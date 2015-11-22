@@ -1,6 +1,11 @@
 ///<reference path='../../../typings/tsd.d.ts' />
 
-/* global describe, beforeEach, it, expect, inject, module */
+/**
+ * Login controller unit test.
+ *
+ * Checks the controller name only.
+ */
+
 'use strict';
 
 describe('LoginCtrl', function () {

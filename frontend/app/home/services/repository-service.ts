@@ -168,7 +168,7 @@ module Home.Services {
          * @param dateProposalId The id of the date proposal.
          */
         getDatePoposal(dateProposalId:string):Home.Interfaces.IDateProposal {
-            return Home.Utilities.ArrayUtilities.findFirst(this.dateProposals, dateProposal => dateProposal._id === dateProposalId);
+            return Home.Utilities.ArrayUtilities.findFirstOrDefault(this.dateProposals, dateProposal => dateProposal._id === dateProposalId);
         }
 
     }

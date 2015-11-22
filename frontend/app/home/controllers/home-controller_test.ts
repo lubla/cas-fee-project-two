@@ -3,6 +3,12 @@
 /* global describe, beforeEach, it, expect, inject, module */
 'use strict';
 
+/**
+ * Home controller unit test.
+ *
+ * Checks the controller name only.
+ */
+
 describe('HomeCtrl', function () {
   var ctrl;
 
