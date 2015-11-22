@@ -4,10 +4,6 @@
 
 export class CssConstants {
     static header = 'a.header__link';
-
-    static test():void {
-
-    }
 }
 
 export class Destinations {
@@ -16,7 +12,7 @@ export class Destinations {
 }
 
 export class TextConstants {
-    static header = 'Doodle';
+    static header = 'DOODLE';
 }
 
 export class BindingNames {

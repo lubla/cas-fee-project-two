@@ -11,13 +11,6 @@ import e2eCommon = require('../e2eCommon');
 describe('Doodle registered page', function () {
 
 
-    //E2eTest.Common.CssConstants.test();
-    //
-    //var inst = new  E2eTest.Common.CssConstants();
-    //var i2 = new E2eTest.Common.TextConstants();
-
-    console.log("doodle reg")
-
     beforeEach(function () {
         browser.get(e2eCommon.Destinations.doodleRegistered);
     });
