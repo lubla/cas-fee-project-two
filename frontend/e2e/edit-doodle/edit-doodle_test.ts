@@ -3,6 +3,13 @@
  */
 ///<reference path='../../typings/tsdProtractor.d.ts' />
 
+/**
+ * Doodle registered page e2e tests.
+ *
+ * Intensive test of the page!
+ */
+
+
 'use strict';
 
 import e2eCommon = require('../e2eCommon');
@@ -15,9 +22,7 @@ describe('Edit doodle page', function () {
         browser.get(e2eCommon.Destinations.editDoodle);
     });
 
-    it('should have the doodle header', function () {
-        e2eCommon.Tests.hasDoodleHeader();
-    });
+    e2eCommon.Tests.itShouldHaveTheDoodleHeader();
 
     it('should have an empty title', function () {
         e2eCommon.Tests.isEmptyInput(e2eCommon.BindingNames.editDoodleTitle);
