@@ -1,15 +1,27 @@
 ///<reference path='../../../typings/tsd.d.ts' />
 ///<reference path='z_rest-service-consumer.ts' />
 
-module Home.Services {
 
-    //import IDeferred = angular.IDeferred;
-    //import RestServiceConsumer = Home.Services.RestServiceConsumer;
+/**
+ * Repository Service
+ *
+ * Implementation of the doodle interfaces and the repository interface.
+ *
+ *
+ */
+
+module Home.Services {
 
     'use strict';
 
-
+    /**
+     * Implements the Home.Interfaces.IDateProposal interface.
+     */
     export class DateProposal implements Home.Interfaces.IDateProposal {
+
+        /**
+         * The id of the proposal.
+         */
         _id:string;
         /**
          * The start date of the proposal.
@@ -26,19 +38,36 @@ module Home.Services {
          */
         acceptedBy:Array<string>;
 
-        constructor() {
+        /**
+         * Constructor. Creates a new date proposal or a clone from a JSON date proposal.
+         *
+         * @param sourceDateProposal   Optional. If not specified then a new date proposal with default values is created.
+         *                 If specified then  the values of source are copied.
+         */
+        constructor(sourceDateProposal?:any) {
 
-            this._id = Home.Utilities.Uuid.new();
-            this.start = new Date();
-            this.start.setMinutes(0, 0, 0);
-            this.end = this.start;
-            this.end.setHours(this.start.getHours() + 1);
-            this.acceptedBy = [];
+            if(sourceDateProposal) {
+                this._id = sourceDateProposal._id;
+                this.start = sourceDateProposal.start;
+                this.end = sourceDateProposal.end;
+                this.acceptedBy = sourceDateProposal.acceptedBy;
+
+            }
+            else {
+                this._id = Home.Utilities.Uuid.new();
+                this.start = new Date();
+                this.start.setMinutes(0, 0, 0);
+                this.end = this.start;
+                this.end.setHours(this.start.getHours() + 1);
+                this.acceptedBy = [];
+            }
         }
-
     }
 
 
+    /**
+     * Implements the Home.Interfaces.IDoodle interface.
+     */
     export class Doodle implements Home.Interfaces.IDoodle {
         /**
          * The id of the doodle.
@@ -84,6 +113,8 @@ module Home.Services {
         /**
          * Constructor to create a new doodle
          *
+         * Declaration only!
+         *
          * @param userId The id of the user that creates the doodle.
          */
         constructor(userId:string);
@@ -92,12 +123,20 @@ module Home.Services {
          * Creates a doodle from a plain javascript doodle (JSON doodle). If
          * no doodle is specified then a new doodle is created.
          *
+         * Declaration only!
+         *
          * @param doodle
          */
         constructor(doodle:any);
 
+        /**
+         * Implementation of the two constructors.
+         *
+         * @param doodleOrUserId
+         */
         constructor(doodleOrUserId:any | string) {
             if (typeof doodleOrUserId === 'string') {
+                // Create a new doodle.
                 var userId:string = doodleOrUserId;
                 this._id = Home.Utilities.Uuid.new();
                 this.userId = userId;
@@ -108,13 +147,14 @@ module Home.Services {
                 this.isExpired = false;
             }
             else {
+                // Create a doodle with the values fom the JSON object.
                 var doodle:any = doodleOrUserId;
                 this._id = doodle._id;
                 this.userId = doodle.userId;
                 this.registerId = doodle.registerId;
                 this.title = doodle.title;
                 this.place = doodle.place;
-                this.dateProposals = doodle.dateProposals;
+                this.dateProposals = Home.Utilities.ArrayUtilities.select(doodle.dateProposals, dateProposal => new DateProposal(dateProposal));
                 this.isExpired = doodle.isExpired;
             }
         }
@@ -170,14 +210,24 @@ module Home.Services {
         getDatePoposal(dateProposalId:string):Home.Interfaces.IDateProposal {
             return Home.Utilities.ArrayUtilities.findFirstOrDefault(this.dateProposals, dateProposal => dateProposal._id === dateProposalId);
         }
-
     }
 
 
-
-
+    /**
+     * Implements the Home.Interfaces.IRepository interface.
+     *
+     * Service wrapper for the doodle REST API.
+     *
+     */
     export class Repository extends RestServiceConsumer implements Home.Interfaces.IRepository {
 
+        /**
+         * Constructor.
+         *
+         * @param $log
+         * @param $http
+         * @param $q
+         */
         constructor($log:ng.ILogService,
                     $http:ng.IHttpService,
                     $q:ng.IQService) {
@@ -340,18 +390,17 @@ module Home.Services {
         }
 
 
+        /**
+         * The name f the repositor. Used for the unit tests.
+         *
+         * @returns {string}
+         */
         get():string {
             return 'Repository';
         }
     }
 
-    /**
-     * @ngdoc service
-     * @name home.service:Repository
-     *
-     * @description
-     *
-     */
+    // Restister the doodle service.
     angular
         .module('home')
         .service('Repository', Repository);

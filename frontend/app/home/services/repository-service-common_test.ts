@@ -7,6 +7,12 @@
 ///<reference path='../../../app/utilities/md5.ts' />
 ///<reference path='../../../app/utilities/uuid.ts' />
 
+/**
+ *
+ * Common stuff for the repository service unit tests.
+ *
+ */
+
 module Home.UnitTestCommon {
 
 
@@ -66,6 +72,11 @@ module Home.UnitTestCommon {
             expect(doodle.title).toBe(RepositoryTest.title);
         }
 
+        /**
+         * Sets up the http mock for the repository unit tests
+         *
+         * @param $httpBackend The http mock service.
+         */
         static setupRepositoryBackend($httpBackend:ng.IHttpBackendService):void {
             // http backend definition for the post doodle request.
             $httpBackend.when('POST', '/doodle', RepositoryTest.doodle)

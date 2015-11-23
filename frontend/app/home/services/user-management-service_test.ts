@@ -5,7 +5,11 @@
 ///<reference path='../../../app/utilities/uuid.ts' />
 ///<reference path='user-management-service-common_test.ts' />
 
-/* global describe, beforeEach, it, expect, inject, module */
+/**
+ *
+ * User management service unit tests.
+ *
+ */
 
 'use strict';
 

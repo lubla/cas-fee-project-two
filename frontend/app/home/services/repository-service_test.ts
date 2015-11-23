@@ -5,7 +5,11 @@
 ///<reference path='../../../app/utilities/uuid.ts' />
 ///<reference path='repository-service-common_test.ts' />
 
-/* global describe, beforeEach, it, expect, inject, module */
+/**
+ *
+ * Repository service unit tests.
+ *
+ */
 
 'use strict';
 

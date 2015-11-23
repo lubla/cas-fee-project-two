@@ -1,14 +1,21 @@
 ///<reference path='../../../typings/tsd.d.ts' />
 ///<reference path='z_rest-service-consumer.ts' />
 
+/**
+ * User management Service
+ *
+ * Implementation of the user management types and the user management interface.
+ *
+ *
+ */
 
 module Home.Services {
 
-//    import IDeferred = angular.IDeferred;
-//    import RestServiceConsumer = Home.Services.RestServiceConsumer;
-
     'use strict';
 
+    /**
+     * Implements the Home.Interfaces.IUser interface.
+     */
     export class User implements Home.Interfaces.IUser {
         email:string;
         password:string;
@@ -19,6 +26,9 @@ module Home.Services {
         }
     }
 
+    /**
+     * Implements the Home.IUserRegister.IUser interface.
+     */
     export class UserRegister implements Home.Interfaces.IUserRegister {
         email:string;
         passwordHash:string;
@@ -29,6 +39,9 @@ module Home.Services {
         }
     }
 
+    /**
+     * Implements the Home.IUserRegister.IUserProfile interface.
+     */
     export class UserProfile implements Home.Interfaces.IUserProfile {
         _id:string;
         email:string;
@@ -47,8 +60,21 @@ module Home.Services {
         }
     }
 
+    /**
+     * Implements the Home.Interfaces.IUserManagement interface.
+     *
+     * Service wrapper for the user management REST API.
+     *
+     */
     export class UserManagement extends RestServiceConsumer implements Home.Interfaces.IUserManagement {
 
+        /**
+         * Constructor
+         *
+         * @param $log
+         * @param $http
+         * @param $q
+         */
         constructor($log:ng.ILogService,
                     $http:ng.IHttpService,
                     $q:ng.IQService) {
@@ -58,16 +84,25 @@ module Home.Services {
 
 
         /**
+         * The user that is currently logged in. If not set then no user is loggedin.
+         *
+         * Persistence of the logged in user is implemented using the local storage.
+         */
+        loggedInUser:Home.Interfaces.IUserProfile;
+
+        /**
          * Local storage key to store the user profile of the logged in user.
          *
          * @type {string}
          */
         private loggedInUserKey = 'loggedInUser';
 
-        loggedInUser:Home.Interfaces.IUserProfile;
-
-
-        private getLoggedInUserFromLocalStorage():Home.Interfaces.IUserProfile {
+        /**
+         * Gets the logged in user from the local storage.
+         *
+         * @returns {UserProfile} The logged in user or null if no user is stored in local storage.
+         */
+        private getLoggedInUserFromLocalStorage():UserProfile {
             var localStorageLoggedInUser = localStorage.getItem(this.loggedInUserKey);
             if (localStorageLoggedInUser) {
                 return new UserProfile(JSON.parse(localStorage.getItem(this.loggedInUserKey)));
@@ -77,7 +112,12 @@ module Home.Services {
             }
         }
 
-        private setLoggedInUserInLocalStorage(userProfile:Home.Interfaces.IUserProfile) {
+        /**
+         * Stores a user in the local storage.
+         *
+         * @param userProfile The user to store. Use null to clear the user in the local storage.
+         */
+        private setLoggedInUserInLocalStorage(userProfile:UserProfile) {
             if (userProfile) {
                 localStorage.setItem(this.loggedInUserKey, JSON.stringify(userProfile));
             }
@@ -87,6 +127,12 @@ module Home.Services {
             }
         }
 
+        /**
+         * Registers a user.
+         *
+         * @param user The user to register.
+         * @returns {IPromise<T>} A promise that resolves with the user profile.
+         */
         registerUser(user:Home.Interfaces.IUser):ng.IPromise<Home.Interfaces.IUserProfile> {
 
             var deferred = this.$q.defer();
@@ -109,6 +155,12 @@ module Home.Services {
         }
 
 
+        /**
+         * Gets the user profiles of a user. Note that a user should have one profile only.
+         *
+         * @param user The user.
+         * @returns {IPromise<T>} A promise that resolves with the user profiles.
+         */
         getUserProfiles(user:Home.Interfaces.IUser):ng.IPromise<Array<Home.Interfaces.IUserProfile>> {
 
             var deferred = this.$q.defer();
@@ -129,12 +181,22 @@ module Home.Services {
             return deferred.promise;
         }
 
+        /**
+         * Logs out the currentl logged in user.
+         */
         logout():void {
             this.loggedInUser = null;
             this.setLoggedInUserInLocalStorage(null);
 
         }
 
+        /**
+         * Logs in a user
+         *
+         * @param user             The user to log in.
+         * @param stayLoggedIn     Indicates if the logged in user has to be stored in the local storage.
+         * @returns {IPromise<T>}  A promise that resolves with the user profile of the user.
+         */
         login(user:Home.Interfaces.IUser, stayLoggedIn:boolean):ng.IPromise<Home.Interfaces.IUserProfile> {
             var deferred = this.$q.defer();
 
@@ -165,18 +227,17 @@ module Home.Services {
             return deferred.promise;
         }
 
+        /**
+         * Gets the name of the user management service. Used in the unit test.
+         *
+         * @returns {string}  The name of the service.
+         */
         get():string {
             return 'UserManagement';
         }
     }
 
-    /**
-     * @ngdoc service
-     * @name home.service:UserManagement
-     *
-     * @description
-     *
-     */
+    // Register the user management service.
     angular
         .module('home')
         .service('UserManagement', UserManagement);

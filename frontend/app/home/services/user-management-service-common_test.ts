@@ -8,6 +8,12 @@
 ///<reference path='../../../app/utilities/md5.ts' />
 ///<reference path='../../../app/utilities/uuid.ts' />
 
+/**
+ *
+ * Common stuff for the user management unit tests.
+ *
+ */
+
 module Home.UnitTestCommon {
 
 
@@ -35,7 +41,11 @@ module Home.UnitTestCommon {
             passwordHash: Home.Utilities.Hash.MD5(RepositoryTest.password)
         };
 
-
+        /**
+         * Sets up the http mock for the repository unit tests
+         *
+         * @param $httpBackend The http mock service.
+         */
         static setupUserManagementBackend($httpBackend:ng.IHttpBackendService):void {
             // http backend to register a user.
             $httpBackend.when('POST', '/userProfile', RepositoryTest.userRegister)
