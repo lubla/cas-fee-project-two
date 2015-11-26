@@ -19,13 +19,11 @@
 }
 
 .button:hover {
-	color: $inverted-text-color;
-	background-color: $primary-color;
-	text-decoration: none;
+  background-color: lighten($divider-color,22%);
+  text-decoration: none;
 }
 
 .button:active {
-	color: $primary-color;
 	text-decoration: none;
 }
 
@@ -44,7 +42,8 @@
 }
 
 .button_primary:hover {
-	background-color: darken($primary-color, 10%);
+  color: $inverted-text-color;
+  background-color: lighten($primary-color, 2%);
 }
 
 .button_negative {

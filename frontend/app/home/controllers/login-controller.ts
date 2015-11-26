@@ -55,7 +55,7 @@ module Home.Controllers {
          * ng-click callback to log in the user.
          */
         login():void {
-            this.errorMessage = false;
+            this.errorMessage = null;
             this.userManagement
                 .login(this.user, this.stayLoggedIn)
                 .then(userProfile => {
