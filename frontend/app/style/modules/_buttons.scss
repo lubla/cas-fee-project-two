@@ -11,7 +11,8 @@
 }
 
 .button:hover {
-  box-shadow: 0 5px 11px 0 rgba(0, 0, 0, 0.18), 0 4px 15px 0 rgba(0, 0, 0, 0.15)
+  box-shadow: 0 5px 11px 0 rgba(0, 0, 0, 0.18), 0 4px 15px 0 rgba(0, 0, 0, 0.15);
+  transform: translateY(-0.1em);
 }
 
 .button_small {
@@ -44,6 +45,7 @@
 .button_primary:hover {
   color: $inverted-text-color;
   background-color: lighten($primary-color, 2%);
+  box-shadow: 0 12px 15px 0 rgba(0, 0, 0, 0.24), 0 17px 50px 0 rgba(0, 0, 0, 0.19);
 }
 
 .button_negative {
