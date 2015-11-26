@@ -4,10 +4,10 @@
 
 @keyframes shake {
     8%, 41% {
-        -webkit-transform: translateX(-10px);
+        -webkit-transform: translateX(-20px);
     }
     25%, 58% {
-        -webkit-transform: translateX(10px);
+        -webkit-transform: translateX(20px);
     }
     75% {
         -webkit-transform: translateX(-5px);

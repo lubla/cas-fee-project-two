@@ -1,8 +1,8 @@
 .button {
-	border: 1px solid $primary-color;
+	// border: 1px solid $primary-color;
 	color: $primary-color;
 	text-align: center;
-	background-color: white;
+	background-color: lighten($divider-color,20%);
   box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
   text-transform: uppercase;
   padding: 1em;
