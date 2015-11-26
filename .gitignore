@@ -1,4 +1,7 @@
 .idea
-
+frontend/app/**/*.js
+frontend/e2e/**/*.js
+mongodb
 node_modules
 *.log
+*.js.map
