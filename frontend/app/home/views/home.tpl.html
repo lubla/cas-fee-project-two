@@ -5,7 +5,23 @@
   Der einfachste Weg einen Termin für alle zu finden.
 </div></a>
 
+<div  ng-show="home.showMyDoodles">
+  <h2>Meine Doodles</h2>
+  <div class="card">
+    <div ng-repeat="doodle in home.doodles">
+      <a ng-click='home.editDoodle(doodle._id)'><div>
+        <hr ng-if="$index > 0">
+        <h3>{{doodle.title}}</h3>
 
-<p><a ng-show="home.showMyDoodles" href="#/MyDoodles" class="button button_full-width">Meine Doodles</a></p>
+        <p>
+          <a ng-click='home.showDoodleStatus(doodle.registerId)'  class="button button_small">Status</a>
+          <a ng-click='home.deleteDoodle(doodle._id)' class="button button_small button_negative">Löschen</a>
+        </p>
+      </div></a>
+
+    </div>
+  </div>
+</div>
+
 <p><a ng-hide="home.loginMessage" href="#/Login" class="button button_full-width">Login</a></p>
 

@@ -45,11 +45,6 @@ module home {
               controller: 'DoodleRegisteredCtrl',
               controllerAs: 'doodleRegistered'
             })
-            .when('/MyDoodles', {
-              templateUrl: 'home/views/my-doodles.tpl.html',
-              controller: 'MyDoodlesCtrl',
-              controllerAs: 'myDoodles'
-            })
             .when('/RegisterDoodle', {
               templateUrl: 'home/views/register-doodle.tpl.html',
               controller: 'RegisterDoodleCtrl',

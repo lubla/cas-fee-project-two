@@ -27,24 +27,45 @@ module Home.Controllers {
         loginMessage:string;
 
         /**
+         * Error message if something goes wrong.
+         */
+        errorMessage:string;
+
+        /**
          * Indicates if "My Doodles" link is shown.
          */
         showMyDoodles:boolean;
 
         /**
+         * The doodles of the user.
+         */
+        doodles:Array<Home.Interfaces.IDoodle>;
+
+
+      /**
          * The controller injections.
          *
          * @type {string[]}
          */
-        public static $inject = ['$log', '$location', '$http', 'UserManagement'];
+        public static $inject = ['$log', '$location', '$http', 'UserManagement', 'Repository'];
 
         constructor(private $log:ng.ILogService,
                     private $location:ng.ILocationService,
                     private $http:ng.IHttpService,
-                    private userManagement: Home.Interfaces.IUserManagement) {
+                    private userManagement: Home.Interfaces.IUserManagement,
+                    private repository:Home.Interfaces.IRepository) {
 
             this.ctrlName = 'HomeCtrl';
             this.setupLoggedInControls();
+
+            if(userManagement.loggedInUser) {
+              repository
+                .getDoodlesForUser(userManagement.loggedInUser._id)
+                .then(doodles => this.doodles = doodles)
+                .catch(err => {
+                  this.errorMessage = err.statusText;
+                });
+            }
         }
 
         /**
@@ -68,6 +89,44 @@ module Home.Controllers {
             this.userManagement.logout();
             this.setupLoggedInControls();
         }
+
+        /**
+         * ng-click callback to delete a doodle.
+         *
+         * @param doodleId  The id of the doodle to delete.
+         */
+        deleteDoodle(doodleId:string):void {
+          this.repository
+            .deleteDoodle(doodleId)
+            .then(doodle => {
+              Home.Utilities.ArrayUtilities
+                .removeWhere(this.doodles, doodle => doodle._id === doodleId);
+            })
+            .catch(err => {
+              this.errorMessage = err.statusText;
+            });
+        }
+
+        /**
+         * ng-click callback to show the doodle status. The register doodle page is displayed.
+         *
+         * @param doodleId The id of the doodle.
+         */
+        showDoodleStatus(registerId:string):void {
+          this.$location.search('registerId', registerId);
+          this.$location.path('/RegisterDoodle');
+        }
+
+        /**
+         * ng-click callback to show the doodle edit page.
+         *
+         * @param doodleId The id of the doodle.
+         */
+        editDoodle(doodleId:string):void {
+          this.$location.search('doodleId', doodleId);
+          this.$location.path('/EditDoodle');
+        }
+
     }
 
 
