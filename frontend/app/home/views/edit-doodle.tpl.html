@@ -10,6 +10,10 @@
 <section class="section">
   <h1 class="section__title">Mögliche Termine</h1>
 
+  <p>
+    <button ng-click='editDoodle.addDateProposal()' class="button button_simple">Neuer Terminvorschlag</button>
+  </p>
+
   <div ng-repeat="dateProposal in editDoodle.doodle.dateProposals" class="doodle-date-form">
     <label class="doodle-date-form__label" for="date">Datum</label>
     <input id="date" name="date" class="doodle-date-form__input" type="text" value="{{dateProposal.start}}" ng-model="dateProposal.start"
@@ -17,13 +21,10 @@
     <label class="doodle-date-form__label" for="timeStart">Zeit</label>
     <input id="timeStart" class="doodle-date-form__input" type="text" size="8" ng-model="dateProposal.end" bs-timepicker
            data-time-format="HH:mm" data-arrow-behavior="picker" data-minute-step="5" data-length="1">
-    <button ng-click='editDoodle.deleteDateProposal(dateProposal._id)'>Löschen</button>
+    <button ng-click='editDoodle.deleteDateProposal(dateProposal._id)' class="button button_simple">Löschen</button>
 
   </div>
 
-  <p>
-    <button ng-click='editDoodle.addDateProposal()' class="inline-button">Neuer Terminvorschlag</button>
-  </p>
 </section>
 
 <p>
