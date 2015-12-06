@@ -19,7 +19,11 @@
 .button_simple {
   border: none;
   box-shadow: none;
-  padding: 0;
+  padding: 0 1em 0 0;
+}
+
+.button_simple_negative {
+  color: red;
 }
 
 .button_small {

@@ -106,7 +106,6 @@ module Home.Interfaces {
          */
         isExpired: boolean;
 
-
         /**
          * Adds a new date proposal.
          *

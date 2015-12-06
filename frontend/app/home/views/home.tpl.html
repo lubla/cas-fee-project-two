@@ -11,12 +11,15 @@
     <div ng-repeat="doodle in home.doodles">
       <div>
         <hr ng-if="$index > 0">
-        <h3><a href="" ng-click='home.editDoodle(doodle._id)' tabindex="2">{{doodle.title}}</a></h3>
+        <div class="float-right">
+          <button ng-click='home.editDoodle(doodle._id)' class="button button_simple" tabindex="2">Bearbeiten</button>
+          <button ng-click='home.deleteDoodle(doodle._id)' class="button button_simple button_simple_negative" tabindex="2">Löschen</button>
+        </div>
 
-        <p>
-          <button ng-click='home.showDoodleStatus(doodle.registerId)' class="button button_small" tabindex="2">Status</button>
-          <button ng-click='home.deleteDoodle(doodle._id)' class="button button_small button_negative" tabindex="2">Löschen</button>
-        </p>
+        <h3><a href="" ng-click='home.showDoodleStatus(doodle.registerId)' tabindex="2">{{doodle.title}}</a><br>
+          <small>{{doodle.place}}</small></h3>
+
+
       </div>
 
     </div>

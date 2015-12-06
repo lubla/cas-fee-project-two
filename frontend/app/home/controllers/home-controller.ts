@@ -96,15 +96,17 @@ module Home.Controllers {
          * @param doodleId  The id of the doodle to delete.
          */
         deleteDoodle(doodleId:string):void {
-          this.repository
-            .deleteDoodle(doodleId)
-            .then(doodle => {
-              Home.Utilities.ArrayUtilities
-                .removeWhere(this.doodles, doodle => doodle._id === doodleId);
-            })
-            .catch(err => {
-              this.errorMessage = err.statusText;
-            });
+          if (confirm("Wirklich löschen?")){
+            this.repository
+              .deleteDoodle(doodleId)
+              .then(doodle => {
+                Home.Utilities.ArrayUtilities
+                  .removeWhere(this.doodles, doodle => doodle._id === doodleId);
+              })
+              .catch(err => {
+                this.errorMessage = err.statusText;
+              });
+          }
         }
 
         /**
