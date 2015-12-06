@@ -10,7 +10,8 @@
   transition: all .2s ease-out;
 }
 
-.button:hover {
+.button:hover,
+.button:focus {
   box-shadow: 0 5px 11px 0 rgba(0, 0, 0, 0.18), 0 4px 15px 0 rgba(0, 0, 0, 0.15);
   transform: translateY(-0.1em);
 }
@@ -42,7 +43,8 @@
 	background-color: $primary-color;
 }
 
-.button_primary:hover {
+.button_primary:hover,
+.button_primary:focus {
   color: $inverted-text-color;
   background-color: lighten($primary-color, 2%);
   box-shadow: 0 8px 17px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
@@ -53,7 +55,8 @@
 	color: red;
 }
 
-.button_negative:hover {
+.button_negative:hover,
+.button_negative:focus {
 	border: 1px solid white;
 	color: white;
 	background-color: red;

@@ -1,6 +1,6 @@
-<p>{{home.loginMessage}} <a ng-show="home.loginMessage" ng-click="home.logout()" class="button button_small">Logout</a></p>
+<p>{{home.loginMessage}} <a ng-show="home.loginMessage" ng-click="home.logout()" class="button button_small" tabindex="5">Logout</a></p>
 
-<a href="#/EditDoodle"><div class="button button_primary">
+<a href="#/EditDoodle" tabindex="1"><div class="button button_primary">
   <h1>Neuen Termin finden</h1>
   Der einfachste Weg einen Termin für alle zu finden.
 </div></a>
@@ -9,15 +9,15 @@
   <h2>Meine Doodles</h2>
   <div class="card">
     <div ng-repeat="doodle in home.doodles">
-      <a ng-click='home.editDoodle(doodle._id)'><div>
+      <div>
         <hr ng-if="$index > 0">
-        <h3>{{doodle.title}}</h3>
+        <h3><a href="" ng-click='home.editDoodle(doodle._id)' tabindex="2">{{doodle.title}}</a></h3>
 
         <p>
-          <a ng-click='home.showDoodleStatus(doodle.registerId)'  class="button button_small">Status</a>
-          <a ng-click='home.deleteDoodle(doodle._id)' class="button button_small button_negative">Löschen</a>
+          <button ng-click='home.showDoodleStatus(doodle.registerId)' class="button button_small" tabindex="2">Status</button>
+          <button ng-click='home.deleteDoodle(doodle._id)' class="button button_small button_negative" tabindex="2">Löschen</button>
         </p>
-      </div></a>
+      </div>
 
     </div>
   </div>

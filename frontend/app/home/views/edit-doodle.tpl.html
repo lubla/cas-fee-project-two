@@ -15,17 +15,17 @@
     <input id="date" name="date" class="doodle-date-form__input" type="text" value="{{dateProposal.start}}" ng-model="dateProposal.start"
            bs-datepicker data-date-format="dd-MM.yyyy">
     <label class="doodle-date-form__label" for="timeStart">Zeit</label>
-    <input name="timeStart" class="doodle-date-form__input" type="text" size="8" ng-model="dateProposal.end" bs-timepicker
+    <input id="timeStart" class="doodle-date-form__input" type="text" size="8" ng-model="dateProposal.end" bs-timepicker
            data-time-format="HH:mm" data-arrow-behavior="picker" data-minute-step="5" data-length="1">
-    <a ng-click='editDoodle.deleteDateProposal(dateProposal._id)'>Löschen</a>
-    
+    <button ng-click='editDoodle.deleteDateProposal(dateProposal._id)'>Löschen</button>
+
   </div>
 
   <p>
-    <a ng-click='editDoodle.addDateProposal()' class="inline-button">Neuer Terminvorschlag</a>
+    <button ng-click='editDoodle.addDateProposal()' class="inline-button">Neuer Terminvorschlag</button>
   </p>
 </section>
 
 <p>
-  <a ng-click='editDoodle.postOrPutDoodle()' class="button button_primary button_full-width">Fertig</a>
+  <a href="" ng-click='editDoodle.postOrPutDoodle()' class="button button_primary button_full-width">Fertig</a>
 </p>
