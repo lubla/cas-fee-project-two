@@ -7,3 +7,20 @@
 .dateProposal__time {
 	color: $secondary-text-color;
 }
+
+.dateProposal__decision {
+  float: left;
+  padding: 0em 1em 0.5em 0;
+  width: 4em;
+  font-weight: bold;
+}
+
+.dateProposal {
+  clear: both;
+  opacity: 0.5;
+}
+
+.dateProposal_accepted {
+  opacity: 1;
+}
+

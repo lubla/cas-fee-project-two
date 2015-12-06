@@ -95,6 +95,20 @@ module Home.Controllers {
         }
 
         /**
+         * ng-click callback to toggle acceptance of a date proposal.
+         *
+         * @param dateProposalId  The date proposal id.
+         */
+
+        toggleAcceptance(dateProposalId:string) {
+            if (this.isRegistered(dateProposalId)){
+              this.rejectDateProposal(dateProposalId);
+            } else {
+              this.acceptDateProposal(dateProposalId);
+            }
+        }
+
+        /**
          * ng-click callback to register for a date proposal.
          *
          * @param dateProposalId  The date proposal id.
