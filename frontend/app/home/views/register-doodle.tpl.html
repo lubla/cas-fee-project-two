@@ -22,8 +22,9 @@
         </div>
         <div class="dateProposal__participations text-muted">
           Passt für:
+          {{dateProposal.acceptedBy.length}} |
           <span ng-repeat="acceptedBy in dateProposal.acceptedBy">
-            {{acceptedBy}}
+            {{acceptedBy}}<span ng-class="{hide:$last}">,</span>
           </span>
         </div>
          <hr>
