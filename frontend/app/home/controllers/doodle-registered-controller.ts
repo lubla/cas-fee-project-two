@@ -52,8 +52,17 @@ module  Home.Controllers {
          */
         registerDoodleLink:string;
 
+        copiedToClipboard():void {
+          var target = $(event.currentTarget);
+          target.addClass("highlight")
+          setTimeout(function() {
+            target.removeClass("highlight");
+          }, 500);
 
-        /**
+        }
+
+
+      /**
          * The controller injections.
          *
          * @type {string[]}

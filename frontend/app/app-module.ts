@@ -11,7 +11,8 @@ module frontend {
     .module('frontend', [
       'ngRoute',
       'mgcrea.ngStrap',
-      'home'
+      'home',
+      'angular-clipboard'
         //, 'angular-linq'
     ]);
 

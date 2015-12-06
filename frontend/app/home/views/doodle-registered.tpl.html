@@ -1,8 +1,21 @@
 <div class="alert">
   <h2>Doodle!</h2>
-  <p ng-show="doodleRegistered.isNewDoodle">Ihr Doodle wurde registriert!</p>
+  <p ng-show="doodleRegistered.isNewDoodle">Ihr Doodle ist bereit zum Ausfüllen!</p>
   <p ng-show="!doodleRegistered.isNewDoodle">Ihr Doodle wurde aktualisiert!</p>
 </div>
 
-<p>Link für die Teilnahme: <a href="{{doodleRegistered.registerDoodleLink}}">{{doodleRegistered.registerDoodleLink}}</a></p>
-<p>Link zur Adminstration: <a href="{{doodleRegistered.editDoodleLink}}">{{doodleRegistered.editDoodleLink}}</a></p>
+<div class="card">
+  <h3>Deine Links</h3>
+  <hr>
+  <p><a href="{{doodleRegistered.registerDoodleLink}}">Teile diesen Link mit deinen Teilnehmern</a>
+    <input type="text" ng-model="doodleRegistered.registerDoodleLink">
+    <button clipboard text="doodleRegistered.registerDoodleLink" on-copied="doodleRegistered.copiedToClipboard()" class="button button_small">Kopieren</button>
+  </p>
+  <hr>
+  <p><a href="{{doodleRegistered.editDoodleLink}}">Link zur Administration:</a>
+    <input type="text" ng-model="doodleRegistered.editDoodleLink">
+    <button clipboard text="doodleRegistered.editDoodleLink" on-copied="doodleRegistered.copiedToClipboard()" class="button button_small">Kopieren</button>
+  </p>
+
+</div>
+
