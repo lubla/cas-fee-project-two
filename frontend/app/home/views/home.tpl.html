@@ -9,11 +9,11 @@
   <h2>Meine Doodles</h2>
   <div class="card">
     <div ng-repeat="doodle in home.doodles">
-      <div>
+      <div ng-click='home.showDoodleStatus(doodle.registerId)' >
         <hr ng-if="$index > 0">
         <div class="float-right">
-          <button ng-click='home.editDoodle(doodle._id)' class="button button_simple" tabindex="2">Bearbeiten</button>
-          <button ng-click='home.deleteDoodle(doodle._id)' class="button button_simple button_simple_negative" tabindex="2">Löschen</button>
+          <button ng-click='home.editDoodle(doodle._id)' class="button button_simple">Bearbeiten</button>
+          <button ng-click='home.deleteDoodle(doodle._id)' class="button button_simple button_simple_negative">Löschen</button>
         </div>
 
         <h3><a href="" ng-click='home.showDoodleStatus(doodle.registerId)' tabindex="2">{{doodle.title}}</a><br>
