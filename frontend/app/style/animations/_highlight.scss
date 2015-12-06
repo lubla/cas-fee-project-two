@@ -1,0 +1,12 @@
+.highlight {
+  animation: highlight 0.5s linear;
+}
+
+@keyframes highlight {
+  0% {
+    background-color: green;
+  }
+  100% {
+    background-color: white;
+  }
+}
