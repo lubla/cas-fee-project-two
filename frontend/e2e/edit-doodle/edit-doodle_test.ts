@@ -46,14 +46,21 @@ describe('Edit doodle page', function () {
 
     it('can add a date proposal', function () {
         var addDateProposal = e2eCommon.Tests.ngClickElement(e2eCommon.BindingNames.editDoodleAddDateProposalCallback);
+
+        // Release autofocus of title input element.
+        addDateProposal.sendKeys(protractor.Key.TAB);
+
         addDateProposal.click();
         e2eCommon.Tests.ngRepeatHasElementCount(e2eCommon.BindingNames.dateProposal, e2eCommon.BindingNames.editDoodleDateProposals, 1);
     });
 
     it('can delete a date proposal', function () {
         var addDateProposal = e2eCommon.Tests.ngClickElement(e2eCommon.BindingNames.editDoodleAddDateProposalCallback);
-        addDateProposal.click();
 
+        // Release autofocus of title input element.
+        addDateProposal.sendKeys(protractor.Key.TAB);
+
+        addDateProposal.click();
         var deleteDateProposal = e2eCommon.Tests.ngClickElement(
             e2eCommon.BindingNames.editDoodleDeleteDateProposalCallback,
             e2eCommon.BindingNames.bindingPath(e2eCommon.BindingNames.dateProposal, e2eCommon.BindingNames._id));
