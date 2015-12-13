@@ -89,7 +89,7 @@ module Home.Controllers {
          * @param dateProposalId     The date proposal id.
          * @returns {IDateProposal}  The data proposal.
          */
-        private getDatePoposal(dateProposalId:string):Home.Interfaces.IDateProposal {
+        private getDateProposal(dateProposalId:string):Home.Interfaces.IDateProposal {
             return Home.Utilities.ArrayUtilities.findFirstOrDefault(this.doodle.dateProposals, dateProposal => dateProposal._id === dateProposalId);
 
         }
@@ -142,7 +142,7 @@ module Home.Controllers {
          * @returns {boolean}     Returns true if the person is registered for the date proposal.
          */
         private isRegistered(dateProposalId:string):boolean {
-            var dateProposal = this.doodle.getDatePoposal(dateProposalId);
+            var dateProposal = this.doodle.getDateProposal(dateProposalId);
             return Home.Utilities.ArrayUtilities.findFirstOrDefault(dateProposal.acceptedBy, acceptedBy => acceptedBy === this.name) != null;
         }
 

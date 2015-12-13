@@ -84,7 +84,7 @@ module Home.Services {
 
 
         /**
-         * The user that is currently logged in. If not set then no user is loggedin.
+         * The user that is currently logged in. If not set then no user is logged in.
          *
          * Persistence of the logged in user is implemented using the local storage.
          */
@@ -182,7 +182,7 @@ module Home.Services {
         }
 
         /**
-         * Logs out the currentl logged in user.
+         * Logs out the currently logged in user.
          */
         logout():void {
             this.loggedInUser = null;

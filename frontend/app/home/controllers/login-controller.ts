@@ -59,7 +59,7 @@ module Home.Controllers {
             this.userManagement
                 .login(this.user, this.stayLoggedIn)
                 .then(userProfile => {
-                    // Sucess. Go to the home page.
+                    // Success. Go to the home page.
                     this.$location.path('/Home')
                 })
                 .catch(error => {

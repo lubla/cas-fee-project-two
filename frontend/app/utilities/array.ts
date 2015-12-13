@@ -10,20 +10,6 @@ module Home.Utilities {
 
     export class ArrayUtilities {
 
-        static findIndices<T>(array:Array<T>, predicate:Func<T,boolean>):Array<number> {
-            var index:number;
-            index = 0;
-            var result = new Array<number>();
-            while (index < array.length) {
-                if (predicate(array[index])) {
-                    result.push(index);
-                }
-                index++;
-            }
-
-            return result;
-        }
-
         static findFirstOrDefault<T>(array:Array<T>, predicate:Func<T,boolean>):T {
             var index:number;
             index = 0;

@@ -34,7 +34,7 @@ export class TextConstants {
 }
 
 /**
- * Binding names and binding helper helper function to bild binding paths.
+ * Binding names and binding helper helper function to build binding paths.
  */
 export class BindingNames {
     static editDoodleController = 'editDoodle';
@@ -128,12 +128,12 @@ export class Tests {
     }
 
     /**
-     * Checks if the current browser destiniation (url) is an expected destinatation.
+     * Checks if the current browser destination (uri) is an expected destination.
      *
      * @param destination       The expected destination.
      * @param excludeParameter  Indicates if the url parameter should be excluded from the check.
      */
-    static isDestiniation(destination:string,
+    static isDestination(destination:string,
                           excludeParameter:boolean = true) {
         browser.getCurrentUrl().then(url => {
             var currentDestination = url.substr(browser.baseUrl.length);

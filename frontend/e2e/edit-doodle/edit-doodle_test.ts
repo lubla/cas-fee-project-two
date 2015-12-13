@@ -16,8 +16,6 @@ import e2eCommon = require('../e2eCommon');
 
 describe('Edit doodle page', function () {
 
-    console.log("edit doodle")
-
     beforeEach(function () {
         browser.get(e2eCommon.Destinations.editDoodle);
     });
@@ -47,7 +45,7 @@ describe('Edit doodle page', function () {
     it('can add a date proposal', function () {
         var addDateProposal = e2eCommon.Tests.ngClickElement(e2eCommon.BindingNames.editDoodleAddDateProposalCallback);
 
-        // Release autofocus of title input element.
+        // Release auto focus of title input element.
         addDateProposal.sendKeys(protractor.Key.TAB);
 
         addDateProposal.click();
@@ -57,7 +55,7 @@ describe('Edit doodle page', function () {
     it('can delete a date proposal', function () {
         var addDateProposal = e2eCommon.Tests.ngClickElement(e2eCommon.BindingNames.editDoodleAddDateProposalCallback);
 
-        // Release autofocus of title input element.
+        // Release auto focus of title input element.
         addDateProposal.sendKeys(protractor.Key.TAB);
 
         addDateProposal.click();
@@ -73,7 +71,7 @@ describe('Edit doodle page', function () {
         var postOrPutDoodle = e2eCommon.Tests.ngClickElement(e2eCommon.BindingNames.editDoodlePostOrPutDoodleCallback);
         postOrPutDoodle.click();
 
-        e2eCommon.Tests.isDestiniation(e2eCommon.Destinations.doodleRegistered);
+        e2eCommon.Tests.isDestination(e2eCommon.Destinations.doodleRegistered);
 
     });
 });

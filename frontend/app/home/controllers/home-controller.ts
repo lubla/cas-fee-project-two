@@ -112,7 +112,7 @@ module Home.Controllers {
         /**
          * ng-click callback to show the doodle status. The register doodle page is displayed.
          *
-         * @param doodleId The id of the doodle.
+         * @param registerId The id of the doodle.
          */
         showDoodleStatus(registerId:string):void {
           this.$location.search('registerId', registerId);

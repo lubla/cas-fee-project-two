@@ -54,7 +54,7 @@ module Home.Services {
 
             }
             else {
-                this._id = Home.Utilities.Uuid.new();
+                this._id = Home.Utilities.Uuid.createNew();
                 this.start = new Date();
                 this.start.setMinutes(0, 0, 0);
                 this.end = this.start;
@@ -138,9 +138,9 @@ module Home.Services {
             if (typeof doodleOrUserId === 'string') {
                 // Create a new doodle.
                 var userId:string = doodleOrUserId;
-                this._id = Home.Utilities.Uuid.new();
+                this._id = Home.Utilities.Uuid.createNew();
                 this.userId = userId;
-                this.registerId = Home.Utilities.Uuid.new();
+                this.registerId = Home.Utilities.Uuid.createNew();
                 this.title = '';
                 this.place = '';
                 this.dateProposals = [];
@@ -187,7 +187,7 @@ module Home.Services {
          * @param name The name to add.
          */
         addAcceptedNameToDateProposal(dateProposalId:string, name:string):void {
-            var dateProposal = this.getDatePoposal(dateProposalId);
+            var dateProposal = this.getDateProposal(dateProposalId);
             dateProposal.acceptedBy.push(name);
         }
 
@@ -198,7 +198,7 @@ module Home.Services {
          * @param name The name to delete.
          */
         deleteAcceptedNameFromDateProposal(dateProposalId:string, name:string):void {
-            var dateProposal = this.getDatePoposal(dateProposalId);
+            var dateProposal = this.getDateProposal(dateProposalId);
             Home.Utilities.ArrayUtilities.removeWhere(dateProposal.acceptedBy, acceptedBy => acceptedBy === name);
         }
 
@@ -207,7 +207,7 @@ module Home.Services {
          *
          * @param dateProposalId The id of the date proposal.
          */
-        getDatePoposal(dateProposalId:string):Home.Interfaces.IDateProposal {
+        getDateProposal(dateProposalId:string):Home.Interfaces.IDateProposal {
             return Home.Utilities.ArrayUtilities.findFirstOrDefault(this.dateProposals, dateProposal => dateProposal._id === dateProposalId);
         }
     }
@@ -391,7 +391,7 @@ module Home.Services {
 
 
         /**
-         * The name f the repositor. Used for the unit tests.
+         * The name of the repository. Used for the unit tests.
          *
          * @returns {string}
          */
@@ -400,7 +400,7 @@ module Home.Services {
         }
     }
 
-    // Restister the doodle service.
+    // Registers the doodle service.
     angular
         .module('home')
         .service('Repository', Repository);

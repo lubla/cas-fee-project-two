@@ -23,7 +23,7 @@ module Home.UnitTestCommon {
         // Property values of user that is used in the tests.
         static password = '11111';
         static email = 'a@a.a';
-        static userId = Home.Utilities.Uuid.new();
+        static userId = Home.Utilities.Uuid.createNew();
 
         static user:Home.Interfaces.IUser = {
             email: RepositoryTest.email,

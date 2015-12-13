@@ -54,7 +54,7 @@ module  Home.Controllers {
 
         copiedToClipboard():void {
           var target = $(event.currentTarget);
-          target.addClass("highlight")
+          target.addClass("highlight");
           setTimeout(function() {
             target.removeClass("highlight");
           }, 500);
@@ -75,12 +75,11 @@ module  Home.Controllers {
                     private $http:ng.IHttpService,
                     private $routeParams:IDoodleRegisteredRouteParams,
                     private repository:Home.Interfaces.IRepository) {
-
             this.ctrlName = 'DoodleRegisteredCtrl';
             this.doodleId = $routeParams.doodleId;
             this.registerId = $routeParams.registerId;
             this.isNewDoodle = $routeParams.isNewDoodle;
-            var serverUrl = $location.absUrl().substr(0, $location.absUrl().length - $location.url().length)
+            var serverUrl = $location.absUrl().substr(0, $location.absUrl().length - $location.url().length);
             this.editDoodleLink = serverUrl + '/EditDoodle?doodleId=' + this.doodleId;
             this.registerDoodleLink = serverUrl + '/RegisterDoodle?registerId=' + this.registerId;
         }

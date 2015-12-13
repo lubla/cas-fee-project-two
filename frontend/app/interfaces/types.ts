@@ -141,7 +141,7 @@ module Home.Interfaces {
          *
          * @param dateProposalId The id of the date proposal.
          */
-        getDatePoposal(dateProposalId: string): IDateProposal;
+        getDateProposal(dateProposalId: string): IDateProposal;
 
 
     }
