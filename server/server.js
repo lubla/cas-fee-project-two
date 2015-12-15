@@ -2,7 +2,7 @@
  * Created by Luzius on 03.08.2015.
  */
 
-'use strict'
+'use strict';
 
 var express = require('express');
 var logger = require('express-logger');

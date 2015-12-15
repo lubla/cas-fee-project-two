@@ -45,6 +45,7 @@ var serverRepository = (function () {
 
         Repository.prototype.registerUser = function (user) {
             var defer = Q.defer();
+            var self = this;
 
             this.getUserProfilesForEmail(user.email)
                 .then(function (userProfiles) {
@@ -52,7 +53,7 @@ var serverRepository = (function () {
                         defer.reject(new Error("User already registered."));
                     }
                     else {
-                        var insertResult = this.mongoDb.collection(userProfilesCollectionName)
+                        var insertResult = self.mongoDb.collection(userProfilesCollectionName)
                             .insert(user);
                         insertResult
                             .then(function (result) {
