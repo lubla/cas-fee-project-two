@@ -3,9 +3,9 @@
 module.exports = function (gulp, $, config) {
   gulp.task('browserSync', function () {
     $.browserSync({
-      proxy: config.host,
+      proxy: config.host + ":" + config.port,
       open: 'external',
-      port: config.port
+      port: config.proxyPort
     });
   });
 

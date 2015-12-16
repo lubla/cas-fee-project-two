@@ -5,6 +5,7 @@ var outDir = 'build/';
 module.exports = {
   host: 'localhost',
   port: 3000,
+  proxyPort: 7000,
 
   // app directories
   appDir: 'app',
