@@ -5,7 +5,7 @@ module.exports = function (gulp, $, config) {
     $.browserSync({
       proxy: config.host,
       open: 'external',
-      port: config.port,
+      port: config.port
     });
   });
 
