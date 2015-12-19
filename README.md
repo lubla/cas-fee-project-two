@@ -6,7 +6,8 @@ The cas fee project two is a doodle clone. It consists on a server and a respons
 
 ### Functions
 - User management: Simple, not using external libraries.
-- Doodle: Option to create "anonymous" doodles without beeing logged in.
+- Doodle: Create doodle, register for doodle, manage doodle.
+- Option to create anonymous doodles without being logged in.
 
 ### Server
 - Based on NodeJS with express.

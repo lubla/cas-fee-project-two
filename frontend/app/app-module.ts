@@ -13,7 +13,6 @@ module frontend {
       'mgcrea.ngStrap',
       'home',
       'angular-clipboard'
-        //, 'angular-linq'
     ]);
 
 }
