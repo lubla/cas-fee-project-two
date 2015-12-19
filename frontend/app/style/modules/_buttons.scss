@@ -8,12 +8,13 @@
   padding: 1em;
   margin-bottom: 1em;
   transition: all .2s ease-out;
+  cursor: pointer;
 }
 
 .button:hover,
 .button:focus {
   box-shadow: 0 5px 11px 0 rgba(0, 0, 0, 0.18), 0 4px 15px 0 rgba(0, 0, 0, 0.15);
-  transform: translateY(-0.1em);
+  transform: scale(1.05);
 }
 
 .button_simple {
