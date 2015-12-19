@@ -17,7 +17,7 @@
   <div ng-repeat="dateProposal in editDoodle.doodle.dateProposals" class="doodle-date-form">
     <label class="doodle-date-form__label" for="date">Datum</label>
     <input id="date" name="date" class="doodle-date-form__input" type="text" value="{{dateProposal.start}}" ng-model="dateProposal.start"
-           bs-datepicker data-date-format="dd.MM.yyyy">
+           bs-datepicker data-date-format="dd.MM.yyyy" data-autoclose="true">
     <label class="doodle-date-form__label" for="timeStart">Zeit</label>
     <input id="timeStart" class="doodle-date-form__input" type="text" size="8" ng-model="dateProposal.end" bs-timepicker
            data-time-format="HH:mm" data-arrow-behavior="picker" data-minute-step="5" data-length="1">
