@@ -4,12 +4,20 @@
 /**
  * Created by Luzius on 12.09.2015.
  */
+
+/**
+ * Routes for the doodle functions of the doodle repository.
+ */
+
 var express = require('express');
 var router = express.Router();
 var bodyParser = require('body-parser');
 var urlencodedParser = bodyParser.urlencoded({ extended: false });
 
-/* GET doodle for edit / GET doodle for register / GET doodles for user */
+
+/**
+ * GET doodle for edit / GET doodle for register / GET doodles for user
+ */
 router.get('/', urlencodedParser, function (req, res, next) {
 
     if(req.query.registerId) {
@@ -36,6 +44,9 @@ router.get('/', urlencodedParser, function (req, res, next) {
 });
 
 
+/**
+ * POST a doodle.
+ */
 router.post('/', bodyParser.json(), function (req, res, next) {
     req.repository.addDoodle(req.body)
         .then(function (result) {
@@ -44,6 +55,9 @@ router.post('/', bodyParser.json(), function (req, res, next) {
         .catch(next);
 });
 
+/**
+ * PUT a doodle.
+ */
 router.put('/', bodyParser.json(), function (req, res, next) {
     req.repository.putDoodle(req.body)
         .then(function (result) {
@@ -52,6 +66,9 @@ router.put('/', bodyParser.json(), function (req, res, next) {
         .catch(next);
 });
 
+/**
+ * DELETE a doodle.
+ */
 router.delete('/', urlencodedParser, function (req, res, next) {
 
     req.repository.deleteDoodle(req.query.doodleId)
