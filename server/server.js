@@ -2,28 +2,39 @@
  * Created by Luzius on 03.08.2015.
  */
 
+/**
+ * Doodle server startup module.
+ *
+ * The server is based on the express and mongo db.
+ */
+
 'use strict';
 
 var express = require('express');
 var logger = require('express-logger');
-var assert = require('assert');
 var path = require('path');
 
-
+/**
+ * setupServer is called when the connection to the mongo db is established.
+ *
+ * @param repository   The repository instance with the mongo db connection.
+ */
 function setupServer(repository) {
 
+    // Initialize the express app.
     var app = express();
 
+    // Log the incoming requester to a log file in the folder where the current script is stored.
     var logFilePath = path.join(__dirname, 'server.log');
     var myLogger = logger({
         path: logFilePath,
         format: 'dev'
     });
-
     app.use(myLogger);
 
-    // Static files.
-
+    //
+    // Serve the static files.
+    //
     app.use(express.static(path.join(__dirname, '../frontend/build/app')));
 
     // Make the repository available in the routes.
@@ -31,9 +42,6 @@ function setupServer(repository) {
         req.repository = repository;
         next();
     });
-
-    //app.use(bodyParser.urlencoded({ extended: false }));
-    //app.use(bodyParser.json());
 
     // Routes.
 
@@ -43,7 +51,7 @@ function setupServer(repository) {
     // REST interface for the doodles.
     app.use('/doodle', require('./routes/doodle'));
 
-    // Forward 404 to error handler to error handler.
+    // Forward 404 error to the server error handler (errorHandler).
     app.use(function (req, res, next) {
         var err = new Error('Not Found: ' + req.originalUrl);
         err.status = 404;
@@ -51,6 +59,15 @@ function setupServer(repository) {
     });
 
 
+    /**
+     * Server error handler.
+     *
+     * @param err
+     * @param req
+     * @param res
+     * @param next
+     * @returns {*}
+     */
     function errorHandler(err, req, res, next) {
         if (res.headersSent) {
             return next(err);
@@ -73,7 +90,8 @@ function setupServer(repository) {
     app.use(errorHandler);
 
     // Start server.
-//    var server = app.listen(80, '0.0.0.0', function () { // accept clients from any IP.
+//
+//    var server = app.listen(80, '0.0.0.0', function () { // accept clients from any IP, i.e. from a mobile within the local network.
 
     var server = app.listen(3000, function () {   // accept clients from localhost only.
         var host = server.address().address;
