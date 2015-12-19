@@ -156,7 +156,6 @@ var serverRepository = (function () {
                     // Check if exactly one doodle has been added.
                     if (result.result.n == 1) {
                         // Return the added doodle.
-                        console.log("resolved");
                         self.putDoodle(doodle);
 
                         defer.resolve(result.ops[0]);

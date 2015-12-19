@@ -1,6 +1,6 @@
 # cas-fee-project-two
 
-The project two is a doodle clone. It consists on a server and a responsive web client.
+The cas fee project two is a doodle clone. It consists on a server and a responsive web client.
 
 ## Overview
 
@@ -12,7 +12,8 @@ The project two is a doodle clone. It consists on a server and a responsive web 
 - Based on NodeJS with express.
 - Implemented in Javascript.
 - REST interface.
-- See server/devInstructions.txt to get started with the server.
+- Data is backed using MongoDB.
+- See server/README.md to get started with the server.
 
 ### Web Client
 - Single page app using AngularJS.
@@ -20,4 +21,4 @@ The project two is a doodle clone. It consists on a server and a responsive web 
 - Starting point: yeoman genererated angular project. SASS support and typescript based e2e tests added later manually. 
 - Unit tests are available.
 - e2e tests are available that work with Chrome, Firefox and Internet Explorer 11.0.
-- See frontend/devInstructions.txt to get started with the web client.
+- See frontend/README.md to get started with the web client.
