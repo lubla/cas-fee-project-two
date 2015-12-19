@@ -23,7 +23,7 @@
  
  1. Start the server, see [Server README](../server/README.md).
  1. Load the frontend project in Webstorm.
- 1. Run gulp build.
+ 1. Run `gulp build`.
  1. Create a debug configuration that loads the URL `http://localhost:3000/#/home`.
  1. Run or debug the debug configuration.
  
@@ -31,7 +31,7 @@
  
  1. Start the server, see [Server README](../server/README.md).
  1. Load the frontend project in Webstorm.
- 1. Run gulp dev.
+ 1. Run `gulp dev`.
 
 ## Run the client from the command line
 
@@ -61,7 +61,7 @@ user profiles ([user-management-service](app/home/services/user-management-servi
 a base class for the services to share common service code (e.g. error handling).
 
 ### app/interfaces
-- [services](app/interfaces/services.ts): Interfaces for the doodle service and user profile service.
+- [services](app/interfaces/services.ts): Interfaces for the doodle repository service and user profile service.
 - [types](app/interfaces/services.ts): Interfaces for all types that are used, e.g. IDoodle, IUserProfile.
 
 ### app/style

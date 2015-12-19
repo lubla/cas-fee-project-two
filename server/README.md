@@ -1,6 +1,6 @@
 # Doodle Web Server
 
-## Prerequists
+## Prerequisites
 
 ### Mongo db
 Install mongoDB from the mongoDB web page.
