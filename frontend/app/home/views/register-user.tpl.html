@@ -17,7 +17,7 @@
   </div>
 
 
-  <div class="errorMessage">
+  <div class="alert alert_error" ng-if="registerUser.errorMessage">
     {{registerUser.errorMessage}}
   </div>
 
@@ -26,6 +26,6 @@
 <p>
   <a ng-click='registerUser.registerUser()' class="button button_primary button_full-width">Registrieren</a>
 </p><p>
-  <a ng-click='registerUser.registerUser()' class="button button_full-width">Abbrechen</a>
+  <a href='#home' class="button button_full-width">Abbrechen</a>
 
 </p>

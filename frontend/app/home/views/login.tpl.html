@@ -1,9 +1,5 @@
 <h2>Login</h2>
 
-<!-- <div class="alert alert_error" ng-if="login.errorMessage">
-  {{login.errorMessage}}
-</div>
- -->
 <div class="login-form" ng-class="{ 'shake': login.errorMessage }">
 	<div class="form-group">
 	  <label for="email" class="form-group__label">Email</label>
@@ -19,6 +15,11 @@
 		<label for="stayLoggedIn" class="form-group__label">Eingelogged bleiben</label>
 		<input id="stayLoggedIn" type="checkbox" ng-model="login.stayLoggedIn">
 	</div>
+
+  <div class="alert alert_error" ng-if="login.errorMessage">
+    {{login.errorMessage}}
+  </div>
+
 
 </div>
 
