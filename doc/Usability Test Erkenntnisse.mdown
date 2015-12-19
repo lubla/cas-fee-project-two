@@ -1,0 +1,30 @@
+# Mini Usability Test
+
+## Test 1
+
+* Benutzer 1 Registriert sich obwoh 
+nicht nötig
+* Link ohne pointer ist verwirrlich
+* Datum auswahl ist Mühsam wegen fehlendem autoclose
+* Mail mit links vermisst, mühsam so
+
+
+## Test 2
+
+* direkt ohne login
+* keine Problem
+* änderung von Inputfeldgrösse verschiebt feld nach unten, so dass sie es nicht beim ersten mal trifft
+* verliert admin link, weil sie kein Mail erhalten hat.
+
+## Haupterkenntnis:
+
+* Die Applikation ohne Email hat grosses Frustpotential. Sonst funktioniert die App recht gut.
+
+### Notwendige Erweiterungen
+
+* Email mit Links an Organisator verschicken.
+
+### Kleinere Massnahmen:
+
+* Autoclose von Datepicker
+* pointer: pointer für alle Links (auch die ohne href)
