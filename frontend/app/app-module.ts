@@ -13,7 +13,8 @@ module frontend {
       'mgcrea.ngStrap',
       'home',
       'angular-clipboard',
-      'ngAnimate'
+      'ngAnimate',
+      'focus-if'
         //, 'angular-linq'
     ]);
 
