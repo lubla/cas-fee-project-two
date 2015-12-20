@@ -12,7 +12,8 @@ module frontend {
       'ngRoute',
       'mgcrea.ngStrap',
       'home',
-      'angular-clipboard'
+      'angular-clipboard',
+      'ngAnimate'
         //, 'angular-linq'
     ]);
 
