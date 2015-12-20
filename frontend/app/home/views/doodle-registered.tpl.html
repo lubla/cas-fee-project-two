@@ -8,12 +8,12 @@
   <h3>Deine Links</h3>
   <hr>
   <p><a href="{{doodleRegistered.registerDoodleLink}}">Teile diesen Link mit deinen Teilnehmern</a>
-    <input type="text" ng-model="doodleRegistered.registerDoodleLink">
+    <input type="text" ng-model="doodleRegistered.registerDoodleLink" readonly>
     <button clipboard text="doodleRegistered.registerDoodleLink" on-copied="doodleRegistered.copiedToClipboard()" class="button button_small">Kopieren</button>
   </p>
   <hr>
   <p><a href="{{doodleRegistered.editDoodleLink}}">Link zur Administration:</a>
-    <input type="text" ng-model="doodleRegistered.editDoodleLink">
+    <input type="text" ng-model="doodleRegistered.editDoodleLink" readonly>
     <button clipboard text="doodleRegistered.editDoodleLink" on-copied="doodleRegistered.copiedToClipboard()" class="button button_small">Kopieren</button>
   </p>
 

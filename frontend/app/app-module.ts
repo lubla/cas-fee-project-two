@@ -15,7 +15,5 @@ module frontend {
       'angular-clipboard',
       'ngAnimate',
       'focus-if'
-        //, 'angular-linq'
     ]);
-
 }

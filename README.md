@@ -8,7 +8,8 @@ It was designed mobile-first.
 
 ### Functions
 - User management: Simple, not using external libraries.
-- Doodle: Option to create "anonymous" doodles without beeing logged in.
+- Doodle: Create doodle, register for doodle, manage doodle.
+- Option to create anonymous doodles without being logged in.
 
 ### Server
 - Based on NodeJS with express.
@@ -24,6 +25,11 @@ It was designed mobile-first.
 - Unit tests are available.
 - e2e tests are available that work with Chrome, Firefox and Internet Explorer 11.0.
 - See [frontend/README.md](frontend/README.md) to get started with the web client.
+
+## Paper work - Screen Designs
+
+- [Sketches](doc/Doodle Sketches.pdf)
+- [Wire frames](doc/CAS Projekt 2 New Doodle.pdf)
 
 ## Usability Test
 
