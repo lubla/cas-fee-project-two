@@ -101,10 +101,12 @@ module Home.Controllers {
          */
 
         toggleAcceptance(dateProposalId:string) {
-            if (this.isRegistered(dateProposalId)){
-              this.rejectDateProposal(dateProposalId);
-            } else {
-              this.acceptDateProposal(dateProposalId);
+            if(!this.nameIsEmtpy()) {
+                if (this.isRegistered(dateProposalId)) {
+                    this.rejectDateProposal(dateProposalId);
+                } else {
+                    this.acceptDateProposal(dateProposalId);
+                }
             }
         }
 
@@ -132,7 +134,7 @@ module Home.Controllers {
          * @returns {boolean}
          */
         private nameIsEmtpy():boolean {
-            return this.name.length === 0;
+            return !this.name || this.name.length === 0;
         }
 
         /**
@@ -147,7 +149,7 @@ module Home.Controllers {
         }
 
         /**
-         * ????
+         * Used to check/un check accept check box.
          *
          * @param dateProposalId
          * @returns {boolean}

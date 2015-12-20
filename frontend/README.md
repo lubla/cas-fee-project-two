@@ -15,32 +15,22 @@
 ## Gulp tasks
 
 - Run `gulp build` to compile assets
-- Run `gulp dev` to run the build task and setup the development environment, *the server must be running on localhost:3000* (see [Server Readme](../server/README.md)).
 - Run `gulp unitTest` to run unit tests via Karma and to create code coverage reports
 - Run `gulp webdriverUpdate` to download Selenium server standalone and Chrome driver for e2e testing
 - Run `gulp e2eTest` to run e2e tests via Protractor
  
 ## Run the client in Webstorm
  
- Prerequisites to run the e2e test
- =================================
-
  1. Start the server, see [Server README](../server/README.md).
  1. Load the frontend project in Webstorm.
  1. Run `gulp build`.
  1. Create a debug configuration that loads the URL `http://localhost:3000/#/home`.
  1. Run or debug the debug configuration.
  
- or
- 
- 1. Start the server, see [Server README](../server/README.md).
- 1. Load the frontend project in Webstorm.
- 1. Run `gulp dev`.
-
 ## Run the client from the command line
 
  1. Start the server, see [Server README](../server/README.md).
- 1. In der folder frontend: run `gulp dev`.
+ 1. In the browser load `http://localhost:3000/#/home`.
  
 ## Project structure
 
