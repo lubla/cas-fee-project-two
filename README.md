@@ -1,6 +1,8 @@
 # cas-fee-project-two
 
-The cas fee project two is a doodle clone. It consists on a server and a responsive web client.
+The cas fee project two is a doodle clone. It consists on a server and a web client.
+
+It was designed mobile-first.
 
 ## Overview
 

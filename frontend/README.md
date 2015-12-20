@@ -3,6 +3,7 @@
 *Generated with [ng-poly](https://github.com/dustinspecker/generator-ng-poly/tree/v0.10.11) version 0.10.11*
 
 ## Setup
+
 1. Install [Node.js](http://nodejs.org/)
  - This will also install npm.
 1. Run `npm install -g bower gulp yo generator-ng-poly@0.10.11`
@@ -12,12 +13,12 @@
 1. Use [generator-ng-poly](https://github.com/dustinspecker/generator-ng-poly) to create additional components
 
 ## Gulp tasks
+
 - Run `gulp build` to compile assets
-- Run `gulp dev` to run the build task and setup the development environment
+- Run `gulp dev` to run the build task and setup the development environment, *the server must be running on localhost:3000* (see [Server Readme](../server/README.md)).
 - Run `gulp unitTest` to run unit tests via Karma and to create code coverage reports
 - Run `gulp webdriverUpdate` to download Selenium server standalone and Chrome driver for e2e testing
 - Run `gulp e2eTest` to run e2e tests via Protractor
- - **A localhost must be running** - `gulp dev`
  
  ## Developers instructions
 
@@ -39,7 +40,7 @@
  2. Load the frontend project in webstorm
  3. Run gulp
  
- Prerequistie to run the e2e test
+ Prerequisites to run the e2e test
  ================================
  
  1. Install silenium standalone:
@@ -56,3 +57,7 @@
  5) Add the folder to the environment variable PATH
  6) In IE => Tools => Internet Optionen => Sicherheit: Check "Geschützten Modus aktivieren" for ALL internet Zoons (Internet, Intranet ...).
  7) IE zoom level must be 100%
+
+ ## SASS Conventions
+
+ * The convention for structuring the styles is the BEM-Notation (Block, Element, Modifier).
