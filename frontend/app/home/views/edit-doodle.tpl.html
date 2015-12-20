@@ -23,7 +23,7 @@
       <label class="doodle-date-form__label" for="timeStart">Zeit</label>
       <input id="timeStart" class="doodle-date-form__input" type="text" size="8" ng-model="dateProposal.end" bs-timepicker
              data-time-format="HH:mm" data-arrow-behavior="picker" data-minute-step="5" data-length="1">
-      <button ng-click='editDoodle.deleteDateProposal(dateProposal._id)' class="button button_simple button_simple_negative">Löschen</button>
+      <button type="button" ng-click='editDoodle.deleteDateProposal(dateProposal._id)' class="button button_simple button_simple_negative">Löschen</button>
 
     </div>
 
