@@ -24,6 +24,11 @@ The cas fee project two is a doodle clone. It consists on a server and a respons
 - e2e tests are available that work with Chrome, Firefox and Internet Explorer 11.0.
 - See [frontend/README.md](frontend/README.md) to get started with the web client.
 
+## Paper work - Screen Designs
+
+- [Sketches](doc/Doodle Sketches.pdf)
+- [Wire frames](doc/CAS Projekt 2 New Doodle.pdf)
+
 ## Usability Test
 
 See [Usability Test Learnings](doc/Usability Test Erkenntnisse.mdown)
