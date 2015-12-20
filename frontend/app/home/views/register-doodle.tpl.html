@@ -1,40 +1,39 @@
 <div class="card">
-  <h2>{{registerDoodle.doodle.title}}</h2>
-  <p>{{registerDoodle.doodle.place}}</p>
+  <form ng-submit="registerDoodle.putDoodle()">
+    <h2>{{registerDoodle.doodle.title}}</h2>
+    <p>{{registerDoodle.doodle.place}}</p>
 
 
-  <h3>Wann hast du Zeit?</h3>
-  <hr>
+    <h3>Wann hast du Zeit?</h3>
+    <hr>
 
-  <div class="form-group">
-    <label for="name" class="form-group__label">Dein Name</label>
-    <input id="name"  class="form-group__input form-group__input_big" type="text" ng-model="registerDoodle.name" value="{{registerDoodle.name}}"  placeholder="Name" focus-if/>
-  </div>
+    <div class="form-group">
+      <label for="name" class="form-group__label">Dein Name</label>
+      <input id="name"  class="form-group__input form-group__input_big" type="text" ng-model="registerDoodle.name" value="{{registerDoodle.name}}"  placeholder="Name" focus-if required/>
+    </div>
 
 
-  <div ng-repeat="dateProposal in registerDoodle.doodle.dateProposals">
-    <div ng-click="registerDoodle.toggleAcceptance(dateProposal._id)" class="dateProposal" ng-class="{dateProposal_accepted: registerDoodle.isAccepted(dateProposal._id)}">
-      <div ng-show="registerDoodle.isAccepted(dateProposal._id)" class="dateProposal__decision dateProposal__accept">✓</div>
-      <div ng-hide="registerDoodle.isAccepted(dateProposal._id)" class="dateProposal__decision dateProposal__reject">☐</div>
+    <div ng-repeat="dateProposal in registerDoodle.doodle.dateProposals">
+      <div ng-click="registerDoodle.toggleAcceptance(dateProposal._id)" class="dateProposal" ng-class="{dateProposal_accepted: registerDoodle.isAccepted(dateProposal._id)}">
+        <div ng-show="registerDoodle.isAccepted(dateProposal._id)" class="dateProposal__decision dateProposal__accept">✓</div>
+        <div ng-hide="registerDoodle.isAccepted(dateProposal._id)" class="dateProposal__decision dateProposal__reject">☐</div>
 
-      <div class="dateProposal__date-time">
+        <div class="dateProposal__date-time">
           <span class="dateProposal__date">{{dateProposal.start | date:'EEEE, dd. MM. yyyy'}}</span> <span class="dateProposal__time">{{dateProposal.start | date:'HH:mm'}}</span>
         </div>
         <div class="dateProposal__participations text-muted">
           Passt für:
           {{dateProposal.acceptedBy.length}} |
-          <span ng-repeat="acceptedBy in dateProposal.acceptedBy">
-            {{acceptedBy}}<span ng-class="{hide:$last}">,</span>
-          </span>
+            <span ng-repeat="acceptedBy in dateProposal.acceptedBy">
+              {{acceptedBy}}<span ng-class="{hide:$last}">,</span>
+            </span>
         </div>
-         <hr>
+        <hr>
       </div>
     </div>
-  <div>
 
-
-
-<p>
-  <a ng-click='registerDoodle.putDoodle()' class="button button_primary button_full-width">Absenden</a>
-</p>
-
+    <p>
+      <button type="submit" class="button button_primary button_full-width">Absenden</button>
+    </p>
+  </form>
+</div>

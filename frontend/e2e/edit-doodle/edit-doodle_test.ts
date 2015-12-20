@@ -68,9 +68,9 @@ describe('Edit doodle page', function () {
     });
 
     it('can store the date proposal and go to the doodle registered page', function () {
-        var postOrPutDoodle = e2eCommon.Tests.ngClickElement(e2eCommon.BindingNames.editDoodlePostOrPutDoodleCallback);
+        e2eCommon.Tests.canSetInput(e2eCommon.BindingNames.editDoodleTitle); // because title is required
+        var postOrPutDoodle = element(by.css('[type="submit"]'));
         postOrPutDoodle.click();
-
         e2eCommon.Tests.isDestination(e2eCommon.Destinations.doodleRegistered);
 
     });

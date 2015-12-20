@@ -1,32 +1,36 @@
-<div class="form-group">
-  <label for="title" class="form-group__label">Titel</label>
-  <input id="title"  class="form-group__input form-group__input_big" type="text" ng-model="editDoodle.doodle.title" value="{{editDoodle.doodle.title}}" placeholder="Titel" focus-if required/>
-</div>
-<div class="form-group">
-  <label for="location" class="form-group__label">Ort</label>
-  <input id="location"  class="form-group__input" type="text" ng-model="editDoodle.doodle.place" value="{{editDoodle.doodle.place}}"  placeholder="Ort"/>
-</div>
+<form  ng-submit='editDoodle.postOrPutDoodle()'>
 
-<section class="section">
-  <h1 class="section__title">Mögliche Termine</h1>
-
-  <p>
-    <button ng-click='editDoodle.addDateProposal()' class="button button_simple">Neuer Terminvorschlag</button>
-  </p>
-
-  <div ng-repeat="dateProposal in editDoodle.doodle.dateProposals" class="doodle-date-form">
-    <label class="doodle-date-form__label" for="date">Datum</label>
-    <input id="date" name="date" class="doodle-date-form__input" type="text" value="{{dateProposal.start}}" ng-model="dateProposal.start"
-           bs-datepicker data-date-format="dd.MM.yyyy" data-autoclose="true">
-    <label class="doodle-date-form__label" for="timeStart">Zeit</label>
-    <input id="timeStart" class="doodle-date-form__input" type="text" size="8" ng-model="dateProposal.end" bs-timepicker
-           data-time-format="HH:mm" data-arrow-behavior="picker" data-minute-step="5" data-length="1">
-    <button ng-click='editDoodle.deleteDateProposal(dateProposal._id)' class="button button_simple button_simple_negative">Löschen</button>
-
+  <div class="form-group">
+    <label for="title" class="form-group__label">Titel</label>
+    <input id="title"  class="form-group__input form-group__input_big" type="text" ng-model="editDoodle.doodle.title" value="{{editDoodle.doodle.title}}" placeholder="Titel" focus-if required/>
+  </div>
+  <div class="form-group">
+    <label for="location" class="form-group__label">Ort</label>
+    <input id="location"  class="form-group__input" type="text" ng-model="editDoodle.doodle.place" value="{{editDoodle.doodle.place}}"  placeholder="Ort"/>
   </div>
 
-</section>
+  <section class="section">
+    <h1 class="section__title">Mögliche Termine</h1>
 
-<p>
-  <a href="" ng-click='editDoodle.postOrPutDoodle()' class="button button_primary button_full-width">Fertig</a>
-</p>
+    <p>
+      <button ng-click='editDoodle.addDateProposal()' class="button button_simple" type="button">Neuer Terminvorschlag</button>
+    </p>
+
+    <div ng-repeat="dateProposal in editDoodle.doodle.dateProposals" class="doodle-date-form">
+      <label class="doodle-date-form__label" for="date">Datum</label>
+      <input id="date" name="date" class="doodle-date-form__input" type="text" value="{{dateProposal.start}}" ng-model="dateProposal.start"
+             bs-datepicker data-date-format="dd.MM.yyyy" data-autoclose="true">
+      <label class="doodle-date-form__label" for="timeStart">Zeit</label>
+      <input id="timeStart" class="doodle-date-form__input" type="text" size="8" ng-model="dateProposal.end" bs-timepicker
+             data-time-format="HH:mm" data-arrow-behavior="picker" data-minute-step="5" data-length="1">
+      <button ng-click='editDoodle.deleteDateProposal(dateProposal._id)' class="button button_simple button_simple_negative">Löschen</button>
+
+    </div>
+
+  </section>
+
+  <p>
+    <button type="submit" class="button button_primary button_full-width">Fertig</button>
+  </p>
+
+</form>

@@ -1,4 +1,5 @@
 <h2>Register User</h2>
+<form ng-submit="registerUser.registerUser()">
 <div>
 
   <div class="form-group">
@@ -24,8 +25,11 @@
 </div>
 
 <p>
-  <a ng-click='registerUser.registerUser()' class="button button_primary button_full-width">Registrieren</a>
-</p><p>
+  <button type="submit" class="button button_primary button_full-width">Registrieren</button>
+
+</p>
+</form>
+<p>
   <a href='#home' class="button button_full-width">Abbrechen</a>
 
 </p>

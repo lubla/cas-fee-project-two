@@ -1,34 +1,34 @@
 <h2>Login</h2>
+<form ng-submit="login.login()">
+  <div class="login-form" ng-class="{ 'shake': login.errorMessage }">
+    <div class="form-group">
+      <label for="email" class="form-group__label">Email</label>
+      <input id="email"  class="form-group__input" type="text" ng-model="login.user.email" value="{{login.user.email}}"  placeholder="Email" focus-if/>
+    </div>
 
-<div class="login-form" ng-class="{ 'shake': login.errorMessage }">
-	<div class="form-group">
-	  <label for="email" class="form-group__label">Email</label>
-	  <input id="email"  class="form-group__input" type="text" ng-model="login.user.email" value="{{login.user.email}}"  placeholder="Email" focus-if/>
-	</div>
+    <div class="form-group">
+      <label for="password" class="form-group__label">Password</label>
+      <input id="password"  class="form-group__input" type="password" ng-model="login.user.password" value="{{login.user.password}}"  placeholder="Password"/>
+    </div>
 
-	<div class="form-group">
-	  <label for="password" class="form-group__label">Password</label>
-	  <input id="password"  class="form-group__input" type="password" ng-model="login.user.password" value="{{login.user.password}}"  placeholder="Password"/>
-	</div>
+    <div class="form-group">
+      <label for="stayLoggedIn" class="form-group__label">Eingelogged bleiben</label>
+      <input id="stayLoggedIn" type="checkbox" ng-model="login.stayLoggedIn">
+    </div>
 
-	<div class="form-group">
-		<label for="stayLoggedIn" class="form-group__label">Eingelogged bleiben</label>
-		<input id="stayLoggedIn" type="checkbox" ng-model="login.stayLoggedIn">
-	</div>
+    <div class="alert alert_error" ng-if="login.errorMessage">
+      {{login.errorMessage}}
+    </div>
 
-  <div class="alert alert_error" ng-if="login.errorMessage">
-    {{login.errorMessage}}
+
   </div>
 
 
-</div>
-
-
-</div>
+  </div>
+  <p>
+    <button type="submit" class="button button_full-width button_primary">Login</button>
+  </p>
+</form>
 <p>
-<a ng-click='login.login()' class="button button_full-width button_primary">Login</a>
-</p>
-
-<p>
-	<a href="#/RegisterUser" class="button button_full-width">Neu Registrieren</a>
+  <a href="#/RegisterUser" class="button button_full-width">Neu Registrieren</a>
 </p>
