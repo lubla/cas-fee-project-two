@@ -5,6 +5,7 @@
     "test": "gulp test"
   },
   "dependencies": {
+    "browser-sync": "^2.10.1",
     "gulp-debug": "^2.1.2"
   },
   "devDependencies": {
