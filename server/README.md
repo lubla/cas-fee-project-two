@@ -11,6 +11,8 @@ Execute `npm install` in the server folder.
 
 ## Run the server
 
+*In order to serve the frontend, you need to have run `gulp build` before (see [frontend/README.md](../frontend/README.md).
+
 ### In Webstorm
 1. Load the server project in Webstorm.
 2. Run server.js
